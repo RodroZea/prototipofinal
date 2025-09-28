@@ -18,6 +18,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'helcon',  # Tu app
 ]
+CSRF_TRUSTED_ORIGINS = [
+    'https://prototipofinal-production.up.railway.app',
+]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
