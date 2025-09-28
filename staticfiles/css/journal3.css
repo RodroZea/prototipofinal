@@ -1,0 +1,757 @@
+:root {
+    --seasalt: #FBFAF8ff;
+    --ruddy-blue: #6CA5FFff;
+    --denim: #245DB5ff;
+    --oxford-blue: #111835ff;
+    --oxford-blue-2: #051024ff;
+    --texto-interno: #C9C9C9;
+    --rubby-blue2: #DAE8FF;
+}
+ 
+* {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+ 
+body {
+    overflow-x: hidden;
+}
+
+/* barra de navegacion */
+.barra-superior {
+    background-color: var(--oxford-blue-2); /* Fondo oscuro de la barra superior */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
+
+    .busqueda {
+        display: flex;
+        align-items: center;
+        background-color: var(--oxford-blue); /* Fondo del campo de búsqueda */
+        border-radius: 25px;
+        padding-left: 10px;
+        flex: 1; /* Permite que la barra de búsqueda ocupe el espacio disponible */
+        max-width: 600px; /* Limita el ancho máximo del input en pantallas grandes */
+        margin-right: 20px; /* Espacio entre la barra de búsqueda y los botones */
+
+        input[type="text"] {
+            border: none;
+            padding: 8px;
+            width: 100%; /* Ocupa todo el ancho disponible en su contenedor flex */
+            font-size: 18px;
+            background: var(--oxford-blue);
+            color: var(--rubby-blue2); /* Color del texto del input */
+            outline: none; /* Eliminar el contorno al enfocar */
+        }
+
+        button {
+            background: none;
+            border: none;
+            padding: 8px 10px;
+            cursor: pointer;
+            color: var(--oxford-blue-2);
+
+            i { /* Para el icono de búsqueda, necesitarás Font Awesome o similar */
+                font-size: 25px;
+                color: var(--rubby-blue2); /* Color del icono de búsqueda */
+            }
+        }
+    }
+
+    .botones {
+        display: flex; /* Para alinear los botones y el icono de idioma */
+        align-items: center;
+        gap: 10px; /* Espacio entre los botones y el icono */
+
+        button {
+            /* Estilos originales para los botones de "Registrarse" y "Iniciar Sesión" */
+            background-color: var(--ruddy-blue); /* Fondo original de Registrarse */
+            color: white; /* Color de texto original */
+            border: none;
+            padding: 10px 15px;
+            margin-left: 10px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 16px;
+            transition: background-color 0.3s ease; /* Transición suave al pasar el cursor */
+
+            &:hover {
+                background-color: darken(var(--ruddy-blue), 5%); /* Oscurecer un poco al pasar el cursor */
+            }
+
+            &.boton-login {
+                background:var(--oxford-blue); /* Fondo original de Iniciar Sesión */
+                color: var(--ruddy-blue); /* Color de texto original */
+                border: 2px solid var(--ruddy-blue); /* Borde original */
+                transition: background-color 0.3s ease, border-color 0.3s ease; /* Transición suave */
+
+                &:hover {
+                    background-color: lighten(var(--oxford-blue), 5%); /* Aclarar un poco al pasar el cursor */
+                    border-color: lighten(var(--ruddy-blue), 5%);
+                }
+            }
+        }
+
+        /* Estilos para el botón de idioma (Material Symbols) */
+        .language-dropdown {
+            position: relative; /* Contenedor para el botón y el menú desplegable */
+            display: inline-block; /* Permite que ocupe su propio espacio */
+            
+            .boton-idioma {
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 40px; /* Tamaño del área del botón circular */
+                height: 40px;
+                border-radius: 50%; /* Hace el botón circular */
+                background-color: var(--ruddy-blue); /* Color de fondo del botón: azul claro */
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                transition: background-color 0.3s ease;
+
+                &:hover {
+                    background-color: darken(var(--ruddy-blue), 10%); /* Oscurecer al pasar el cursor */
+                }
+
+                .material-symbols-outlined { /* Selector para el icono */
+                    font-variation-settings:
+                    'FILL' 0,   
+                    'wght' 400, 
+                    'GRAD' 0,
+                    'opsz' 28; 
+                    color: var(--oxford-blue-2); /* Color del icono: azul muy oscuro para contraste */
+                    font-size: 28px;
+                    vertical-align: middle;
+                    transition: color 0.3s ease;
+                }
+            }
+            
+            .dropdown-menu {
+                position: absolute;
+                top: 100%; /* Coloca el menú justo debajo del botón */
+                right: 0; /* Alinea el menú a la derecha del botón */
+                background: white;
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                min-width: 150px;
+                z-index: 1000;
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(-10px); /* Ligeramente hacia arriba para la animación */
+                transition: all 0.3s ease; /* Transición suave para aparición/desaparición */
+
+                &.show {
+                    opacity: 1;
+                    visibility: visible;
+                    transform: translateY(0); /* Vuelve a la posición normal */
+                }
+
+                .dropdown-item {
+                    display: flex;
+                    align-items: center;
+                    padding: 12px 16px;
+                    color: #333;
+                    text-decoration: none;
+                    transition: background-color 0.2s ease;
+                    font-family: 'Poppins', sans-serif;
+                    font-size: 14px;
+
+                    &:hover {
+                        background-color: #f5f5f5;
+                    }
+
+                    &:first-child {
+                        border-top-left-radius: 7px;
+                        border-top-right-radius: 7px;
+                    }
+
+                    &:last-child {
+                        border-bottom-left-radius: 7px;
+                        border-bottom-right-radius: 7px;
+                    }
+
+                    .flag-icon {
+                        width: 20px;
+                        height: 15px;
+                        margin-right: 10px;
+                        border-radius: 2px;
+                        background-size: cover;
+                        background-position: center;
+
+                        &.flag-es {
+                            background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzUwIiBoZWlnaHQ9IjUwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9Ijc1MCIgaGVpZ2h0PSI1MDAiIGZpbGw9IiNBQTAwMDAiLz4KPHJlY3QgeT0iMTI1IiB3aWR0aD0iNzUwIiBoZWlnaHQ9IjI1MCIgZmlsbD0iI0ZGRkYwMCIvPgo8L3N2Zz4=');
+                        }
+
+                        &.flag-en {
+                            background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI2MDAiIHZpZXdCb3g9IjAgMCAxMjAwIDYwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjEyMDAiIGhlaWdodD0iNjAwIiBmaWxsPSIjMDA5NkZGIi8+CjxwYXRoIGQ9Im0wLDAgaDEyMDBMIDAsNjAwIE0wLDYwMCBoMTIwMEwgMCwwIiBzdHJva2U9IiNGRkZGRkYiIHN0cm9rZS13aWR0aD0iMTIwIi8+CjxwYXRoIGQ9Im0wLDAgaDEyMDBMIDAsNjAwIE0wLDYwMCBoMTIwMEwgMCwwIiBzdHJva2U9IiNGRjAwMDAiIHN0cm9rZS13aWR0aD0iODAiLz4KPHBhdGggZD0iTTYwMCwwdjYwMCBNMCwzMDBoMTIwMCIgc3Ryb2tlPSIjRkZGRkZGIiBzdHJva2Utd2lkdGg9IjIwMCIvPgo8cGF0aCBkPSJNNjAwLDB2NjAwIE0wLDMwMGgxMjAwIiBzdHJva2U9IiNGRjAwMDAiIHN0cm9rZS13aWR0aD0iMTIwIi8+Cjwvc3ZnPg==');
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.barra-navegacion {
+    background-color: var(--oxford-blue);
+    padding: 20px 20px; /* Padding vertical y horizontal para ajustar la altura */
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        gap: 40px; /* Espacio entre los enlaces de navegación */
+        justify-content: flex-end; /* Alinea los enlaces a la derecha */
+    }
+
+    a {
+        color: white; /* Color de texto de los enlaces */
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s ease; /* Transición suave al pasar el cursor */
+
+        &:hover {
+            text-decoration:none;
+            color: var(--ruddy-blue); /* Color al pasar el cursor */
+            font-weight: 800;
+        }
+    }
+}
+/*fin de barra de navegacion*/
+
+/* Animación lateral para subtítulos e imágenes (de journall3.css)*/
+.animate-from-left,
+.animate-from-right {
+  opacity: 0;
+  transform: translateX(-100px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.animate-from-right {
+  transform: translateX(100px);
+}
+
+.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Botón del footer: agrandarse al hacer click (de journall3.css) */
+footer {
+    .social-button {
+        button {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            cursor: pointer;
+
+            &:active {
+                transform: scale(1.2);
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            }
+        }
+    }
+}
+
+/*Codigo para imagenes la imagen del inicio y la del medio de la pagina*/
+.imagen_principal{
+    width: 100vw; 
+    height: 100vh; /* Altura 100vh para la imagen principal en este journal */
+    object-fit: cover; 
+    display: block;
+    margin: 0;
+    padding: 0; 
+}
+
+h1{
+    font-size: 60px;
+    text-align: left;
+    color: var(--oxford-blue);
+    margin: 2% 6%;
+}
+
+/* contenido de divs (content-section) */
+.content-section {
+    display: flex;
+    align-items: flex-start; /* Alinea los elementos al inicio de la cruz */
+    margin: 20px 5%; /* Margen superior/inferior y lateral */
+    gap: 30px; /* Espacio entre el texto y la imagen */
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
+
+    &.div1 {
+        flex-direction: row; /* Texto a la izquierda, imagen a la derecha */
+    }
+
+    &.div2 {
+        flex-direction: row-reverse; /* Imagen a la izquierda, texto a la derecha */
+    }
+
+    .text-content {
+        flex: 1; /* Permite que el contenedor de texto ocupe el espacio disponible */
+        min-width: 300px;
+        padding: 1.5%; /* Ancho mínimo para el contenido de texto */
+
+        p {
+            font-size: 30px; /* Tamaño de fuente solicitado */
+            font-weight: 450; /* Peso de fuente solicitado */
+            color: var(--oxford-blue); /* Color de texto consistente */
+            line-height: 1.5; /* Espaciado entre líneas para mejor lectura */
+            margin-top: 10px; /* Espacio entre el h2/h3 y el párrafo */
+        }
+
+        h2 { /* Estilos para h2 dentro de content-section */
+            font-size: 40px; /* Ajusta el tamaño del h2 */
+            color: var(--oxford-blue);
+            margin: 0; /* Elimina márgenes predeterminados para un control más preciso */
+        }
+    }
+
+    .image-wrapper {
+        flex-shrink: 0; /* Evita que la imagen se encoja */
+        width: 40%; /* Ancho fijo para la imagen */
+        max-width: 500px; /* Ancho máximo para la imagen */
+        height: auto;
+        img {
+            width: 100%; /* La imagen ocupa todo el ancho de su contenedor */
+            height: auto; /* Mantiene la relación de aspecto */
+            border-radius: 10px; /* Bordes redondeados */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+            object-fit: cover; /* Asegura que la imagen cubra el área sin distorsionarse */
+        }
+    }
+}
+
+
+/*Frases*/
+.frase{
+    background: var(--oxford-blue);
+    h2{
+        margin: 0 5%;
+        padding: 2%;
+        font-size: 50px;
+        text-align: left;
+        color: var(--ruddy-blue);
+        
+    }
+    p{
+        padding-bottom: 2%;
+        margin: 0 5%;
+        font-size: 25px;
+        color: var(--seasalt);
+        
+    }
+}
+
+/* Frases fin*/
+
+/* contenido2 inicio*/
+.contenido2{
+    margin: 0.5% 5%;
+    h3{
+        font-size: 50px;
+        color: var(--oxford-blue);
+        padding: 0.7% 0;
+    }
+    p{
+        font-size: 27px;
+        font-weight: 470;
+        padding-bottom: 12px;
+    }
+    ul{
+        margin-left: 2%;
+        padding-bottom: 6px ;
+        li{
+            font-size: 25px;
+            font-weight: 450;
+        }
+    }
+}
+/* contenido2 fin*/
+
+ 
+/*Foooter*/
+.main-footer {
+    background-color: var(--oxford-blue-2);
+    color: var(--seasalt);
+    padding: 40px 5%; /* Añadimos padding superior e inferior y márgenes laterales */
+    display: flex;
+    flex-wrap: wrap; /* Permite que las columnas se envuelvan en pantallas más pequeñas */
+    justify-content: center; /* Centra las columnas del footer */
+    margin: 0 auto; /* Centra el footer horizontalmente */
+
+    .footer-column {
+        flex: 1; /* Hace que las columnas crezcan por igual */
+        min-width: 200px; /* Evita que las columnas se compriman demasiado */
+        margin-bottom: 20px;
+        text-align: left; /* Alinea el texto a la izquierda dentro de cada columna */
+    }
+
+    .footer-column h3 {
+        color: var(--ruddy-blue);
+        font-size: 1.5em;
+        margin-top: 0;
+        margin-bottom: 15px;
+    }
+
+    .footer-column p {
+        margin-bottom: 3px;
+        color: var(--texto-interno);
+    }
+
+    .social-button button{
+      display: flex;
+      align-items: center;
+      font-weight: 600;
+      padding: 10px 30px;
+      font-size: 16px ;
+      color: var(--oxford-blue-2);
+      gap: 10px;
+      border: none;
+      border-radius: 50px;
+      background: var(--ruddy-blue);
+    }
+
+    .links-column ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .links-column li {
+        margin-bottom: 8px;
+    }
+
+    .links-column a {
+        color: var(--texto-interno);
+        text-decoration: none;
+    }
+
+    .links-column a:hover {
+        text-decoration: underline;
+        color: var(--seasalt);
+    }
+
+    .recent-posts ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .recent-posts li {
+        margin-bottom: 15px;
+    }
+
+    .post-date {
+        display: block;
+        font-size: 0.9em;
+        color: var(--ruddy-blue);
+        margin-bottom: 5px;
+    }
+
+    .recent-posts a {
+        color: var(--texto-interno);
+        text-decoration: none;
+        line-height: 1.4;
+    }
+
+    .recent-posts a:hover {
+        text-decoration: underline;
+        color: var(--seasalt);
+    }
+}
+ 
+/* Media query para pantallas más pequeñas */
+@media (max-width: 992px) {
+    .barra-superior {
+        flex-direction: column;
+        align-items: flex-start;
+        .busqueda {
+            width: 100%;
+            margin-right: 0; 
+            input[type="text"] {
+                width: calc(100% - 50px);
+            }
+        }
+        .botones {
+            margin-top: 15px;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            button {
+                margin-left: 0;
+            }
+        }
+    }
+    .barra-navegacion ul {
+        justify-content: center; /* Centrar en móviles */
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+    h1 {
+        font-size: 45px;
+    }
+    .content-section {
+        flex-direction: column;
+        align-items: center;
+        .text-content {
+            width: 100%;
+            text-align: center;
+            h2 {
+                font-size: 40px;
+            }
+            p {
+                font-size: 22px;
+            }
+        }
+        .image-wrapper {
+            width: 80%;
+            margin-top: 20px;
+        }
+    }
+    .frase {
+        h2 {
+            font-size: 45px;
+        }
+        p {
+            font-size: 22px;
+        }
+    }
+    .contenido2 {
+        h3 {
+            font-size: 40px; /* Ajustado a 40px */
+        }
+        p, ul li {
+            font-size: 22px;
+        }
+    }
+    .media-player-section {
+        .media-player-container {
+            padding: 15px;
+        }
+        .player-controls {
+            flex-direction: column;
+            gap: 10px;
+        }
+        .progress-bar-wrapper {
+            width: 100%;
+        }
+        .volume-controls {
+            width: 100%;
+            justify-content: center;
+        }
+        .volume-bar {
+            width: 80%;
+        }
+        .play-pause-btn, .volume-btn {
+            width: 45px;
+            height: 45px;
+            font-size: 20px;
+        }
+        .media-title h3 {
+            font-size: 20px;
+        }
+    }
+    .main-footer {
+        padding: 20px;
+        flex-direction: column; 
+        align-items: flex-start;
+        .footer-column {
+            width: 100%;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .barra-superior {
+        flex-direction: column;
+        align-items: flex-start;
+        .busqueda {
+            width: 100%;
+            input[type="text"] {
+                width: calc(100% - 50px);
+            }
+        }
+        .botones {
+            margin-top: 15px;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            button {
+                margin-left: 0;
+            }
+        }
+    }
+    .barra-navegacion ul {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    h1 {
+        font-size: 35px;
+        text-align: center;
+    }
+    .content-section {
+        .text-content {
+            h2 {
+                font-size: 35px;
+            }
+            p {
+                font-size: 18px;
+            }
+        }
+        .image-wrapper {
+            width: 90%;
+        }
+    }
+    .frase {
+        h2 {
+            font-size: 35px;
+        }
+        p {
+            font-size: 18px;
+        }
+    }
+    .contenido2 {
+        h3 {
+            font-size: 35px; /* Ajustado a 35px */
+        }
+        p, ul li {
+            font-size: 18px;
+        }
+    }
+    .media-player-section {
+        margin: 40px 2%; 
+        h2 {
+            font-size: 35px;
+            margin-bottom: 20px;
+        }
+        .player-controls {
+            flex-direction: column; 
+        }
+        .volume-controls {
+            width: 100%;
+            .volume-bar {
+                width: 70%;
+            }
+        }
+    }
+    .main-footer {
+        padding: 15px;
+        .footer-column {
+            margin-bottom: 20px;
+        }
+    }
+}
+@keyframes bounce {
+  0% { transform: scale(1); }
+  30% { transform: scale(1.1); }
+  60% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  font-family: 'Material Symbols Outlined', sans-serif;
+}
+.account-menu .dropdown {
+  position: relative;
+  cursor: pointer;
+}
+
+.account-menu .dropdown .material-symbols-outlined {
+  font-size: 32px;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+.account-menu .dropdown:hover .material-symbols-outlined {
+  color: #0056b3; /* Cambia el color al pasar el mouse */
+}
+
+.account-menu .dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: white;
+  min-width: 140px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  border-radius: 6px;
+  z-index: 1000;
+  padding: 8px 0;
+}
+
+.account-menu .dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.account-menu .dropdown-content a {
+  display: block;
+  padding: 10px 20px;
+  color: #333;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.account-menu .dropdown-content a:hover {
+  background-color: #0056b3;
+  color: white;
+}
+.account-menu .dropdown .material-symbols-outlined {
+    font-size: 32px;
+    color: #333;
+    transition: color 0.3s ease;
+}
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    font-family: 'Material Symbols Outlined', sans-serif;
+}
+.material-symbols-outlined {
+    font-family: 'Material Symbols Outlined';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+}
+
+* {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.account-menu .dropdown {
+    position: relative;
+    cursor: pointer;
+}
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #111;
+    overflow-x: hidden;
+}
+:root {
+    --oxford-blue: #111835;
+    --oxford-blue-light: #2c3e7e;
+    --oxford-blue-lighter: #40559b;
+    --white: #ffffff;
+}
+:root {
+    --seasalt: #FBFAF8ff;
+    --ruddy-blue: #6CA5FFff;
+    --denim: #245DB5ff;
+    --oxford-blue: #111835ff;
+    --oxford-blue-2: #051024ff;
+    --texto-interno: #C9C9C9;
+    --rubby-blue2: #DAE8FF;
+}

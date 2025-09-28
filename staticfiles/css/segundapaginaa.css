@@ -1,0 +1,496 @@
+:root {
+    --seasalt: #FBFAF8ff;
+    --ruddy-blue: #6CA5FFff;
+    --denim: #245DB5ff;
+    --oxford-blue: #111835ff;
+    --oxford-blue-2: #051024ff;
+    --texto-interno: #C9C9C9;
+    --rubby-blue2: #DAE8FF;
+}
+
+* {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.barra-superior {
+    background-color: var(--oxford-blue-2);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
+    position: relative; /* Asegura que los elementos con position absolute dentro se posicionen con respecto a este */
+    z-index: 1001; /* Un z-index alto para que la barra superior esté por encima */
+}
+
+.busqueda {
+    display: flex;
+    align-items: center;
+    background-color: var(--oxford-blue); /* Fondo blanco para el input */
+    border-radius: 25px;
+    padding-left: 10px;
+
+    input[type="text"] {
+        border: none;
+        padding: 8px;
+        width: 800px;
+        font-size: 18px;
+        background: var(--oxford-blue); /* Ajusta el ancho según necesites */
+        color: var(--rubby-blue2);
+    }
+
+    button {
+        background: none;
+        border: none;
+        padding: 8px 10px;
+        cursor: pointer;
+        color: var(--oxford-blue-2);
+
+        i { /* Para el icono de búsqueda, necesitarás Font Awesome o similar */
+            font-size: 25px;
+            color: var(--rubby-blue2);
+        }
+    }
+}
+
+.botones {
+    display: flex; /* Asegura que los botones y el dropdown se alineen */
+    gap: 10px; /* Espacio entre los botones y el dropdown */
+
+    button {
+        background-color: var(--ruddy-blue);
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 25px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 16px;
+
+        &.boton-login {
+            background:var(--oxford-blue);
+            color: var(--ruddy-blue);
+            border: 2px solid var(--ruddy-blue);
+            font-size: 16px;
+        }
+    }
+}
+
+/* Estilos para el botón de idioma (Material Symbols) */
+.language-dropdown {
+    position: relative; /* Contenedor para el botón y el menú desplegable */
+    display: inline-block; /* Permite que ocupe su propio espacio */
+    z-index: 1002; /* ¡Incrementa este z-index para que esté por encima de la barra superior! */
+
+    .boton-idioma {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px; /* Tamaño del área del botón circular */
+        height: 40px;
+        border-radius: 50%; /* Hace el botón circular */
+        background-color: var(--ruddy-blue); /* Color de fondo del botón: azul claro */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: darken(var(--ruddy-blue), 10%); /* Oscurecer al pasar el cursor */
+        }
+
+        .material-symbols-outlined { /* Selector para el icono */
+            font-variation-settings:
+            'FILL' 0,   
+            'wght' 400, 
+            'GRAD' 0,
+            'opsz' 28; 
+            color: var(--oxford-blue-2); /* Color del icono: azul muy oscuro para contraste */
+            font-size: 28px;
+            vertical-align: middle;
+            transition: color 0.3s ease;
+        }
+    }
+    
+    .dropdown-menu {
+        position: absolute;
+        top: 100%; /* Coloca el menú justo debajo del botón */
+        right: 0; /* Alinea el menú a la derecha del botón */
+        background: white;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        min-width: 150px;
+        z-index: 2003; /* ¡Asegura que el menú en sí esté por encima de todo! */
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px); /* Ligeramente hacia arriba para la animación */
+        transition: all 0.3s ease; /* Transición suave para aparición/desaparición */
+
+        &.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0); /* Vuelve a la posición normal */
+        }
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            color: #333;
+            text-decoration: none;
+            transition: background-color 0.2s ease;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+
+            &:hover {
+                background-color: #f5f5f5;
+            }
+
+            &:first-child {
+                border-top-left-radius: 7px;
+                border-top-right-radius: 7px;
+            }
+
+            &:last-child {
+                border-bottom-left-radius: 7px;
+                border-bottom-right-radius: 7px;
+            }
+
+            .flag-icon {
+                width: 20px;
+                height: 15px;
+                margin-right: 10px;
+                border-radius: 2px;
+                background-size: cover;
+                background-position: center;
+
+                &.flag-es {
+                    background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzUwIiBoZWlnaHQ9IjUwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9Ijc1MCIgaGVpZ2h0PSI1MDAiIGZpbGw9IiNBQTAwMDAiLz4KPHJlY3QgeT0iMTI1IiB3aWR0aD0iNzUwIiBoZWlnaHQ9IjI1MCIgZmlsbD0iI0ZGRkYwMCIvPgo8L3N2Zz4=');
+                }
+
+                &.flag-en {
+                    background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI2MDAiIHZpZXdCb3g9IjAgMCAxMjAwIDYwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjEyMDAiIGhlaWdodD0iNjAwIiBmaWxsPSIjMDA5NkZGIi8+CjxwYXRoIGQ9Im0wLDAgaDEyMDBMIDAsNjAwIE0wLDYwMCBoMTIwMEwgMCwwIiBzdHJva2U9IiNGRkZGRkYiIHN0cm9rZS13aWR0aD0iMTIwIi8+CjxwYXRoIGQ9Im0wLDAgaDEyMDBMIDAsNjAwIE0wLDYwMCBoMTIwMEwgMCwwIiBzdHJva2U9IiNGRjAwMDAiIHN0cm9rZS13aWR0aD0iODAiLz4KPHBhdGggZD0iTTYwMCwwdjYwMCBNMCwzMDBoMTIwMCIgc3Ryb2tlPSIjRkZGRkZGIiBzdHJva2Utd2lkdGg9IjIwMCIvPgo8cGF0aCBkPSJNNjAwLDB2NjAwIE0wLDMwMGgxMjAwIiBzdHJva2U9IiNGRjAwMDAiIHN0cm9rZS13aWR0aD0iMTIwIi8+Cjwvc3ZnPg==');
+                }
+            }
+        }
+    }
+}
+    
+.barra-navegacion {
+    background-color: var(--oxford-blue);
+    padding: 35px 20px;
+    z-index: 1000; /* Asegura que la barra de navegación esté por debajo del dropdown */
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        gap: 45px;
+        justify-content: flex-end;
+    }
+
+    a {
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+
+        &:hover {
+            text-decoration:none;
+            color: var(--ruddy-blue);
+            font-weight: 800;
+        }
+    }
+}
+/*fin de barra de navegacionr*/
+
+.parte_principal{
+    background: var(--oxford-blue);
+
+    h2{
+        margin: 0 15px;
+        font-size: 40px;
+        text-align: center;
+        color: var(--ruddy-blue);
+
+        span{
+            color: var(--seasalt);
+        }
+    }
+}
+
+.b4who_we_are1{
+    padding: 0 7%;
+    margin-top: 20px;
+    margin-bottom: 2%;
+
+    h2{
+        font-size: 60px;
+        color: var(--oxford-blue);
+    }
+    p{
+        font-size: 25px;
+        margin-top: 10px;
+        font-weight: 450;
+    }
+    li{
+        margin: 4px;
+        font-size: 25px;
+        font-weight: 450;
+    }
+}
+
+
+/* New Styles for "Contactar a un doctor"  */
+.contactar_a_un_doctor { 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 10px;
+    width: 100%;
+
+    .contactar_a_un_doctor1 { 
+        width: 48%; 
+        color: black;
+        margin-left: 7%;
+
+        h2 { 
+            font-size: 50px; 
+            margin-bottom: 10px;
+        }
+
+        span { 
+            color: var(--ruddy-blue);
+        }
+
+        p { 
+            font-size: 25px;
+            font-weight: 450;
+            line-height: 1.6;
+        }
+    }
+
+    .find_doctor_button {
+        text-align: center;
+        background-color: var(--oxford-blue); 
+        color: var(--ruddy-blue); 
+        padding: 15px 30px; 
+        border: none;
+        border-radius: 25px; 
+        font-size: 1.2em;
+        cursor: pointer;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        font-weight: bold;
+
+        button{
+            display: inline-block; 
+        }
+
+        &:hover {
+            background-color: var(--ruddy-blue);
+            color: var(--oxford-blue);
+        }
+    }
+
+    .contactar_a_un_doctor2 { 
+        width: 35%; 
+        text-align: center;
+        background-color: var(--rubby-blue2);
+        border-radius: 25px;
+        margin: 2% 10%; 
+
+        img { 
+            max-width: 100%; 
+            height: auto;
+            border-radius: 10px; 
+        }
+    }
+}
+
+/*Foooter*/
+.main-footer {
+    background-color: var(--oxford-blue-2);
+    color: var(--seasalt);
+    padding: 40px 5%; 
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: space-around; 
+
+    .footer-column {
+        flex: 1; 
+        min-width: 200px; 
+        margin-bottom: 20px;
+    }
+
+    .footer-column h3 {
+        color: var(--ruddy-blue);
+        font-size: 1.5em;
+        margin-top: 0;
+        margin-bottom: 15px;
+    }
+
+    .footer-column p {
+        margin-bottom: 3px;
+        color: var(--texto-interno);
+    }
+
+    .social-button button{
+        display: flex;
+        align-items: center;
+        font-weight: 600;
+        padding: 10px 30px;
+        font-size: 16px ;
+        color: var(--oxford-blue-2);
+        gap: 10px;
+        border: none;
+        border-radius: 50px;
+        background: var(--ruddy-blue);
+    }
+
+    .links-column {
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        a {
+            color: var(--texto-interno);
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+                color: var(--seasalt);
+            }
+        }
+    }
+
+    .recent-posts-column {
+        .recent-posts {
+            ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            li {
+                margin-bottom: 15px;
+            }
+
+            .post-date {
+                display: block;
+                font-size: 0.9em;
+                color: var(--ruddy-blue);
+                margin-bottom: 5px;
+            }
+
+            a {
+                color: var(--texto-interno);
+                text-decoration: none;
+                line-height: 1.4;
+
+                &:hover {
+                    text-decoration: underline;
+                    color: var(--seasalt);
+                }
+            }
+        }
+    }
+
+    /* Media query para pantallas más pequeñas */
+    @media (max-width: 768px) {
+        & {
+            padding: 20px;
+            flex-direction: column; 
+            align-items: flex-start; 
+        }
+
+        .footer-column {
+            width: 100%; 
+            margin-bottom: 30px;
+        }
+    }
+}
+
+/* Clase para el efecto de rebote del botón */
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-5px);
+    }
+    60% {
+        transform: translateY(-3px);
+    }
+}
+
+.click-bounce {
+    animation: bounce 0.3s ease;
+}
+
+
+/*CODIGO BORRABLE */
+.imagen_de_repuesto{
+    text-align: center;
+    border-radius: 25px;
+
+    img{
+        border-radius: 25px;
+    }
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  font-family: 'Material Symbols Outlined', sans-serif;
+}
+.account-menu .dropdown {
+  position: relative;
+  cursor: pointer;
+}
+
+.account-menu .dropdown .material-symbols-outlined {
+  font-size: 32px;
+  color: var(--ruddy-blue);
+  transition: color 0.3s ease;
+}
+
+.account-menu .dropdown:hover .material-symbols-outlined {
+  color: #0056b3; /* Cambia el color al pasar el mouse */
+}
+
+.account-menu .dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: white;
+  min-width: 140px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  border-radius: 6px;
+  z-index: 1000;
+  padding: 8px 0;
+}
+
+.account-menu .dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.account-menu .dropdown-content a {
+  display: block;
+  padding: 10px 20px;
+  color: #333;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.account-menu .dropdown-content a:hover {
+  background-color: #0056b3;
+  color: white;
+}
+

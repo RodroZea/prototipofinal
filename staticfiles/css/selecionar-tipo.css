@@ -1,0 +1,119 @@
+:root {
+    --seasalt: #FBFAF8ff;
+    --ruddy-blue: #6CA5FFff;
+    --denim: #245DB5ff;
+    --oxford-blue: #111835ff;
+    --oxford-blue-2: #051024ff;
+    --texto-interno: #C9C9C9;
+    --rubby-blue2: #DAE8FF;
+}
+
+* {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+}
+
+body {
+    background-color: var(--seasalt);
+
+}
+.back-button {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        cursor: pointer;
+        font-size: 60px;
+        color: var(--oxford-blue); 
+        
+    }
+
+.back-button .material-symbols-outlined { 
+    font-size: 4rem; 
+}
+h1{
+    text-align: center;
+    font-size: 60px;
+    margin-top: 20px;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+h1 span{
+    color: var(--ruddy-blue);
+}
+h2{
+    text-align: center;
+    margin-top: 15px;
+    font-size: 35px;
+}
+.div-button{
+    display: flex;
+    margin: 5px 35px;
+    padding: 2% 10%;
+}
+.div-button a img{
+    border-radius: 25px;
+    width: 100%;
+    margin: 10px;
+}
+img{
+    box-shadow: 5px 5px 10px var(--texto-interno); 
+}
+a{
+    padding: 15px;
+}
+.back-button {
+      display: inline-flex;
+      align-items: center;
+      cursor: pointer;
+      color: #333;
+      font-size: 18px;
+      border: 1px solid #ccc;
+      padding: 5px 8px;
+      border-radius: 4px;
+      background: white;
+      transition: background-color 0.2s ease;
+      user-select: none;
+    }
+    .back-button:hover {
+      background-color: #e0e0e0;
+    }
+    .material-symbols-outlined {
+      font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24;
+      margin-right: 5px;
+    }
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background-color: #4caf50; /* Verde suave */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none; /* Para el caso <a> */
+  transition: background-color 0.3s ease;
+  user-select: none;
+}
+
+.back-button:hover {
+  background-color: #388e3c; /* Verde más oscuro al pasar el mouse */
+}
+
+.back-button:active {
+  background-color: #2e7d32; /* Verde aún más oscuro al hacer clic */
+}
+
+.material-symbols-outlined {
+  font-size: 20px;
+}
+
