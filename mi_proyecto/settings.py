@@ -6,7 +6,7 @@ LOGIN_REDIRECT_URL = 'home'
 # Seguridad
 SECRET_KEY = 'django-insecure-4b7=&d9fisu*7qp4irm$$!g@e*!lof8_-hcg24nf@%!ju3+78o'
 DEBUG = True
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['prototipofinal-production.up.railway.app']
 LOGIN_URL = '/login/'
 # Aplicaciones instaladas
 INSTALLED_APPS = [
