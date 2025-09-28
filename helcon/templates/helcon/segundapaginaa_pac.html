@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <title data-text-key="pageTitle">Health Connectors</title>
+  <link rel="stylesheet" href="{% static 'css/segundapaginaa.css' %}">
+</head>
+
+<body>
+<body>
+  <button onclick="window.history.back()" style="
+  background-color: #111835;
+  color: white;
+  padding: 10px 20px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 20px;
+  transition: background-color 0.3s ease;
+"
+onmouseover="this.style.backgroundColor='#2c3e7e'"
+onmouseout="this.style.backgroundColor='#111835'"
+>
+  ← Volver
+</button>
+  <!-- Encabezado con búsqueda y botones -->
+  <header>
+   <div class="barra-superior">
+      <div class="busqueda">
+        <input type="text" placeholder="Buscar" data-text-key="searchPlaceholder"/>
+        <button><i class="fas fa-search"></i></button>
+      </div>
+      <div class="botones">
+        <div class="account-menu">
+          {% if user.is_authenticated %}
+    <div class="dropdown">
+        {% if doctor.foto_perfil %}
+            <img src="{{ doctor.foto_perfil.url }}" alt="Foto de perfil" style="width:50px; height:50px; border-radius:50%; object-fit:cover;" />
+        {% else %}
+            <img src="{% static 'images/fotoprede.webp' %}" alt="Foto de perfil por defecto" style="width:50px; height:50px; border-radius:50%; object-fit:cover;" />
+        {% endif %}
+        <div class="dropdown-content">
+            <a href="{% url 'perfil_doctor' %}" data-text-key="profileLink">Perfil</a>
+            <a href="{% url 'logout' %}" data-text-key="logoutLink">Cerrar sesión</a>
+        </div>
+    </div>
+{% else %}
+        <a href="{% url 'login' %}"><button class="boton-login" data-text-key="loginButton">Login</button></a>
+        <a href="{% url 'registro' %}" style="margin-left: 15px;"><button class="boton-registro" data-text-key="registerButton">Sign up</button></a>
+          {% endif %}
+        </div>
+        <!-- Menú desplegable de idiomas -->
+        <div class="language-dropdown">
+            <div class="boton-idioma" id="language-button" aria-label="Cambiar idioma">
+              <span class="material-symbols-outlined">
+                language
+              </span>
+            </div>
+            <div class="dropdown-menu" id="language-menu">
+              <a href="#" class="dropdown-item" data-lang="es">
+                <div class="flag-icon flag-es"></div>
+                Español
+              </a>
+              <a href="#" class="dropdown-item" data-lang="en">
+                <div class="flag-icon flag-en"></div>
+                English
+              </a>
+            </div>
+          </div>
+      </div>
+    </div>
+
+    <nav class="barra-navegacion">
+      <ul>
+          <li class="nav-item"><a href="{% url 'home_paciente' %}" data-nav-key="homeNav">Home</a></li>
+          <li class="nav-item"><a href="{% url 'segpag_pac' %}" data-nav-key="featuresNav">Functions and Benefits</a></li>
+          <li class="nav-item"><a href="{% url 'tercerapag' %}" data-nav-key="aboutNav">About us</a></li>
+          <li class="nav-item"><a href="{% url 'blog_view' %}" data-nav-key="blogNav">Blog</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Contenido principal -->
+  <main>
+    <!-- Sección principal con imagen -->
+    <div class="parte_principal">
+      <img src="{% static 'images/funcionalidades_principal.webp' %}" alt="Imagen principal de funcionalidades" width="100%" data-image-key="main_functionalities_image">
+      <h1></h1>
+      <h2 class="imagen_a_new_way" data-text-key="main_title_h2">A NEW WAY TO AVOID ANY PROBLEMS FOR ARRANGING <br> <span data-text-key="main_title_span"> YOUR APPOINTMENT</span></h2>
+    </div>
+
+    <hr>
+
+    <!-- Qué puedes hacer -->
+    <div class="b4who_we_are1">
+      <h2 data-text-key="what_you_can_do_h2">What you can do in Health <br> Connectors website</h2>
+      <p data-text-key="what_you_can_do_p1">
+        On the Health Connectors website, you can easily book medical appointments with your trusted doctor or find the right specialist based on your needs. The platform allows you to search and compare healthcare professionals by location, specialty, or patient reviews. In addition to scheduling visits, you can explore the Journal section, which offers reliable health tips and articles verified by reputable health organizations. 
+      </p>
+      <p data-text-key="what_you_can_do_p2">
+        Health Connectors is designed to make managing your healthcare simple, convenient, and informed — all in one place.
+      </p>
+    </div>
+    <div class="imagen_de_repuesto">
+      <img src="{% static 'images/imagenderepuesto.png' %}" alt="Imagen de repuesto" data-image-key="placeholder_image">
+
+    </div>
+
+    <!-- Beneficios para pacientes -->
+    <div class="b4who_we_are1">
+      <h2 data-text-key="benefits_patients_h2">Benefits for patients</h2>
+      <ul>
+        <li data-text-key="benefits_patients_li1">Easy Appointment Booking: Quickly and easily schedule your medical appointments online. Whether you want to book a visit with your trusted doctor or need to find an available specialist based on your symptoms or needs, our intuitive system lets you set appointments in just a few clicks—no hassle, no long forms.</li>
+        <li data-text-key="benefits_patients_li2">Reliable Health Information: Stay informed with trustworthy articles, tips, and health resources. Our Journal section features content reviewed and approved by respected medical organizations, covering a wide range of topics like disease prevention, nutrition, mental wellness, and everyday health advice.</li>
+        <li data-text-key="benefits_patients_li3">Time-Saving: Skip the phone calls and long wait times. Manage all your appointments in one place—check doctor availability, reschedule when needed, and receive reminders directly to your device. It’s healthcare made efficient and stress-free.</li>
+        <li data-text-key="benefits_patients_li4">Convenient Search: Find the right healthcare professional quickly. Use filters to search by specialty, location, availability, and other important criteria to ensure you're connecting with the right provider for your specific needs.</li>
+      </ul>
+    </div>
+
+    <!-- Imagen adicional -->
+    <div>
+      <img src="{% static 'images/who_weare.webp' %}" alt="Quiénes somos" data-image-key="who_we_are_image">
+    </div>
+
+    <!-- Beneficios para doctores -->
+    <div class="b4who_we_are1">
+      <h2 data-text-key="benefits_doctors_h2">Benefits for doctors</h2>
+      <ul>
+        <li data-text-key="benefits_doctors_li1">Increased Visibility: Expand your reach and attract more patients who are actively searching for medical care online. Being featured on a trusted platform puts you in front of people who genuinely need your services at the right time.</li>
+        <li data-text-key="benefits_doctors_li2">Professional Presence: Showcase your complete profile with a polished presentation that highlights your specialties, credentials, and professional experience. A well-crafted profile builds trust with potential patients and sets you apart from other healthcare providers.</li>
+        <li data-text-key="benefits_doctors_li3">Direct Patient Connection: Simplify communication and appointment management with built-in tools that allow for appointment reminders, quick messaging, and seamless follow-ups—making it easier to stay connected with your patients and improve their experience.</li>
+        <li data-text-key="benefits_doctors_li4">
+Enhanced Patient Engagement: Foster stronger relationships by providing patients with educational resources, personalized health tips, and easy access to their appointment history and medical notes. Engaged patients are more likely to follow treatment plans and feel confident in their healthcare journey, leading to better outcomes and higher satisfaction.</li>
+      </ul>
+    </div>
+
+    <!-- Contactar a un doctor -->
+    <div class="contactar_a_un_doctor">
+      <div class="contactar_a_un_doctor1">
+        <h2 data-text-key="contact_doctor_h2">Do you want to <br><span data-text-key="contact_doctor_span">contact a doctor?</span></h2>
+        <p data-text-key="contact_doctor_p">For any inquiries, feedback, or comments, please feel free to contact us directly via email. We look forward to hearing from you.</p>
+        <button class="find_doctor_button" type="button" data-text-key="find_doctor_contact_button">Find a doctor</button>  
+      </div>
+      <div class="contactar_a_un_doctor2">
+        <img src="{% static 'images/imagen-mujer-medica-profesional-clipboard-escribiendo-escuchando-paciente-cita-clinica-hospital-pie-sobre-fondo-turquesa.webp' %}" alt="Mujer médica profesional" data-image-key="contact_doctor_image">
+      </div>
+    </div>
+  </main> 
+
+  <footer class="main-footer">
+    <div class="footer-column">
+        <h3 data-text-key="footer_h3">Health<br>Connectors</h3>
+        <p data-text-key="footer_p1">New Elsiebury</p>
+        <p data-text-key="footer_p2">634 Halvorson</p>
+        <p data-text-key="footer_p3">Estates Suite 039</p>
+        <br>
+        <div class="social-button">
+          <button type="submit" data-text-key="footer_button">know more</button>
+        </div>
+    </div>
+    <div class="footer-column links-column">
+        <h3 data-text-key="footer_links_h3">Links</h3>
+        <ul class="footer-links">
+            <li><a href="{% url 'home' %}" data-text-key="footer_link_home">Home</a></li>
+            <li><a href="#" data-text-key="footer_link_pages">Pages</a></li>
+            <li><a href="#" data-text-key="footer_link_services">Services</a></li>
+            <li><a href="#" data-text-key="footer_link_portfolio">Portfolio</a></li>
+            <li><a href="{% url 'blog_view' %}" data-text-key="footer_link_blog">Blog</a></li>
+            <li><a href="#" data-text-key="footer_link_contact">Contact</a></li>
+        </ul>
+    </div>
+    <div class="footer-column links-column">
+        <br>
+        <ul class="footer-links">
+            <li><a href="{% url 'privacy_policies' %}" data-text-key="footer_link_privacy">Privacy policies</a></li>
+            <li><a href="{% url 'terms' %}" data-text-key="footer_link_terms">Terms of use</a></li>
+            <li><a href="#" data-text-key="footer_link_signup">Sign up</a></li>
+            <li><a href="#" data-text-key="footer_link_login">Login</a></li>
+            <li><a href="{% url 'difamation' %}" data-text-key="footer_link_defamation">Defamation</a></li>
+        </ul>
+    </div>
+    <div class="footer-column recent-posts-column">
+        <h3 data-text-key="footer_recent_posts_h3">Recent posts</h3>
+        <ul class="recent-posts">
+            <li data-text-key="recent_post_sleep">
+                <span class="post-date">28 Aug 2024</span>
+                <a href="#">Health Benefits of Sleep</a>
+            </li>
+            <li data-text-key="recent_post_exercise">
+                <span class="post-date">28 Aug 2024</span>
+                <a href="#">Benefits of Excercise</a>
+            </li>
+            <li data-text-key="recent_post_stress">
+                <span class="post-date">28 Aug 2024</span>
+                <a href="#">Stress Management</a>
+            </li>
+            <li data-text-key="recent_post_preventive_care">
+                <span class="post-date">28 Aug 2024</span>
+                <a href="#">The importance of preventive care.</a>
+            </li>
+        </ul>
+    </div>
+  </footer>
+
+  <script src="{% static 'js/funcionalidades.js' %}"></script>
+</body>
+</html>

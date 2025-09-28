@@ -1,0 +1,306 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Health Connectors</title>
+  <link rel="stylesheet" href="{% static 'css/nuevoo.css' %}" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <link rel="stylesheet" href="">
+  <link rel="stylesheet" href="{% static 'css/nuevo.css' %}" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Darker+Grotesque:wght@300..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">  
+</head>
+<body>
+ 
+  <div class="header">
+    <!-- Icono de Home a la izquierda del header -->
+   
+ 
+    <div class="botones">
+      <div class="account-menu">
+        <a href="#" title="Home" data-text-key="homeIconTitle" class="botones">
+          <span class="material-symbols-outlined">home</span>
+        </a>
+      </div>
+      <div class="account-menu">
+        {% if user.is_authenticated %}
+         
+          {% if paciente %}
+            <!-- Paciente logueado -->
+            <div class="dropdown">
+              <span class="material-symbols-outlined">person</span>
+              <div class="dropdown-content">
+                <a href="{% url 'perfil_paciente' %}" data-text-key="profileLink">Perfil</a>
+                <a href="{% url 'logout' %}" data-text-key="logoutLink">Cerrar sesión</a>
+              </div>
+            </div>
+ 
+          {% elif doctor %}
+            <!-- Doctor logueado -->
+            <div class="dropdown">
+              {% if doctor.foto_perfil %}
+                <img src="{{ doctor.foto_perfil.url }}" alt="Foto de perfil" style="width:24px; height:24px; border-radius:50%; object-fit:cover;" />
+              {% else %}
+                <img src="{% static 'images/fotoprede.webp' %}" alt="Foto por defecto" style="width:24px; height:24px; border-radius:50%; object-fit:cover;" />
+              {% endif %}
+              <div class="dropdown-content">
+                <a href="{% url 'perfil_doctor' %}" data-text-key="profileLink">Perfil</a>
+                <a href="{% url 'logout' %}" data-text-key="logoutLink">Cerrar sesión</a>
+              </div>
+            </div>
+          {% endif %}
+ 
+        {% else %}
+          <!-- No autenticado -->
+          <a href="{% url 'login' %}"><button class="boton-login" data-text-key="loginButton">Login</button></a>
+          <a href="{% url 'registro' %}" style="margin-left: 15px;"><button class="boton-registro" data-text-key="signupButton">Sign up</button></a>
+        {% endif %}
+      </div>
+ 
+      <!-- Menú de idioma -->
+      <div class="language-dropdown">
+        <div class="boton-idioma" id="language-button" aria-label="Cambiar idioma">
+          <span class="material-symbols-outlined">language</span>
+        </div>
+        <div class="dropdown-menu" id="language-menu">
+          <a href="#" class="dropdown-item" data-lang="es">
+            <div class="flag-icon flag-es"></div>
+            Español
+          </a>
+          <a href="#" class="dropdown-item" data-lang="en">
+            <div class="flag-icon flag-en"></div>
+            English
+          </a>
+        </div>
+      </div>
+ 
+    </div>
+  </div>
+ 
+<div class="carousel">
+  <div class="carousel-track" id="carousel-track">
+    <!-- Las URLs de las imágenes se mantienen estáticas para este ejemplo, pero podrían ser dinámicas si tienes versiones de imágenes por idioma -->
+    <a href="{% url 'blog_view' %}"><img src="{% static 'images/inicio_encabezado_eng.webp' %}" alt="Imagen 1" /></a>
+    <a href="{% url 'tercerapag' %}"><img src="{% static 'images/inicio_encabezado2_eng.webp' %}" alt="Imagen 2" /></a>
+    <a href="{% url 'segpag' %}"><img src="{% static 'images/inicio_encabezado3_eng.webp' %}" alt="Imagen 3" /></a>
+    <a href="{% url 'contacto' %}"><img src="{% static 'images/inicio_encabezado4_eng.webp' %}" alt="Imagen 4" /></a>
+    <a href="{% url 'privacy_policies' %}"><img src="{% static 'images/inicio_encabezado5_eng.webp' %}" alt="Imagen 5" /></a>
+  </div>
+ 
+ 
+  <div class="arrow left" id="prev" tabindex="0" data-text-key="carouselPrev" aria-label="Previous slide">
+    <span class="material-symbols-outlined">chevron_left</span>
+  </div>
+  <div class="arrow right" id="next" tabindex="0" data-text-key="carouselNext" aria-label="Next slide">
+    <span class="material-symbols-outlined">chevron_right</span>
+  </div>
+</div>
+ 
+  <div class="search-section">
+  <h2 data-text-key="welcomeTitle">Welcome to Health Connectors</h2>
+  <p data-text-key="welcomeText">Here is your appointment calendar. Please review your upcoming consultations.</p>
+ 
+ 
+<hr>
+ 
+<ul>
+     <div class="calendar-wrapper">
+      <div id="calendar"></div>
+    </div>
+ 
+  </div>
+ 
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+<script>
+  // Script original del calendario FullCalendar
+  const pacienteData = {
+    nombre: "{{ paciente.user.first_name|default:''|escapejs }}",
+    apellido: "{{ paciente.user.last_name|default:''|escapejs }}",
+    fecha_nacimiento: "{{ paciente.birthdate|date:'Y-m-d'|default:'' }}",
+    cedula: "{{ paciente.id_number|default:''|escapejs }}",
+    telefono: "{{ paciente.phone|default:''|escapejs }}",
+    fecha_cita: "{{ paciente.fecha_cita|date:'Y-m-d'|default:'' }}",
+  };
+ 
+  function seleccionarModo(modo) {
+    const form = document.getElementById("formDatos");
+    const campos = {
+      nombre: document.getElementById("nombre"),
+      fecha_nacimiento: document.getElementById("fecha_nacimiento"),
+      cedula: document.getElementById("cedula"),
+      telefono: document.getElementById("telefono"),
+      fecha_cita: document.getElementById("fecha_cita")
+    };
+ 
+    form.style.display = "block";
+ 
+    if (modo === "mi") {
+      campos.nombre.value = pacienteData.nombre;
+      campos.fecha_nacimiento.value = pacienteData.fecha_nacimiento;
+      campos.cedula.value = pacienteData.cedula;
+      campos.telefono.value = pacienteData.telefono;
+ 
+      for (let campo in campos) {
+        if (campo !== "fecha_cita") {
+          campos[campo].readOnly = true;
+        } else {
+          campos[campo].readOnly = false;
+        }
+      }
+    } else {
+      for (let campo in campos) {
+        campos[campo].value = "";
+        campos[campo].readOnly = false;
+      }
+    }
+  }
+ 
+  document.addEventListener('DOMContentLoaded', function () {
+    var calendarEl = document.getElementById('calendar');
+    if (calendarEl) { // Asegura que el elemento exista antes de inicializar
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        headerToolbar: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+        },
+        events: '/api/citas/',
+        // El idioma del calendario se establecerá dinámicamente en translation_home.js
+      });
+      calendar.render();
+      window.calendarInstance = calendar; // Hace la instancia de calendario accesible globalmente
+    }
+  });
+</script>
+</ul>
+</div>
+<div id="citas-doctor" style="padding: 2% 5%;">
+ 
+  <h2 style="color: #111835; margin-bottom: 20px; font-size: 3.5rem;" data-text-key="doctorAppointmentsTitle" data-doctor-name="{{ request.user.first_name|default:'' }}">
+    Citas del Doctor {{ request.user.first_name }}
+  </h2>
+
+  <!-- Botón para registrar citas -->
+  <a href="{% url 'registrar_cita_doc' %}" style="
+    display: inline-block;
+    background: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-bottom: 25px;
+  " data-text-key="registerAppointmentButton">
+    Registrar cita
+  </a>
+
+  {% if citas %}
+    <div style="
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+    ">
+      {% for cita in citas %}
+        <div class="appointment-card" style="
+          background: white;
+          border-radius: 12px;
+          box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+          padding: 20px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+        ">
+          <div>
+            <h3 style="margin: 0 0 10px 0; color: #111835;">{{ cita.nombre }}</h3>
+            <p style="margin: 5px 0; color: #333;"><strong data-text-key="appointmentReason">Motivo:</strong> {{ cita.motivo_visita }}</p>
+            <p style="margin: 5px 0; color: #333;"><strong data-text-key="appointmentDate">Fecha:</strong> {{ cita.fecha }} a las {{ cita.hora }}</p>
+          </div>
+          <a href="{% url 'detalle_cita' cita.id %}" data-text-key="moreInfoButton" style="
+            background: #6CA5FFff;
+            color: #111835ff;;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            text-decoration: none;
+            margin-top: 15px;
+            font-weight: bold;
+          ">Más información</a>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p data-text-key="noAppointments">No hay citas registradas.</p>
+  {% endif %}
+ 
+</div>
+
+ 
+  <script src="{% static 'js/nuevoo.js' %}"></script>
+  <!-- Nuevo script de traducción -->
+  <script src="{% static 'js/translation_home.js' %}"></script>
+</body>
+ <footer class="main-footer">
+    <div class="footer-column">
+        <h3>Health<br>Connectors</h3>
+        <p>New Elsiebury</p>
+        <p>634 Halvorson</p>
+        <p>Estates Suite 039</p>
+        <br>
+        <div class="social-button">
+          <a href="https://linktr.ee/Health_Connectors" target="_blank" style="
+  display: inline-block;
+  margin-top: 25px;
+  background-color: #8cb8ff;
+  border: none;
+  border-radius: 12px;
+  color: #000;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 15px 30px;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: 'Poppins', sans-serif;
+">
+  Know more
+</a>
+
+        </div>
+    </div>
+    <div class="footer-column links-column">
+        <h3>Links</h3>
+        <ul class="footer-links">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="#">Pages</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Portfolio</a></li>
+            <li><a href="{% url 'blog_view' %}">Blog</a></li>
+            <li><a href="{% url 'contacto' %}">Contact</a></li>
+        </ul>
+    </div>
+    <div class="footer-column links-column">
+        <br>
+        <ul class="footer-links">
+            <li><a href="{% url 'privacy_policies' %}">Privacy Policies</a></li>
+            <li><a href="{% url 'terms' %}">Term of use</a></li>
+            <li><a href="{% url 'registro' %}">Sign up</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
+            <li><a href="{% url 'difamation' %}">Defamation</a></li>
+        </ul>
+    </div>
+    <div class="footer-column recent-posts-column">
+        <h3>Recent posts</h3>
+        <ul class="recent-posts">
+            <li> <a href="{% url 'journal1' %}">Health Benefits of Sleep</a></li>
+            <li> <a href="{% url 'journal2' %}">Benefits of Excercise</a></li>
+            <li><a href="{% url 'journal3' %}">Stress Management</a></li>
+            <li><a href="{% url 'journal4' %}">The importance of preventive care.</a></li>
+        </ul>
+    </div>
+</footer>
+</html>
+ 
+ 

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/selecionar-tipo.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>Select Role</title>
+</head>
+
+<body>
+    <button onclick="window.history.back()" style="
+  background-color: #111835;
+  color: white;
+  padding: 10px 20px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 20px;
+  transition: background-color 0.3s ease;
+"
+onmouseover="this.style.backgroundColor='#2c3e7e'"
+onmouseout="this.style.backgroundColor='#111835'"
+>
+  ← Volver
+</button>
+
+    <div class="div-seleccionar">
+        <h1>Log in to Health<span> Connectors</span> </h1>
+        <h2>which one are you?</h2>
+        <div class="div-button">
+
+            <a href="{% url 'formpac' %}">
+                <img src="{% static 'images/patient.webp' %}" alt="Paciente">
+            </a>
+
+            <a href="{% url 'formdoc' %}">
+                <img src="{% static 'images/doctor.webp' %}" alt="Paciente">
+            </a>
+
+        </div>
+
+    </div>
+</body>
+<script src="{% static 'js/seleccionar-tipo.js' %}"></script>
+
+</html>

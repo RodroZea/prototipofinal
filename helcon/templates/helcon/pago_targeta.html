@@ -1,0 +1,122 @@
+<!-- templates/helcon/pago_tarjeta.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pago con Tarjeta</title>
+  <script src="https://js.stripe.com/v3/"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 500px;
+      margin: 40px auto;
+      padding: 0 20px;
+      background: #f9f9f9;
+    }
+    h2 {
+      color: #333;
+    }
+    .doctor-info {
+      margin-bottom: 20px;
+      padding: 15px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+      text-align: center;
+    }
+    #card-element {
+      background: white;
+      padding: 12px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      margin-bottom: 12px;
+    }
+    button {
+      background: #6772e5;
+      color: white;
+      font-size: 16px;
+      border: none;
+      padding: 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      width: 100%;
+    }
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    #resultado {
+      margin-top: 15px;
+      font-weight: bold;
+      color: red;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="doctor-info">
+    <h2>Pago para cita con Dr. {{ doctor.nombre }}</h2>
+    <p>Especialidad: {{ doctor.especialidad }}</p>
+    {% if doctor.foto %}
+      <img src="{{ doctor.foto.url }}" alt="Foto Dr. {{ doctor.nombre }}" width="120" style="border-radius:50%" />
+    {% endif %}
+    <p><strong>Precio:</strong> $0.01</p>
+  </div>
+
+  <form id="payment-form">
+    <div id="card-element"></div>
+    <button id="submit">Pagar $0.01</button>
+  </form>
+
+  <div id="resultado"></div>
+
+  <script>
+    const stripe = Stripe("{{ stripe_public_key }}");
+    const elements = stripe.elements();
+    const card = elements.create("card");
+    card.mount("#card-element");
+
+    const submitButton = document.getElementById("submit");
+    const resultado = document.getElementById("resultado");
+
+    submitButton.addEventListener("click", async (e) => {
+      e.preventDefault();
+      submitButton.disabled = true;
+      resultado.textContent = "";
+
+      const { paymentMethod, error } = await stripe.createPaymentMethod({
+        type: "card",
+        card: card
+      });
+
+      if (error) {
+        resultado.textContent = error.message;
+        submitButton.disabled = false;
+      } else {
+        // Enviar paymentMethod.id al backend para crear el pago
+        const response = await fetch("{% url 'procesar_pago' %}", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": "{{ csrf_token }}"
+          },
+          body: JSON.stringify({ payment_method_id: paymentMethod.id })
+        });
+
+        const data = await response.json();
+
+        if (data.status === "success") {
+          resultado.style.color = "green";
+          resultado.textContent = "¡Pago exitoso! Gracias por su compra.";
+          // Opcional: redirigir o limpiar formulario aquí
+        } else {
+          resultado.style.color = "red";
+          resultado.textContent = data.error || "Error en el pago";
+          submitButton.disabled = false;
+        }
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load static %}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title data-text-key="pageTitle">Health Connectors</title>
+  <link rel="stylesheet" href="{% static 'css/welcome.css' %}" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+</head>
+ 
+<body>
+ <header>
+ 
+    <div class="barra-superior">
+    <body>
+  <div>
+ 
+  </div>
+     
+     
+      <div class="botones">
+          <div class="botones">
+  <div class="account-menu">
+    {% if user.is_authenticated %}
+     
+      {% if paciente %}
+        <!-- Paciente logueado -->
+        <div class="dropdown">
+          <span class="material-symbols-outlined">person</span>
+          <div class="dropdown-content">
+            <a href="{% url 'perfil_paciente' %}">Perfil</a>
+            <a href="{% url 'logout' %}">Cerrar sesión</a>
+          </div>
+        </div>
+ 
+      {% elif doctor %}
+        <!-- Doctor logueado -->
+        <div class="dropdown">
+          {% if doctor.foto_perfil %}
+            <img src="{{ doctor.foto_perfil.url }}" alt="Foto de perfil" style="width:50px; height:50px; border-radius:50%; object-fit:cover;" />
+          {% else %}
+            <img src="{% static 'images/fotoprede.webp' %}" alt="Foto por defecto" style="width:50px; height:50px; border-radius:50%; object-fit:cover;" />
+          {% endif %}
+          <div class="dropdown-content">
+            <a href="{% url 'perfil_doctor' %}">Perfil</a>
+            <a href="{% url 'logout' %}">Cerrar sesión</a>
+          </div>
+        </div>
+      {% endif %}
+ 
+    {% else %}
+      <!-- No autenticado -->
+      <a href="{% url 'login' %}"><button class="boton-login">Login</button></a>
+      <a href="{% url 'registro' %}" style="margin-left: 15px;"><button class="boton-registro">Sign up</button></a>
+    {% endif %}
+  </div>
+</div>
+ 
+          <div class="language-dropdown">
+            <div class="boton-idioma" id="language-button" aria-label="Cambiar idioma">
+              <span class="material-symbols-outlined">
+                language
+              </span>
+            </div>
+            <div class="dropdown-menu" id="language-menu">
+              <a href="#" class="dropdown-item" data-lang="es">
+                <div class="flag-icon flag-es"></div>
+                Español
+              </a>
+              <a href="#" class="dropdown-item" data-lang="en">
+                <div class="flag-icon flag-en"></div>
+                English
+              </a>
+            </div>
+          </div>
+      </div>
+    </div>
+ 
+    <nav class="barra-navegacion">
+    <ul>
+        <li><a href="{% url 'home' %}" data-nav-key="homeNav">Inicio</a></li>
+        <li><a href="{% url 'segpag' %}" data-nav-key="featuresNav">Funcionalidades y Beneficios</a></li>
+        <li><a href="{% url 'tercerapag' %}" data-nav-key="aboutNav">Acerca de Nosotros</a></li>
+        <li><a href="{% url 'blog_view' %}" data-nav-key="blogNav">Blog</a></li>
+    </ul>
+    </nav>
+  </header>
+ 
+  <div align="center" valign="middle">
+    <div class="Imagen_principal">
+      <img src="{% static 'images/home_encabezado_eng.webp' %}" alt="Imagen principal Health Connectors" data-image-key="home_main_header_image"/>
+    </div>
+  </div>
+ 
+  <div class="Heath_connectors_mancha">
+    <div class="Marcha_izquierda">
+      <div class="mancha"></div>
+    </div>
+    <div class="Mancha_derecha">
+      <table>
+        <tr>
+          <td>
+            <h1 data-text-key="health_connectors_h1">Health<br /><b>Connectors</b></h1>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p data-text-key="health_connectors_p1">
+              Health Connectors is a digital platform designed to make healthcare more accessible and efficient.
+              From the comfort of your home, you can easily book medical appointments and find doctors across a wide
+              range of specialties.
+            </p>
+            <p data-text-key="health_connectors_p2">
+              Our platform simplifies the process of connecting with medical providers by offering a fast, secure, and
+              user-friendly experience.
+            </p>
+            <button class="button_mancha" id="button_mancha" type="button" onclick="window.location.href='{% url 'dissplay' %}';" data-text-key="find_doctor_button_main">Find a Doctor</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+ 
+  <h1 class="container_titulo" data-text-key="featured_services_title">Servicios destacados</h1>
+ 
+  <div class="container">
+    <div class="swiper-container mySwiper">
+      <div class="swiper-wrapper">
+ 
+        <div class="swiper-slide">
+          <img src="{% static 'images/home_offer1_eng.webp' %}" alt="Organización desde casa" data-image-key="service1_image"/>
+          <div class="card-description">
+            <div class="card-title"><h4 data-text-key="service1_title">Organización desde casa</h4></div>
+            <div class="card-text">
+              <p data-text-key="service1_description">Administra tus tareas y tiempo desde la comodidad de tu hogar con herramientas efectivas.</p>
+            </div>
+          </div>
+        </div>
+ 
+        <div class="swiper-slide">
+          <img src="{% static 'images/home_offer2_eng.webp' %}" alt="Agenda médica automatizada" data-image-key="service2_image"/>
+          <div class="card-description">
+            <div class="card-title"><h4 data-text-key="service2_title">Agenda médica automatizada</h4></div>
+            <div class="card-text">
+              <p data-text-key="service2_description">Solicita y organiza tus citas médicas sin complicaciones a través de nuestro sistema inteligente.</p>
+            </div>
+          </div>
+        </div>
+ 
+        <div class="swiper-slide">
+          <img src="{% static 'images/home_offer3_eng.webp' %}" alt="Agenda en segundos" data-image-key="service3_image"/>
+          <div class="card-description">
+            <div class="card-title"><h4 data-text-key="service3_title">Agenda en segundos</h4></div>
+            <div class="card-text">
+              <p data-text-key="service3_description">Realiza todas tus citas con tan solo un par de clics.</p>
+            </div>
+          </div>
+        </div>
+ 
+        <div class="swiper-slide">
+          <img src="{% static 'images/home_offer4_eng.webp' %}" alt="Servicio 4" data-image-key="service4_image"/>
+          <div class="card-description">
+            <div class="card-title"><h4 data-text-key="service4_title">Título 4</h4></div>
+            <div class="card-text"><p data-text-key="service4_description">Descripción 4.</p></div>
+          </div>
+        </div>
+ 
+        <div class="swiper-slide">
+          <img src="{% static 'images/offer5.webp' %}" alt="Servicio 5" data-image-key="service5_image"/>
+          <div class="card-description">
+            <div class="card-title"><h4 data-text-key="service5_title">Título 5</h4></div>
+            <div class="card-text"><p data-text-key="service5_description">Descripción 5.</p></div>
+          </div>
+        </div>
+ 
+      </div>
+ 
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+    </div>
+  </div>
+ 
+  <div class="trouble">
+    <div class="trouble_izquierda">
+      <h3 data-text-key="trouble_h3">Are you having some problems with your healthcare?</h3>
+      <button data-text-key="contact_doctor_trouble_button">Contact a doctor</button>
+    </div>
+    <div class="trouble_derecha">
+      <img src="{% static 'images/home_tercera.webp' %}" alt="Imagen contacto doctor" data-image-key="trouble_image"/>
+    </div>
+  </div>
+ 
+  <!--Carrousel 222 Journal .-->
+  <div class="carrousel_journal">
+ 
+    <h2 class="container_titulo2" data-text-key="journal_title">Visit our journal for some <br> advices</h2>
+    <p class="container_padding2" data-text-key="journal_description">Health Connectors also research different topics in the medical field — check some of them out!</p>
+  </div>
+  <!--Todo el  codigo de carrousel 2-->
+    <div>
+      <section>
+          <div class="container2">
+            <div class="card">
+              <div class="card-inner" style="--clr:#fff;">
+                <div class="box">
+                  <div class="imgBox">
+                    <img src="{% static 'images/home_journal.webp' %}" alt="Appointment" data-image-key="journal_card1_image">
+                  </div>
+                  <div class="icon">
+                    <a href="Info-1.html" class="iconBox a-box"> <span class="material-symbols-outlined">
+                        arrow_outward
+                      </span></a>
+                  </div>
+                </div>
+              </div>
+              <div class="content">
+                <h3 class="h3-box" data-text-key="journal_card1_title">Consult a professional</h3>
+                <p class="p-box" data-text-key="journal_card1_description">Consulting a medical professional is important because they provide expert guidance, accurate diagnoses, and tailored treatments, ensuring you receive the best care and improve health outcomes.</p>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-inner" style="--clr:#fff;">
+                <div class="box">
+                  <div class="imgBox">
+                    <img src="{% static 'images/home_journal1.webp.webp' %}" alt="Doctor meeting" data-image-key="journal_card2_image">
+                  </div>
+                  <div class="icon">
+                    <a href="Info-2.html" class="iconBox a-box"> <span class="material-symbols-outlined">
+                        arrow_outward
+                      </span></a>
+                  </div>
+                </div>
+              </div>
+              <div class="content">
+                <h3 class="h3-box" data-text-key="journal_card2_title">Stay health</h3>
+                <p class="p-box" data-text-key="journal_card2_description">Staying healthy is crucial because it enhances quality of life, prevents illness, and boosts overall well-being, enabling you to live fully and effectively.</p>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-inner" style="--clr:#fff;">
+                <div class="box">
+                  <div class="imgBox">
+                    <img src="{% static 'images/home_journal2.webp' %}" alt="Doctor suplies" data-image-key="journal_card3_image">
+                  </div>
+                  <div class="icon">
+                    <a href="http://localhost/GURTER/Homes-HealthConnectors/Info-3.html" class="iconBox a-box"> <span class="material-symbols-outlined">
+                        arrow_outward
+                      </span></a>
+                  </div>
+                </div>
+              </div>
+              <div class="content">
+                <h3 class="h3-box" data-text-key="journal_card3_title">Physical self-care</h3>
+                <p class="p-box" data-text-key="journal_card3_description">Physical self-care is important because it helps maintain your body's health, boosts energy, and prevents illness, allowing you to function optimally in daily life.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+  </div>
+ 
+  <div>
+    <img src="{% static 'images/home_penultima_eng.webp' %}" alt="Quiénes somos - Health Connectors" data-image-key="home_penultima_image"/>
+  </div>
+  <div class="testimonios">
+    <h3 data-text-key="testimonial_h3">Testimonial <span data-text-key="testimonial_span">from our users</span></h3>
+    <blockquote data-text-key="testimonial_blockquote">"Your experience can help others. Share your story and be part of the change."</blockquote>
+  </div>
+ 
+  <div class="contact-container" id="contact-container">
+    <form action="https://api.web3forms.com/submit" method="POST">
+      <div class="container-left">
+        <div class="container-left-little">
+          <h2 data-text-key="contact_h2"><span id="color-container" data-text-key="contact_span1"> Get in</span> <span class="get-touch" data-text-key="contact_span2"> touch</span></h2>
+        </div>
+        <input type="hidden" name="access_key" value="ac296c37-4f57-4b23-aff9-fdd2de57012e" />
+        <input type="text" name="name" placeholder="Your name" class="inputs-class" required data-text-key="contact_name_placeholder"/>
+        <input type="email" name="email" placeholder="Your email" class="inputs-class" required data-text-key="contact_email_placeholder"/>
+        <textarea name="message" placeholder="Your message" class="inputs-class" required data-text-key="contact_message_placeholder"></textarea>
+        <button type="submit" data-text-key="contact_submit_button">Submit</button>
+      </div>
+    </form>
+    <div class="container-right">
+      <img src="{% static 'images/tipo-get-in-touch.webp' %}" alt="Contacto imagen" class="imagen_contacto" data-image-key="contact_image"/>
+    </div>
+  </div>
+ 
+  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+  <!-- NOTE: The Swiper initialization script will be moved to welcome.js to ensure proper translation integration -->
+<footer class="main-footer">
+    <div class="footer-column">
+        <h3>Health<br>Connectors</h3>
+        <p>New Elsiebury</p>
+        <p>634 Halvorson</p>
+        <p>Estates Suite 039</p>
+        <br>
+        <div class="social-button">
+          <a href="https://linktr.ee/Health_Connectors" target="_blank" style="
+  display: inline-block;
+  margin-top: 25px;
+  background-color: #8cb8ff;
+  border: none;
+  border-radius: 12px;
+  color: #000;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 15px 30px;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: 'Poppins', sans-serif;
+">
+  Know more
+</a>
+
+        </div>
+    </div>
+    <div class="footer-column links-column">
+        <h3>Links</h3>
+        <ul class="footer-links">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="#">Pages</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Portfolio</a></li>
+            <li><a href="{% url 'blog_view' %}">Blog</a></li>
+            <li><a href="{% url 'contacto' %}">Contact</a></li>
+        </ul>
+    </div>
+    <div class="footer-column links-column">
+        <br>
+        <ul class="footer-links">
+            <li><a href="{% url 'privacy_policies' %}">Privacy Policies</a></li>
+            <li><a href="{% url 'terms' %}">Term of use</a></li>
+            <li><a href="{% url 'registro' %}">Sign up</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
+            <li><a href="{% url 'difamation' %}">Defamation</a></li>
+        </ul>
+    </div>
+    <div class="footer-column recent-posts-column">
+        <h3>Recent posts</h3>
+        <ul class="recent-posts">
+            <li> <a href="{% url 'journal1' %}">Health Benefits of Sleep</a></li>
+            <li> <a href="{% url 'journal2' %}">Benefits of Excercise</a></li>
+            <li><a href="{% url 'journal3' %}">Stress Management</a></li>
+            <li><a href="{% url 'journal4' %}">The importance of preventive care.</a></li>
+        </ul>
+    </div>
+</footer>
+ 
+  <script src="{% static 'js/welcome.js' %}"></script>
+</body>
+</html>
+ 
+ 

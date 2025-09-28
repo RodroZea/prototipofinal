@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+  <meta charset="UTF-8">
+  <title>Self-Medication Risks</title>
+  <link rel="stylesheet" href="{% static 'css/journal6.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+ 
+  <!--Link para fuente-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=language" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  
+  <!-- Agregar el CSS del menú de idiomas -->
+  <link rel="stylesheet" href="language-dropdown.css">
+</head>
+<body>
+  <!--Barra de navegacion-->
+  <header>
+  
+    <div class="barra-superior">
+    <body>
+  <button onclick="window.history.back()" style="
+  background-color: #111835;
+  color: white;
+  padding: 10px 20px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 20px;
+  transition: background-color 0.3s ease;
+"
+onmouseover="this.style.backgroundColor='#2c3e7e'"
+onmouseout="this.style.backgroundColor='#111835'"
+>
+  ← Volver
+</button>  
+      
+      
+      <div class="botones">
+          <div class="botones">
+  <div class="account-menu">
+    {% if user.is_authenticated %}
+      
+      {% if paciente %}
+        <!-- Paciente logueado -->
+        <div class="dropdown">
+          <span class="material-symbols-outlined">person</span>
+          <div class="dropdown-content">
+            <a href="{% url 'perfil_paciente' %}">Perfil</a>
+            <a href="{% url 'logout' %}">Cerrar sesión</a>
+          </div>
+        </div>
+
+      {% elif doctor %}
+        <!-- Doctor logueado -->
+        <div class="dropdown">
+          {% if doctor.foto_perfil %}
+            <img src="{{ doctor.foto_perfil.url }}" alt="Foto de perfil" style="width:50px; height:50px; border-radius:50%; object-fit:cover;" />
+          {% else %}
+            <img src="{% static 'images/fotoprede.webp' %}" alt="Foto por defecto" style="width:50px; height:50px; border-radius:50%; object-fit:cover;" />
+          {% endif %}
+          <div class="dropdown-content">
+            <a href="{% url 'perfil_doctor' %}">Perfil</a>
+            <a href="{% url 'logout' %}">Cerrar sesión</a>
+          </div>
+        </div>
+      {% endif %}
+
+    {% else %}
+      <!-- No autenticado -->
+      <a href="{% url 'login' %}"><button class="boton-login">Login</button></a>
+      <a href="{% url 'registro' %}" style="margin-left: 15px;"><button class="boton-registro">Sign up</button></a>
+    {% endif %}
+  </div>
+</div>
+
+          <div class="language-dropdown">
+            <div class="boton-idioma" id="language-button" aria-label="Cambiar idioma">
+              <span class="material-symbols-outlined">
+                language
+              </span>
+            </div>
+            <div class="dropdown-menu" id="language-menu">
+              <a href="#" class="dropdown-item" data-lang="es">
+                <div class="flag-icon flag-es"></div>
+                Español
+              </a>
+              <a href="#" class="dropdown-item" data-lang="en">
+                <div class="flag-icon flag-en"></div>
+                English
+              </a>
+            </div>
+          </div>
+      </div>
+    </div>
+
+    <nav class="barra-navegacion">
+    <ul>
+        <li><a href="{% url 'home' %}" data-nav-key="homeNav">Inicio</a></li>
+        <li><a href="{% url 'segpag' %}" data-nav-key="featuresNav">Funcionalidades y Beneficios</a></li>
+        <li><a href="{% url 'blog_view' %}" data-nav-key="aboutNav">Acerca de Nosotros</a></li>
+        <li><a href="{% url 'blog_view' %}" data-nav-key="blogNav">Blog</a></li>
+    </ul>
+    </nav>
+  </header>
+ 
+  <img src="{% static 'images/MEDICAMENTO.webp' %}" alt="Take naps" class="imagen_principal" data-image-key= "image_main_risk">
+  <div class="contenido_1">
+    <h2 data-text-key="contenido1_h2_1">The Problem with Self-Medication</h2>
+    <p data-text-key="contenido1_p_1">"Medications are effective tools for protecting health. However, medications that are prescribed incorrectly, taken improperly, or are of poor quality can cause serious harm," said Dr. Tedros Adhanom Ghebreyesus, Director-General of WHO. "No one should suffer harm due to healthcare." </p>
+
+    <h2 data-text-key="contenido1_h2_2">Behaviors Used</h2>
+    <p data-text-key="contenido1_p_2">People develop certain behaviors, whether their own or adopted, when using medications without a prescription. <br> The most common behaviors include:</p>
+    <ul>
+      <li data-text-key="contenido1_li_1" ></li></li>
+      <li data-text-key="contenido1_li_2"></li></li>
+      <li data-text-key="contenido1_li_3"></li></li>
+      <li data-text-key="contenido1_li_4"></li></li>
+    </ul>
+  </div>
+ <img src="{% static 'images/PHARMACEUTICAL_RISK.webp' %}" alt="Riesgos farmacéuticos" class="imagen_principal" data-image-key= "image_pharmaceutical_risks">
+
+  <div class="contenido_1">
+    <h2 data-text-key="contenido2_h2">Complications Associated with Over-the-Counter Medication Use</h2> 
+    <p data-text-key="contenido2_p_1">There are several risks associated with using medications without a prescription. In general, all medications carry some level of risk, whether they are over-the-counter or not. The primary risks when using medications without a prescription are: </p>
+    <ul>
+      <li data-text-key="contenido2_li_1_strong">Negative interactions with other medications <li data-text-key="contenido2_li_1_text">(e.g., for patients with chronic diseases).</li>
+      <li data-text-key="contenido2_li_2">Risk of poisoning.</li>
+      <li data-text-key="contenido2_li_3">Medication addiction.</li>
+      <li data-text-key="contenido2_li_4_strong">Microbial resistance (due to the misuse of antibiotics).</li>
+      <li data-text-key="contenido2_li_5_strong">Delay in diagnosing the actual disease, which can be associated with the placebo effect.</li>
+    </ul>
+
+    <p id="Parrafo_final">Understanding what self-medication is and its possible consequences, it is clear that educating the population about the safe use of over-the-counter drugs is the main tool to combat it. For greater safety, medications of any kind should always be used under medical guidance. </p>
+
+  </div>
+  
+ <img src="{% static 'images/FRASCOS.webp' %}" alt="Take naps" class="imagen_principal" data-image-key="image_frascos">
+ <div class="contenido_3">
+  <h2>Self-Medication Presents Several Health Risks</h2>
+  <p><strong>Pain relievers:</strong> Excessive use can cause kidney damage and narcotic addiction, leading to severe consequences, including potentially fatal overdoses.</p>
+  <p><strong>Hypertension:</strong> Over-the-counter medications can raise blood pressure, which is dangerous for people with hypertension.</p>
+  <p><strong>Anxiolytics:</strong> Abusing anxiolytics can cause drowsiness, memory issues, and concentration problems, increasing the risk of accidents.</p>
+  <p><strong>Stimulants:</strong> The excessive use of stimulants can lead to heart problems, insomnia, and anxiety.</p>
+  <p><strong>Antibiotics:</strong> Inappropriate use of antibiotics strengthens bacteria, contributing to antimicrobial resistance.</p>
+ </div>
+  
+</body>
+ <footer class="main-footer">
+    <div class="footer-column">
+        <h3>Health<br>Connectors</h3>
+        <p>New Elsiebury</p>
+        <p>634 Halvorson</p>
+        <p>Estates Suite 039</p>
+        <br>
+        <div class="social-button">
+          <a href="https://linktr.ee/Health_Connectors" target="_blank" style="
+  display: inline-block;
+  margin-top: 25px;
+  background-color: #8cb8ff;
+  border: none;
+  border-radius: 12px;
+  color: #000;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 15px 30px;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: 'Poppins', sans-serif;
+">
+  Know more
+</a>
+
+        </div>
+    </div>
+    <div class="footer-column links-column">
+        <h3>Links</h3>
+        <ul class="footer-links">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="#">Pages</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Portfolio</a></li>
+            <li><a href="{% url 'blog_view' %}">Blog</a></li>
+            <li><a href="{% url 'contacto' %}">Contact</a></li>
+        </ul>
+    </div>
+    <div class="footer-column links-column">
+        <br>
+        <ul class="footer-links">
+            <li><a href="{% url 'privacy_policies' %}">Privacy Policies</a></li>
+            <li><a href="{% url 'terms' %}">Term of use</a></li>
+            <li><a href="{% url 'registro' %}">Sign up</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
+            <li><a href="{% url 'difamation' %}">Defamation</a></li>
+        </ul>
+    </div>
+    <div class="footer-column recent-posts-column">
+        <h3>Recent posts</h3>
+        <ul class="recent-posts">
+            <li> <a href="{% url 'journal1' %}">Health Benefits of Sleep</a></li>
+            <li> <a href="{% url 'journal2' %}">Benefits of Excercise</a></li>
+            <li><a href="{% url 'journal3' %}">Stress Management</a></li>
+            <li><a href="{% url 'journal4' %}">The importance of preventive care.</a></li>
+        </ul>
+    </div>
+</footer>
+
+<script src="{% static 'js/journal6.js' %}"></script>
+</html>

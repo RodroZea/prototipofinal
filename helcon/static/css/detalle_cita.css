@@ -1,0 +1,277 @@
+/* Variables de color globales */
+:root {
+  --seasalt: #FBFAF8ff;
+  --ruddy-blue: #6CA5FFff; /* Azul principal para acciones */
+  --denim: #245DB5ff;
+  --oxford-blue: #111835ff; /* Color principal de texto/encabezados */
+  --oxford-blue-2: #051024ff; /* Un azul más oscuro */
+  --texto-interno: #C9C9C9;
+  --rubby-blue2: #DAE8FF; /* Azul muy claro para fondos suaves */
+ 
+  /* Colores para botones de acción */
+  --btn-primary-bg: var(--ruddy-blue);
+  --btn-primary-hover: #5A94E0; /* Un poco más oscuro */
+  --btn-success-bg: #28a745; /* Verde para confirmar */
+  --btn-success-hover: #218838;
+  --btn-danger-bg: #dc3545; /* Rojo para cancelar */
+  --btn-danger-hover: #c82333;
+  /* El btn-secondary no es necesario al eliminar el modal, pero se mantiene si se usara en otro lado */
+  --btn-secondary-bg: #6c757d; /* Gris para "No, mantener" */
+  --btn-secondary-hover: #5a6268;
+}
+ 
+/* Base global para tipografía Poppins */
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--oxford-blue);
+  padding: 40px;
+  margin: 0;
+  color: var(--oxford-blue-2); /* Color de texto general */
+}
+ 
+/* Estilos de la tarjeta principal de detalles */
+.detalle {
+  max-width: 600px;
+  margin: auto;
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  position: relative; /* Importante para posicionar el botón de idioma */
+}
+ 
+/* Encabezado de la card */
+h2 {
+  color: var(--oxford-blue);
+  font-size: 2em;
+  margin-bottom: 20px;
+  text-align: center; /* Centrar el título */
+}
+ 
+/* Párrafos de información de la cita */
+p {
+  font-weight: 450;
+  margin: 12px 0;
+  font-size: 1.1em;
+  line-height: 1.5;
+ 
+}
+ 
+p strong {
+  color: var(--oxford-blue); /* Color más oscuro para las etiquetas */
+  font-weight: 600;
+}
+ 
+/* Estilo para el input de precio */
+.form-assign-price input[type="number"] {
+  width: 120px; /* Ancho ajustado */
+  padding: 8px 10px;
+  border: 1px solid var(--texto-interno);
+  border-radius: 6px;
+  font-size: 1em;
+  font-family: 'Poppins', sans-serif;
+  color: var(--oxford-blue);
+  margin-left: 10px;
+}
+ 
+/* Contenedor para los botones de acción */
+.action-buttons {
+  display: flex; /* Usa flexbox para alinear los botones */
+  flex-wrap: wrap; /* Permite que los botones se envuelvan en pantallas pequeñas */
+  gap: 15px; /* Espacio entre los botones */
+  margin-top: 25px;
+  justify-content: center; /* Centra los botones en el contenedor */
+}
+ 
+/* Estilos base para todos los botones */
+button {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1.05em;
+  transition: all 0.3s ease;
+  flex-grow: 1; /* Permite que los botones crezcan para llenar el espacio */
+  min-width: 180px; /* Asegura un ancho mínimo para los botones */
+}
+ 
+/* Estilos específicos para cada tipo de botón */
+.btn-primary {
+  background: var(--btn-primary-bg);
+  color: white;
+}
+ 
+.btn-primary:hover {
+  background: var(--btn-primary-hover);
+  transform: translateY(-2px); /* Pequeño efecto al pasar el mouse */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+ 
+.btn-success {
+  background: var(--btn-success-bg);
+  color: white;
+}
+ 
+.btn-success:hover {
+  background: var(--btn-success-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+ 
+.btn-danger {
+  background: var(--btn-danger-bg);
+  color: white;
+}
+ 
+.btn-danger:hover {
+  background: var(--btn-danger-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+ 
+/* El .btn-secondary y el modal-overlay, etc. han sido eliminados de aquí */
+ 
+ 
+/* Estilos para el menú de idioma dentro de la card */
+.language-dropdown {
+    position: absolute;
+    top: 15px; /* Ajusta la posición vertical */
+    right: 15px; /* Ajusta la posición horizontal */
+    z-index: 10; /* Asegura que esté por encima de otros elementos */
+ 
+    .boton-idioma {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: var(--ruddy-blue); /* Azul claro */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s ease;
+ 
+        .material-symbols-outlined {
+            font-variation-settings:
+            'FILL' 0,  
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 32; /* Tamaño grande para el icono */
+            color: var(--oxford-blue-2); /* Color oscuro del icono */
+            font-size: 32px; /* Asegura el tamaño renderizado */
+            transition: color 0.3s ease;
+        }
+       
+        &:hover .material-symbols-outlined {
+            color: var(--oxford-blue); /* Color al pasar el mouse */
+        }
+    }
+   
+    .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: white;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        min-width: 150px;
+        z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: all 0.3s ease;
+ 
+        &.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+ 
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            color: #333;
+            text-decoration: none;
+            transition: background-color 0.2s ease;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+ 
+            &:hover {
+                background-color: #f5f5f5;
+            }
+ 
+            &:first-child {
+                border-top-left-radius: 7px;
+                border-top-right-radius: 7px;
+            }
+ 
+            &:last-child {
+                border-bottom-left-radius: 7px;
+                border-bottom-right-radius: 7px;
+            }
+ 
+            .flag-icon {
+                width: 20px;
+                height: 15px;
+                margin-right: 10px;
+                border-radius: 2px;
+                background-size: cover;
+                background-position: center;
+ 
+                &.flag-es {
+                    background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzUwIiBoZWlnaHQ9IjUwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9Ijc1MCIgaGVpZ2h0PSI1MDAiIGZpbGw9IiNBQTAwMDAiLz4KPHJlY3QgeT0iMTI1IiB3aWR0aD0iNzUwIiBoZWlnaHQ9IjI1MCIgZmlsbD0iI0ZGRkYwMCIvPgo8L3N2Zz4=');
+                }
+ 
+                &.flag-en {
+                    background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI2MDAiIHZpZXdCb3g9IjAgMCAxMjAwIDYwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjEyMDAiIGhlaWdodD0iNjAwIiBmaWxsPSIjMDA5NkZGIi8+CjxwYXRoIGQ9Im0wLDAgaDEyMDBMIDAsNjAwIE0wLDYwMCBoMTIwMEwgMCwwIiBzdHJva2U9IiNGRkZGRkYiIHN0cm9rZS13aWR0aD0iMTIwIi8+CjxwYXRoIGQ9Im0wLDAgaDEyMDBMIDAsNjAwIE0wLDYwMCBoMTIwMEwgMCwwIiBzdHJva2U9IiNGRjAwMDAiIHN0cm9rZS13aWR0aD0iODAiLz4KPHBhdGggZD0iTTYwMCwwdjYwMCBNMCwzMDBoMTIwMCIgc3Ryb2tlPSIjRkZGRkZGIiBzdHJva2Utd2lkdGg9IjIwMCIvPgo8cGF0aCBkPSJNNjAwLDB2NjAwIE0wLDMwMGgxMjAwIiBzdHJva2U9IiNGRjAwMDAiIHN0cm9rZS13aWR0aD0iMTIwIi8+Cjwvc3ZnPg==');
+                }
+            }
+        }
+    }
+}
+ 
+/* Media queries para responsividad */
+@media (max-width: 768px) {
+  body {
+    padding: 20px;
+  }
+  .detalle {
+    padding: 20px;
+  }
+  h2 {
+    font-size: 1.8em;
+  }
+  p {
+    font-size: 1em;
+  }
+  .action-buttons button {
+    width: 100%; /* Botones apilados en móvil */
+    min-width: unset; /* Reiniciar min-width */
+  }
+  .language-dropdown {
+    top: 10px;
+    right: 10px;
+    .boton-idioma .material-symbols-outlined {
+      font-size: 28px;
+      size: 24;
+    }
+  }
+}
+ 
+@media (max-width: 480px) {
+  body {
+    padding: 15px;
+  }
+  .detalle {
+    padding: 15px;
+  }
+  h2 {
+    font-size: 1.5em;
+  }
+  /* No hay estilos de modal para adaptar aquí */
+}
+ 
+ 

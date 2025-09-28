@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title data-text-key="pageTitle">Perfil Paciente</title>
+  <link rel="stylesheet" href="{% static 'css/perfil_paciente.css' %}" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" />
+</head>
+<body>
+  <div class="profile-container">
+
+    <!-- Botón de idioma -->
+    <div class="language-dropdown">
+      <div class="boton-idioma" id="language-button" aria-label="Cambiar idioma">
+        <span class="material-symbols-outlined">language</span>
+      </div>
+      <div class="dropdown-menu" id="language-menu">
+        <a href="#" class="dropdown-item" data-lang="es">
+          <div class="flag-icon flag-es"></div>
+          Español
+        </a>
+        <a href="#" class="dropdown-item" data-lang="en">
+          <div class="flag-icon flag-en"></div>
+          English
+        </a>
+      </div>
+    </div>
+
+    <!-- Datos del paciente -->
+    <div class="profile-data">
+      <p><strong data-text-key="name_label">Nombre:</strong> <span>{{ paciente.user.first_name }} {{ paciente.user.last_name }}</span></p>
+      <p><strong data-text-key="birthdate_label">Fecha de nacimiento:</strong> <span>{{ paciente.birthdate }}</span></p>
+      <p><strong data-text-key="id_number_label">Cédula:</strong> <span>{{ paciente.id_number }}</span></p>
+      <p><strong data-text-key="gender_label">Género:</strong> <span>{{ paciente.get_genero_display }}</span></p>
+      <p><strong data-text-key="phone_label">Teléfono:</strong> <span>{{ paciente.phone }}</span></p>
+      <p><strong data-text-key="allergies_label">Alergias:</strong> <span>{{ paciente.alergias }}</span></p>
+      <p><strong data-text-key="diseases_label">Enfermedades:</strong> <span>{{ paciente.enfermedades }}</span></p>
+      <p><strong data-text-key="current_meds_label">Medicamentos actuales:</strong> <span>{{ paciente.medicamentos }}</span></p>
+      <p><strong data-text-key="surgical_history_label">Antecedentes quirúrgicos:</strong> <span>{{ paciente.antecedentes_quirurgicos }}</span></p>
+    </div>
+
+    <!-- Botones -->
+    <div class="buttons-container">
+      <a href="{% url 'home_paciente' %}" class="btn-regresar" data-text-key="return_home_button">Regresar al Home</a>
+      <button id="btnEditar" class="edit-btn" type="button" data-text-key="edit_profile_button">Editar Perfil</button>
+    </div>
+  </div>
+
+  <!-- Modal de edición -->
+  <div id="modal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="modalTitle" aria-modal="true" style="display:none;">
+    <div class="modal-content">
+      <h2 id="modalTitle" data-text-key="edit_profile_modal_title">Editar Perfil</h2>
+      <form method="post" action="{% url 'perfil_paciente' %}">
+        {% csrf_token %}
+
+        <div class="form-group">
+          <label for="id_number" data-text-key="modal_id_number_label">Cédula</label>
+          <input type="text" id="id_number" name="id_number" value="{{ paciente.id_number }}" required>
+        </div>
+
+        <div class="form-group">
+          <label for="phone" data-text-key="modal_phone_label">Teléfono</label>
+          <input type="text" id="phone" name="phone" value="{{ paciente.phone }}" required>
+        </div>
+
+        <div class="form-group">
+          <label for="alergias" data-text-key="modal_allergies_label">Alergias</label>
+          <textarea id="alergias" name="alergias">{{ paciente.alergias }}</textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="enfermedades" data-text-key="modal_diseases_label">Enfermedades</label>
+          <textarea id="enfermedades" name="enfermedades">{{ paciente.enfermedades }}</textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="medicamentos" data-text-key="modal_current_meds_label">Medicamentos actuales</label>
+          <textarea id="medicamentos" name="medicamentos">{{ paciente.medicamentos }}</textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="antecedentes_quirurgicos" data-text-key="modal_surgical_history_label">Antecedentes quirúrgicos</label>
+          <textarea id="antecedentes_quirurgicos" name="antecedentes_quirurgicos">{{ paciente.antecedentes_quirurgicos }}</textarea>
+        </div>
+
+        <button type="submit" class="save-btn" data-text-key="modal_save_changes_button">Guardar Cambios</button>
+        <br>
+        <button type="button" class="cancel-btn" id="btnCancelarModal" data-text-key="modal_cancel_button">Cancelar</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="{% static 'js/perfil_paciente.js' %}"></script>
+</body>
+</html>

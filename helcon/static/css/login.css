@@ -1,0 +1,119 @@
+:root{
+    --seasalt: #FBFAF8ff; 
+    --ruddy-blue: #6CA5FFff; 
+    --denim: #245DB5ff; 
+    --oxford-blue: #111835ff; 
+    --oxford-blue-2: #051024ff; 
+    --texto-interno: #C9C9C9;
+}
+*{
+    font-family: "Lexend", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/*barra de navegacion continuacion*/
+.nav-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    }
+    .nav-item {
+    padding: 14px 20px;
+    color: var(--texto-interno);
+    font-size: 25px;
+    font-weight: 300;
+    }
+    .nav-item a {
+    color: var(--texto-interno);
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    }
+    .nav-item a:hover {
+    color: var(--oxford-blue);
+    font-weight: 600;
+    }
+    .nav-item span{
+        color: var(--ruddy-blue);
+        font-weight: 700;
+    }
+
+h1{
+    font-size: 60px;
+    text-align: center;
+}
+.todo{
+    display: flex;
+}
+.pt-iz{
+    width: 55%;
+    align-items: center;
+    justify-content: space-evenly;
+    h1{
+        color: var(--ruddy-blue);
+        margin-top: 110px;
+        margin-bottom: 60px;
+    } 
+}
+.pt-de{
+    width: 45%;
+    background: var(--oxford-blue-2);
+    .contenido{
+        h2{
+            font-size: 65px;
+            color: var(--ruddy-blue);
+            margin-top: 60px;
+            margin-left: 40px ;
+            span{
+                color: var(--seasalt);
+            }
+        }
+        img{
+            width: 48%;
+            margin-top: 0.9%;
+            margin-left: 25%;
+            margin-bottom: none ;
+        }
+    }
+}
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+input{
+    margin: 10px;
+    padding: 14.5px;
+    border-radius: 35px;
+}
+
+form input[type="text"],
+form input[type="password"] {
+    width: 400px;
+    border: none;
+    outline: none;
+    padding-left: 25px;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--oxford-blue);
+    border-radius: 30px;
+    font-style: italic;
+    background: var(--seasalt) ;
+}
+
+form input[type="submit"] {
+    display: flex;
+    align-items: center;
+    padding: 15px 80px;
+    font-size: 25px ;
+    font-weight: 700;
+    color: var(--ruddy-blue);
+    gap: 10px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 50px;
+    background: var(--oxford-blue) ;
+}

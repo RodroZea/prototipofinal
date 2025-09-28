@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+{% load static %}
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Doctor Form</title>
+
+  <!-- CSS LOCAL -->
+  <link rel="stylesheet" href="{% static 'css/formDoctor.css' %}" />
+
+  <!-- GOOGLE FONTS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet" />
+
+  <!-- ANIMATE.CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+</head>
+
+<body>
+  <button onclick="window.history.back()" style="
+  background-color: #111835;
+  color: white;
+  padding: 10px 20px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 20px;
+  transition: background-color 0.3s ease;
+"
+onmouseover="this.style.backgroundColor='#2c3e7e'"
+onmouseout="this.style.backgroundColor='#111835'"
+>
+  ← Volver
+</button>
+
+  <div class="todo">
+    <div class="div-izquierda">
+      <h2 class="titulo-animado">Make Your Work</h2>
+      <h2 class="titulo-animado h22"><span>Easier With Us</span></h2>
+
+      <form method="post">
+        {% csrf_token %}
+        <input type="text" name="name" required placeholder="Name" />
+        <input type="text" name="last_name" required placeholder="Last Name" />
+        <input type="tel" name="id_number" required placeholder="ID" />
+        <input type="tel" name="credential_number" required placeholder="Credential Number" />
+        <input type="email" name="email" required placeholder="Email" />
+        <input type="tel" name="tel" required placeholder="Phone" />
+        <input type="password" name="password" required placeholder="Password" /> 
+        <input type="submit" value="Submit" />
+      </form>
+
+      {% if mensaje %}
+        <p style="color: green; font-weight: bold;">{{ mensaje }}</p>
+      {% endif %}
+    </div>
+
+    <div class="div-derecha">
+      <img src="{% static 'images/doctor_registro.webp' %}" alt="Imagen Doctor" />
+    </div>
+  </div>
+
+  <script src="{% static 'js/formDoctor.js' %}"></script>
+</body>
+</html>

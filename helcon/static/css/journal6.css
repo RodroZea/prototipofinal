@@ -1,0 +1,638 @@
+:root {
+    --seasalt: #FBFAF8ff;
+    --ruddy-blue: #6CA5FFff;
+    --denim: #245DB5ff;
+    --oxford-blue: #111835ff;
+    --oxford-blue-2: #051024ff;
+    --texto-interno: #C9C9C9;
+    --rubby-blue2: #DAE8FF;
+}
+ 
+* {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+ 
+body {
+    overflow-x: hidden;
+}
+/* barra de navegacion */
+.barra-superior {
+    background-color: var(--oxford-blue-2);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
+
+    .busqueda {
+        display: flex;
+        align-items: center;
+        background-color: var(--oxford-blue);
+        border-radius: 25px;
+        padding-left: 10px;
+        flex: 1; /* Permite que la barra de búsqueda ocupe el espacio disponible */
+        max-width: 600px; /* Limita el ancho máximo del input en pantallas grandes */
+        margin-right: 20px; /* Espacio entre la barra de búsqueda y los botones */
+
+        input[type="text"] {
+            border: none;
+            padding: 8px;
+            width: 100%; /* Ocupa todo el ancho disponible en su contenedor flex */
+            font-size: 18px;
+            background: var(--oxford-blue);
+            color: var(--rubby-blue2); /* Color del texto del input */
+            outline: none; /* Eliminar el contorno al enfocar */
+        }
+
+        button {
+            background: none;
+            border: none;
+            padding: 8px 10px;
+            cursor: pointer;
+            color: var(--oxford-blue-2);
+
+            i { /* Para el icono de búsqueda, necesitarás Font Awesome o similar */
+                font-size: 25px;
+                color: var(--rubby-blue2); /* Color del icono de búsqueda */
+            }
+        }
+    }
+
+    .botones {
+        display: flex; /* Para alinear los botones y el icono de idioma */
+        align-items: center;
+        gap: 10px; /* Espacio entre los botones y el icono */
+
+        button {
+            /* Estilos para el botón de "Registrarse" */
+            background-color: var(--seasalt); /* Fondo claro para "Sign up" */
+            color: var(--oxford-blue-2); /* Texto oscuro para "Sign up" */
+            border: none;
+            padding: 10px 15px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 16px;
+            transition: background-color 0.3s ease; /* Transición suave al pasar el cursor */
+
+            &:hover {
+                background-color: darken(var(--seasalt), 5%); /* Oscurecer un poco al pasar el cursor */
+            }
+
+            &.boton-login {
+                /* Estilos para el botón de "Iniciar Sesión" */
+                background:var(--oxford-blue); /* Fondo oscuro para "Login" */
+                color: var(--ruddy-blue); /* Texto azul claro para "Login" */
+                border: 2px solid var(--denim); /* Borde azul oscuro para "Login" */
+                font-size: 16px;
+                transition: background-color 0.3s ease, border-color 0.3s ease; /* Transición suave */
+
+                &:hover {
+                    background-color: lighten(var(--oxford-blue), 5%); /* Aclarar un poco al pasar el cursor */
+                    border-color: lighten(var(--denim), 5%);
+                }
+            }
+        }
+
+        /* Estilos para el botón de idioma (Material Symbols) */
+        .language-dropdown {
+            position: relative; /* Contenedor para el botón y el menú desplegable */
+            display: inline-block; /* Permite que ocupe su propio espacio */
+
+            .boton-idioma {
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 40px; /* Tamaño del área del botón circular */
+                height: 40px;
+                border-radius: 50%; /* Hace el botón circular */
+                background-color: var(--ruddy-blue); /* Color de fondo del botón: azul claro */
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                transition: background-color 0.3s ease;
+
+                &:hover {
+                    background-color: darken(var(--ruddy-blue), 10%); /* Oscurecer al pasar el cursor */
+                }
+
+                .material-symbols-outlined { /* Selector para el icono */
+                    font-variation-settings:
+                    'FILL' 0,   
+                    'wght' 400, 
+                    'GRAD' 0,
+                    'opsz' 28; 
+                    color: var(--oxford-blue-2); /* Color del icono: azul muy oscuro para contraste */
+                    font-size: 28px;
+                    vertical-align: middle;
+                    transition: color 0.3s ease;
+                }
+            }
+            
+            .dropdown-menu {
+                position: absolute;
+                top: 100%; /* Coloca el menú justo debajo del botón */
+                right: 0; /* Alinea el menú a la derecha del botón */
+                background: white;
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                min-width: 150px;
+                z-index: 1000;
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(-10px); /* Ligeramente hacia arriba para la animación */
+                transition: all 0.3s ease; /* Transición suave para aparición/desaparición */
+
+                &.show {
+                    opacity: 1;
+                    visibility: visible;
+                    transform: translateY(0); /* Vuelve a la posición normal */
+                }
+
+                .dropdown-item {
+                    display: flex;
+                    align-items: center;
+                    padding: 12px 16px;
+                    color: #333;
+                    text-decoration: none;
+                    transition: background-color 0.2s ease;
+                    font-family: 'Poppins', sans-serif;
+                    font-size: 14px;
+
+                    &:hover {
+                        background-color: #f5f5f5;
+                    }
+
+                    &:first-child {
+                        border-top-left-radius: 7px;
+                        border-top-right-radius: 7px;
+                    }
+
+                    &:last-child {
+                        border-bottom-left-radius: 7px;
+                        border-bottom-right-radius: 7px;
+                    }
+
+                    .flag-icon {
+                        width: 20px;
+                        height: 15px;
+                        margin-right: 10px;
+                        border-radius: 2px;
+                        background-size: cover;
+                        background-position: center;
+
+                        &.flag-es {
+                            background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzUwIiBoZWlnaHQ9IjUwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9Ijc1MCIgaGVpZ2h0PSI1MDAiIGZpbGw9IiNBQTAwMDAiLz4KPHJlY3QgeT0iMTI1IiB3aWR0aD0iNzUwIiBoZWlnaHQ9IjI1MCIgZmlsbD0iI0ZGRkYwMCIvPgo8L3N2Zz4=');
+                        }
+
+                        &.flag-en {
+                            background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI2MDAiIHZpZXdCb3g9IjAgMCAxMjAwIDYwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjEyMDAiIGhlaWdodD0iNjAwIiBmaWxsPSIjMDA5NkZGIi8+CjxwYXRoIGQ9Im0wLDAgaDEyMDBMIDAsNjAwIE0wLDYwMCBoMTIwMEwgMCwwIiBzdHJva2U9IiNGRkZGRkYiIHN0cm9rZS13aWR0aD0iMTIwIi8+CjxwYXRoIGQ9Im0wLDAgaDEyMDBMIDAsNjAwIE0wLDYwMCBoMTIwMEwgMCwwIiBzdHJva2U9IiNGRjAwMDAiIHN0cm9rZS13aWR0aD0iODAiLz4KPHBhdGggZD0iTTYwMCwwdjYwMCBNMCwzMDBoMTIwMCIgc3Ryb2tlPSIjRkZGRkZGIiBzdHJva2Utd2lkdGg9IjIwMCIvPgo8cGF0aCBkPSJNNjAwLDB2NjAwIE0wLDMwMGgxMjAwIiBzdHJva2U9IiNGRjAwMDAiIHN0cm9rZS13aWR0aD0iMTIwIi8+Cjwvc3ZnPg==');
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.barra-navegacion {
+    background-color: var(--oxford-blue);
+    padding: 20px 20px; /* Padding vertical y horizontal para ajustar la altura */
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        gap: 40px; /* Espacio entre los enlaces de navegación */
+        justify-content: right; /* Centrar los enlaces de navegación */
+    }
+
+    a {
+        color: white; /* Color de texto de los enlaces */
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s ease; /* Transición suave al pasar el cursor */
+
+        &:hover {
+            text-decoration:none;
+            color: var(--ruddy-blue); /* Color al pasar el cursor */
+            font-weight: 800;
+        }
+    }
+}
+/*fin de barra de navegacion*/
+ 
+/*Codigo para images que cubren la pagina*/
+.imagen_principal{
+    width: 100vw;
+    height: auto;
+    object-fit: cover; 
+    display: block;
+    margin: 0;
+    padding: 0; 
+}
+/*Inicio de codigo de contenido 1 y 2 */
+.contenido_1{
+    margin: 3% 5%;
+    text-align: left;
+    h2{
+        padding: 0.7%;
+        font-size: 60px;
+        color: var(--oxford-blue);
+    }
+    p{
+        font-size: 30px;
+        font-weight: 450;
+        text-align: justify;
+    }
+    ul{
+        margin: 0 2.5%;
+        padding: 5px;
+        li{
+            padding: 6px;
+            font-size: 30px;
+            font-weight: 450;
+            /* Estos estilos serán controlados por el JS de animación ahora */
+            /* opacity: 1; */
+            /* transform: translateY(0px) scale(1); */
+            /* transition: transform 0.6s ease-out, opacity 0.6s ease-out; */
+        }
+    }
+}
+#Parrafo_final{
+    padding: 2% ;
+    text-align: justify;
+}
+/*Fin de codigo de contenido 1*/
+ 
+/*Inicio de codigo de contenido 3*/
+.contenido_3{
+    margin: 3% 5%;
+    text-align: left;
+    h2{
+        padding: 0.7%;
+        font-size: 60px;
+        color: var(--oxford-blue);
+    }
+    p{
+        padding: 0.4%;
+        font-size: 30px;
+        font-weight: 450;
+        text-align: justify;
+        strong{
+            color: var(--oxford-blue);
+        }
+    }
+}
+/*Fin de codigo de contenido 3*/
+
+/* Estilos para la sección del reproductor de medios */
+.media-player-section {
+    margin: 60px 5%; /* Margen superior para separar de la sección anterior */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra el contenido horizontalmente */
+
+    h2 {
+        font-size: 50px;
+        color: var(--oxford-blue);
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .media-player-container {
+        background-color: var(--oxford-blue); /* Fondo oscuro del reproductor */
+        border-radius: 15px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+        width: 100%;
+        max-width: 800px; /* Ancho máximo del reproductor */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    audio {
+        display: none; /* Oculta el reproductor nativo */
+    }
+
+    .player-controls {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 15px;
+        gap: 15px; /* Espacio entre los controles */
+    }
+
+    .play-pause-btn, .volume-btn {
+        background-color: var(--ruddy-blue); /* Color del botón de play/pause y volumen */
+        color: white;
+        border: none;
+        border-radius: 50%; /* Botón circular */
+        width: 50px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 22px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+
+        &:hover {
+            background-color: darken(var(--ruddy-blue), 10%);
+            transform: scale(1.05);
+        }
+
+        i {
+            margin-left: 2px; /* Ajuste para el ícono de play */
+        }
+    }
+
+    .progress-bar-wrapper {
+        flex: 1; /* Ocupa el espacio disponible */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px; /* Espacio entre la barra y el tiempo */
+    }
+
+    .progress-bar, .volume-bar {
+        width: 100%;
+        height: 8px; /* Altura de la barra */
+        -webkit-appearance: none; /* Eliminar estilos por defecto de Webkit */
+        appearance: none;
+        background: var(--denim); /* Fondo de la barra (color más oscuro) */
+        border-radius: 5px;
+        outline: none;
+        cursor: pointer;
+        transition: background 0.2s ease;
+
+        &::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px; /* Tamaño del "mango" de la barra */
+            height: 18px;
+            border-radius: 50%;
+            background: var(--ruddy-blue); /* Color del "mango" */
+            cursor: grab;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            margin-top: -5px; /* Ajuste vertical para centrar el mango */
+        }
+
+        &::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--ruddy-blue);
+            cursor: grab;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+    }
+
+    .volume-bar {
+        width: 100px; /* Ancho más pequeño para la barra de volumen */
+        height: 6px;
+        &::-webkit-slider-thumb {
+            width: 15px;
+            height: 15px;
+        }
+        &::-moz-range-thumb {
+            width: 15px;
+            height: 15px;
+        }
+    }
+
+    .time-display {
+        color: var(--seasalt); /* Color del texto del tiempo */
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    .media-title {
+        width: 100%;
+        text-align: center;
+        margin-top: 15px;
+
+        h3 {
+            font-size: 24px;
+            color: var(--seasalt); /* Color del título del podcast */
+            font-weight: 600;
+        }
+    }
+}
+ 
+/*Foooter*/
+.main-footer {
+    background-color: var(--oxford-blue-2);
+    color: var(--seasalt);
+    padding: 40px 5%; /* Añadimos padding superior e inferior y márgenes laterales */
+    display: flex;
+    flex-wrap: wrap; /* Permite que las columnas se envuelvan en pantallas más pequeñas */
+    justify-content: space-around; /* Distribuye el espacio entre las columnas */
+}
+
+.footer-column {
+    flex: 1; /* Hace que las columnas crezcan por igual */
+    min-width: 200px; /* Evita que las columnas se compriman demasiado */
+    margin-bottom: 20px;
+     /* Espacio entre las filas de columnas en pantallas pequeñas */
+}
+
+.footer-column h3 {
+    color: var(--ruddy-blue);
+    font-size: 1.5em;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.footer-column p {
+    margin-bottom: 3 px;
+    color: var(--texto-interno);
+}
+
+.social-button button{
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  padding: 10px 30px;
+  font-size: 16px ;
+  color: var(--oxford-blue-2);
+  gap: 10px;
+  border: none;
+  border-radius: 50px;
+  background: var(--ruddy-blue);
+}
+
+.links-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.links-column li {
+    margin-bottom: 8px;
+}
+
+.links-column a {
+    color: var(--texto-interno);
+    text-decoration: none;
+}
+
+.links-column a:hover {
+    text-decoration: underline;
+    color: var(--seasalt);
+}
+
+.recent-posts ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.recent-posts li {
+    margin-bottom: 15px;
+}
+
+.post-date {
+    display: block;
+    font-size: 0.9em;
+    color: var(--ruddy-blue);
+    margin-bottom: 5px;
+}
+
+.recent-posts a {
+    color: var(--texto-interno);
+    text-decoration: none;
+    line-height: 1.4;
+}
+
+.recent-posts a:hover {
+    text-decoration: underline;
+    color: var(--seasalt);
+}
+
+/* Media query para pantallas más pequeñas */
+@media (max-width: 768px) {
+    .main-footer {
+        padding: 20px;
+        flex-direction: column; 
+        align-items: flex-start;
+    }
+
+    .footer-column {
+        width: 100%; 
+        margin-bottom: 30px;
+    }
+}
+@keyframes bounce {
+  0% { transform: scale(1); }
+  30% { transform: scale(1.1); }
+  60% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  font-family: 'Material Symbols Outlined', sans-serif;
+}
+.account-menu .dropdown {
+  position: relative;
+  cursor: pointer;
+}
+
+.account-menu .dropdown .material-symbols-outlined {
+  font-size: 32px;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+.account-menu .dropdown:hover .material-symbols-outlined {
+  color: #0056b3; /* Cambia el color al pasar el mouse */
+}
+
+.account-menu .dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: white;
+  min-width: 140px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  border-radius: 6px;
+  z-index: 1000;
+  padding: 8px 0;
+}
+
+.account-menu .dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.account-menu .dropdown-content a {
+  display: block;
+  padding: 10px 20px;
+  color: #333;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.account-menu .dropdown-content a:hover {
+  background-color: #0056b3;
+  color: white;
+}
+.account-menu .dropdown .material-symbols-outlined {
+    font-size: 32px;
+    color: #333;
+    transition: color 0.3s ease;
+}
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    font-family: 'Material Symbols Outlined', sans-serif;
+}
+.material-symbols-outlined {
+    font-family: 'Material Symbols Outlined';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+}
+
+* {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.account-menu .dropdown {
+    position: relative;
+    cursor: pointer;
+}
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #111;
+    overflow-x: hidden;
+}
+:root {
+    --oxford-blue: #111835;
+    --oxford-blue-light: #2c3e7e;
+    --oxford-blue-lighter: #40559b;
+    --white: #ffffff;
+}
+:root {
+    --seasalt: #FBFAF8ff;
+    --ruddy-blue: #6CA5FFff;
+    --denim: #245DB5ff;
+    --oxford-blue: #111835ff;
+    --oxford-blue-2: #051024ff;
+    --texto-interno: #C9C9C9;
+    --rubby-blue2: #DAE8FF;
+}

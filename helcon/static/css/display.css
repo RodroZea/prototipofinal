@@ -1,0 +1,522 @@
+:root {
+    --seasalt: #FBFAF8ff;
+    --ruddy-blue: #6CA5FFff;
+    --denim: #245DB5ff;
+    --oxford-blue: #111835ff;
+    --oxford-blue-2: #051024ff;
+    --texto-interno: #C9C9C9;
+    --rubby-blue2: #DAE8FF; /* Azul muy claro, similar al del borde exterior de las tarjetas en la imagen */
+}
+
+* {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+/* barra de navegacion - NO ALTERAR */
+header {
+    .barra-superior {
+        background-color: var(--oxford-blue-2);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 15px 20px;
+
+        .busqueda {
+            display: flex;
+            align-items: center;
+            background-color: var(--oxford-blue);
+            border-radius: 25px;
+            padding-left: 10px;
+            flex: 1;
+            max-width: 600px;
+            margin-right: 20px;
+
+            input[type="text"] {
+                border: none;
+                padding: 8px;
+                width: 100%;
+                font-size: 18px;
+                background: var(--oxford-blue);
+                color: var(--rubby-blue2);
+                outline: none;
+            }
+
+            button {
+                background: none;
+                border: none;
+                padding: 8px 10px;
+                cursor: pointer;
+                color: var(--oxford-blue-2);
+
+                i {
+                    font-size: 25px;
+                    color: var(--rubby-blue2);
+                }
+            }
+        }
+
+        .botones {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            button {
+                background-color: var(--ruddy-blue);
+                color: white;
+                border: none;
+                padding: 10px 15px;
+                margin-left: 10px;
+                border-radius: 25px;
+                cursor: pointer;
+                font-weight: 600;
+                font-size: 16px;
+                transition: background-color 0.3s ease;
+
+                &:hover {
+                    background-color: darken(var(--ruddy-blue), 5%);
+                }
+
+                &.boton-login {
+                    background:var(--oxford-blue);
+                    color: var(--ruddy-blue);
+                    border: 2px solid var(--ruddy-blue);
+                    font-size: 16px;
+                    transition: background-color 0.3s ease, border-color 0.3s ease;
+
+                    &:hover {
+                        background-color: lighten(var(--oxford-blue), 5%);
+                        border-color: lighten(var(--ruddy-blue), 5%);
+                    }
+                }
+            }
+
+            .language-dropdown {
+                position: relative;
+                display: inline-block;
+                
+                .boton-idioma {
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    background-color: var(--ruddy-blue);
+                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                    transition: background-color 0.3s ease;
+
+                    &:hover {
+                        background-color: darken(var(--ruddy-blue), 10%);
+                    }
+
+                    .material-symbols-outlined {
+                        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 28;
+                        color: var(--oxford-blue-2);
+                        font-size: 28px;
+                        vertical-align: middle;
+                        transition: color 0.3s ease;
+                    }
+                }
+                
+                .dropdown-menu {
+                    position: absolute;
+                    top: 100%;
+                    right: 0;
+                    background: white;
+                    border: 1px solid #ddd;
+                    border-radius: 8px;
+                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                    min-width: 150px;
+                    z-index: 1000;
+                    opacity: 0;
+                    visibility: hidden;
+                    transform: translateY(-10px);
+                    transition: all 0.3s ease;
+
+                    &.show {
+                        opacity: 1;
+                        visibility: visible;
+                        transform: translateY(0);
+                    }
+
+                    .dropdown-item {
+                        display: flex;
+                        align-items: center;
+                        padding: 12px 16px;
+                        color: #333;
+                        text-decoration: none;
+                        transition: background-color 0.2s ease;
+                        font-family: 'Poppins', sans-serif;
+                        font-size: 14px;
+
+                        &:hover {
+                            background-color: #f5f5f5;
+                        }
+
+                        &:first-child {
+                            border-top-left-radius: 7px;
+                            border-top-right-radius: 7px;
+                        }
+
+                        &:last-child {
+                            border-bottom-left-radius: 7px;
+                            border-bottom-right-radius: 7px;
+                        }
+
+                        .flag-icon {
+                            width: 20px;
+                            height: 15px;
+                            margin-right: 10px;
+                            border-radius: 2px;
+                            background-size: cover;
+                            background-position: center;
+
+                            &.flag-es {
+                                background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzUwIiBoZWlnaHQ9IjUwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9Ijc1MCIgaGVpZ2h0PSI1MDAiIGZpbGw9IiNBQTAwMDAiLz4KPHJlY3QyeT0iMTI1IiB3aWR0aD0iNzUwIiBoZWlnaHQ9IjI1MCIgZmlsbD0iI0ZGRkYwMCIvPgo8L3N2Zz4=');
+                            }
+
+                            &.flag-en {
+                                background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI2MDAiIHZpZXdCb3g9IjAgMCAxMjAwIDYwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjEyMDAiIGhlaWdodD0iNjAwIiBmaWxsPSIjMDA5NkZGIi8+CjxwYXRoIGQ9Im0wLDAgaDEyMDBMIDAsNjAwIE0wLDYwMCBoMTIwMEwgMCwwIiBzdHJva2U9IiNGRkZGRkYiIHN0cm9rZS13aWR0aD0iMTIwIi8+CjxwYXRoIGQ9Im0wLDAgaDEyMDBMIDAsNjAwIE0wLDYwMCBoMTIwMEwgMCwwIiBzdHJva2U9IiNGRjAwMDAiIHN0cm9rZS13aWR0aD0iODAiLz4KPHBhdGggZD0iTTYwMCwwdjYwMCBNMCwzMDBoMTIwMCIgc3Ryb2tlPSIjRkZGRkZGIiBzdHJva2Utd2lkdGg9IjIwMCIvPgo8cGF0aCBkPSJNNjAwLDB2NjAwIE0wLDMwMGgxMjAwIiBzdHJva2U9IiNGRjAwMDAiIHN0cm9rZS13aWR0aD0iMTIwIi8+Cjwvc3ZnPg==');
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.barra-navegacion {
+    background-color: var(--oxford-blue);
+    padding: 20px 20px;
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        gap: 40px;
+        justify-content: flex-end; /* Alinea los enlaces a la derecha */
+    }
+
+    a {
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s ease;
+
+        &:hover {
+            text-decoration:none;
+            color: var(--ruddy-blue);
+            font-weight: 800;
+        }
+    }
+}
+/*fin de barra de navegacion*/
+
+/* Contenedor principal de la página */
+.container {
+padding: 10px 3%; /* Ajustar padding para que coincida con la captura */
+margin: 0 auto; /* Centrar el contenedor */
+}
+
+h1 {
+margin-bottom: 5px;
+font-size: 3em; /* Ajustado para ser más grande */
+color: var(--oxford-blue);
+text-align: left; /* Alineado a la izquierda */
+}
+
+p {
+font-size: 1.5em;
+color: var(--oxford-blue); /* Color para párrafos */
+margin-bottom: 20px; /* Espacio debajo de los párrafos */
+text-align: left; /* Alineado a la izquierda */
+}
+
+.filters {
+margin: 20px 0 40px 0; /* Más margen inferior para separar de las tarjetas */
+display: flex; /* Para que los botones estén en línea */
+flex-wrap: wrap; /* Permitir que los botones se envuelvan */
+gap: 10px; /* Espacio entre los botones */
+}
+
+.filters button {
+background-color: white;
+border: 1px solid var(--texto-interno); /* Borde gris claro */
+border-radius: 8px; /* Bordes menos redondos */
+padding: 8px 15px;
+cursor: pointer;
+font-weight: 500; /* Menos negrita que el original */
+color: var(--oxford-blue); /* Texto oscuro */
+transition: all 0.3s ease; /* Transición suave para hover */
+
+&:hover {
+    background-color: var(--rubby-blue2); /* Fondo azul claro al pasar el cursor */
+    border-color: var(--ruddy-blue); /* Borde azul al pasar el cursor */
+    color: var(--denim); /* Texto azul más oscuro al pasar el cursor */
+}
+}
+
+.card {
+background-color: white;
+padding: 30px; /* Más padding interno */
+margin-bottom: 25px; /* Más espacio entre tarjetas */
+display: flex;
+flex-direction: column;
+box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* Sombra más pronunciada */
+border: 1px solid var(--oxford-blue); /* Borde azul oscuro para las tarjetas */
+}
+
+.doctor-info {
+display: flex;
+align-items: flex-start; /* Alinea la imagen y el texto a la parte superior */
+/* margin-bottom: 20px;  Se mueve al contenedor .location */
+
+/* NEW: Para alinear los botones al lado de la información del doctor */
+position: relative; 
+flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
+justify-content: space-between; /* Distribuye espacio entre info y botones */
+gap: 20px; /* Espacio entre la info y los botones */
+
+.info {
+    flex: 1; /* Permite que la información ocupe el espacio restante */
+    
+}
+}
+
+.doctor-info img {
+border-radius: 8px; /* Bordes menos redondos que la imagen original */
+width: 200px; /* Tamaño de la imagen del doctor */
+height: 200px; /* Asegura que la imagen sea cuadrada */
+object-fit: cover; /* Recorta la imagen para cubrir el espacio */
+margin-right: 25px; /* Más espacio a la derecha de la imagen */
+box-shadow: 0 2px 6px rgba(0,0,0,0.1); /* Sombra sutil para la imagen */
+}
+
+.info h3 {
+font-size: 1.8em; /* Tamaño del nombre del doctor */
+color: var(--oxford-blue);
+margin-bottom: 5px;
+font-weight: 700; /* Más negrita */
+}
+
+.tag {
+background-color: var(--rubby-blue2); /* Fondo azul claro para el tag */
+color: var(--denim); /* Texto azul oscuro para el tag */
+padding: 5px 12px;
+display: inline-block;
+border-radius: 2px; /* Más redondeado */
+font-size: 0.85em; /* Tamaño de fuente del tag */
+margin-top: 5px;
+margin-bottom: 10px; /* Espacio debajo del tag */
+font-weight: 600; /* Más negrita */
+}
+
+.info p {
+font-size: 1em; /* Tamaño para la información de contacto */
+color: var(--oxford-blue-2); /* Color más oscuro */
+margin-bottom: 4px; /* Menos espacio entre líneas */
+font-weight: 400; /* Normal */
+}
+
+.info strong {
+color: var(--denim); /* Color azul oscuro para las etiquetas strong */
+font-weight: 700; /* Ligeramente negrita */
+}
+
+.specialties {
+margin-top: 15px; /* Espacio encima de las especialidades */
+display: flex;
+.specialties1{
+    margin-right: 2.5%;
+}
+p {
+    margin-bottom: 5px;
+}
+ul {
+    list-style: none; /* Eliminar viñetas por defecto */
+    padding-left: 15px; /* Indentación para la lista de hospitales */
+    li {
+        font-size: 0.9em;
+        color: var(--oxford-blue-2);
+        margin-bottom: 3px;
+        position: relative;
+        &::before { /* Viñeta personalizada */
+            content: "•";
+            color: var(--denim);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+            position: absolute;
+            left: 0;
+        }
+    }
+}
+}
+
+
+.location {
+font-size: 1em; /* Tamaño de la fuente para la ubicación */
+color: var(--oxford-blue-2); /* Color más oscuro */
+margin-top: 15px; /* Espacio encima de la ubicación */
+line-height: 1.4; /* Espaciado de línea */
+display: flex; /* Usar flexbox para alinear dirección y teléfono */
+justify-content: space-between; /* Espacio entre dirección y teléfono */
+align-items: baseline; /* Alinea los elementos a la base de su línea */
+flex-wrap: wrap; /* Permite que se envuelva en pantallas pequeñas */
+
+.address-text {
+    flex: 1; /* Permite que la dirección ocupe el espacio disponible */
+}
+.phone-text {
+    flex-shrink: 0; /* Evita que el teléfono se encoja */
+    text-align: right; /* Alinea el teléfono a la derecha */
+    margin-left: 20px; /* Espacio entre dirección y teléfono */
+}
+
+a {
+    color: var(--denim); /* Color del enlace "Ver mapa" */
+    text-decoration: none;
+    &:hover {
+        text-decoration: underline;
+    }
+}
+strong {
+    color: var(--denim); /* Color del Teléfono en la ubicación */
+    font-weight: 700;
+}
+}
+
+.buttons-card {
+display: flex;
+flex-direction: column; /* Apila los botones verticalmente */
+justify-content: flex-start; /* Alinea los botones arriba */
+align-items: flex-end; /* Alinea los botones a la derecha */
+gap: 10px; /* Espacio entre los botones */
+/* margin-left: auto; No es necesario si está dentro de doctor-info como columna */
+padding-top: 0px; /* Ajuste para alinear con la imagen del doctor */
+
+/* Para que tengan el mismo ancho y se alineen bien en la columna */ /* Ancho fijo para los botones, ajusta según la imagen */
+flex-shrink: 0; /* Evita que los botones se encojan */
+}
+
+.buttons-card button {
+padding: 12px 20px;
+border-radius: 20px; /* Bordes cuadrados */
+cursor: pointer;
+font-weight: 600;
+font-size: 1em;
+transition: all 0.3s ease;
+width: 100%; /* Ocupa todo el ancho disponible en .buttons-card */
+border: 1px solid transparent; /* Borde transparente por defecto */
+}
+
+.btn-schedule {
+background-color: var(--oxford-blue-2); /* Fondo oscuro */
+color: white;
+border-color: var(--oxford-blue-2); /* Borde del mismo color */
+&:hover {
+    background-color: var(--oxford-blue-2);
+}
+}
+
+.btn-info {
+background-color: var(--ruddy-blue); /* Fondo azul medio (ajustado para la imagen) */
+color: white;
+border-color: var(--ruddy-blue); /* Borde del mismo color */
+&:hover {
+    background-color: var(--ruddy-blue); /* Oscurecer al pasar el cursor */
+}
+}
+.titulo{
+font-weight: 700;
+color: var(--denim);
+}
+
+@keyframes bounce {
+  0% { transform: scale(1); }
+  30% { transform: scale(1.1); }
+  60% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  font-family: 'Material Symbols Outlined', sans-serif;
+}
+.account-menu .dropdown {
+  position: relative;
+  cursor: pointer;
+}
+
+.account-menu .dropdown .material-symbols-outlined {
+  font-size: 32px;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+.account-menu .dropdown:hover .material-symbols-outlined {
+  color: #0056b3; /* Cambia el color al pasar el mouse */
+}
+
+.account-menu .dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: white;
+  min-width: 140px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  border-radius: 6px;
+  z-index: 1000;
+  padding: 8px 0;
+}
+
+.account-menu .dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.account-menu .dropdown-content a {
+  display: block;
+  padding: 10px 20px;
+  color: #333;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.account-menu .dropdown-content a:hover {
+  background-color: #0056b3;
+  color: white;
+}
+.account-menu .dropdown .material-symbols-outlined {
+    font-size: 32px;
+    color: #333;
+    transition: color 0.3s ease;
+}
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    font-family: 'Material Symbols Outlined', sans-serif;
+}
+.material-symbols-outlined {
+    font-family: 'Material Symbols Outlined';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+}

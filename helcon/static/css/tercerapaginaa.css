@@ -1,0 +1,179 @@
+.scroll-animate {
+  opacity: 0;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.scroll-animate.visible {
+  opacity: 1;
+}
+
+/* para subtitulos */
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.slide-in-from-right {
+  animation: slideInFromRight 0.7s ease forwards;
+}
+
+.slide-in-from-left {
+  animation: slideInFromLeft 0.7s ease forwards;
+}
+
+/* para la imagenes */
+@keyframes exoticImageAnim {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.exotic-img {
+  animation: exoticImageAnim 1.2s ease forwards;
+}
+
+@keyframes smoothParagraphIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.smooth-paragraph {
+  animation: smoothParagraphIn 0.8s ease forwards;
+}
+
+
+.scroll-button {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.scroll-button:hover {
+  transform: scale(1.2);
+}
+
+/* para que los botones  */
+@keyframes clickBounce {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.click-bounce {
+  animation: clickBounce 0.3s ease forwards;
+}
+.account-menu {
+  position: relative;
+  display: inline-block;
+  font-family: Arial, sans-serif;
+}
+
+/* Botón de la cuenta */
+.dropbtn {
+  background-color: #1a2238;
+  color: #f8f9fa;
+  padding: 12px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dropbtn:hover {
+  background-color: #3f4c73;
+}
+
+/* Foto de perfil dentro del botón */
+.foto-perfil {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* Contenedor dropdown */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Menú oculto inicialmente con efecto fade */
+.dropdown-content {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  position: absolute;
+  background-color: #ffffff;
+  min-width: 180px;
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+  border-radius: 8px;
+  margin-top: 0;  /* evita espacio vacío */
+  z-index: 1000;
+}
+
+/* Mostrar el menú al hacer hover en todo el contenedor */
+.dropdown:hover .dropdown-content {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Estilo de los links del dropdown */
+.dropdown-content a {
+  color: hsl(224, 37%, 16%);
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  border-bottom: 1px solid #f1f1f1;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-content a:last-child {
+  border-bottom: none;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}

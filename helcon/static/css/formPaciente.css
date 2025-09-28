@@ -1,0 +1,86 @@
+:root{
+    --seasalt: #FBFAF8ff; 
+    --ruddy-blue: #6CA5FFff; 
+    --denim: #245DB5ff; 
+    --oxford-blue: #111835ff; 
+    --oxford-blue-2: #051024ff; 
+    --texto-interno: #C9C9C9;
+}
+*{
+    font-family: "Lexend", sans-serif;
+    margin: 0;
+    padding: 0;
+    background: white;
+}
+.todo{
+    display: flex;
+    
+}
+.div-izquierda{
+    width: 65%;
+    background:white;
+    height: 100%;
+    margin-top: 30px;
+
+    h2{
+        text-align:left;
+        margin-left: 18%;
+        color: var(--oxford-blue);
+        font-size: 54px;
+        padding: 1.2%;
+    }
+}
+span{
+    color: var(--ruddy-blue);
+}
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    input{
+        margin: 15px auto;
+        height: 50px;
+    }
+}
+
+form input[type="text"],
+form input[type="tel"],
+form input[type="email"],
+form input[type="date"],
+form input[type="password"]{
+    width: 65%;
+    height: px;
+    border: none;
+    outline: none;
+    padding-left: 25px;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--oxford-blue);
+    border-radius: 30px;
+    font-style: italic;
+    background: var(--texto-interno) ;
+}
+
+form input[type="submit"] {
+    display: flex;
+    height: 60px;
+    align-items: center;
+    padding: 15px 80px;
+    font-size: 25px ;
+    font-weight: 700;
+    color: var(--ruddy-blue);
+    gap: 10px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 50px;
+    background: var(--oxford-blue) ;
+}
+.div-derecha{
+    width: 35%;
+    img{
+        width: 95%;
+        object-fit: cover;
+        position: relative;
+    }
+
+}

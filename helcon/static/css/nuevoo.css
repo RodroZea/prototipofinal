@@ -1,0 +1,658 @@
+:root {
+  --seasalt: #FBFAF8ff;
+  --ruddy-blue: #6CA5FFff;
+  --denim: #245DB5ff;
+  --oxford-blue: #111835ff;
+  --oxford-blue-2: #051024ff;
+  --texto-interno: #C9C9C9;
+  --rubby-blue2: #DAE8FF; /* Azul muy claro, similar al del borde exterior de las tarjetas en la imagen */
+}
+ 
+* {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+ 
+/* General */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif; /* Aunque se define Poppins, Arial está como fallback */
+  background-color: #f5f5f5; /* Usar una variable si es un color recurrente */
+  color: #111; /* Usar una variable si es un color recurrente */
+  overflow-x: hidden;
+}
+ 
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  font-family: 'Material Symbols Outlined', sans-serif;
+}
+ 
+/* Header */
+.header {
+  background-color: var(--oxford-blue-2);
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  padding: 1rem;
+  align-items: center;
+  a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.5rem;
+ 
+    &:hover {
+      color: var(--ruddy-blue);
+    }
+  }
+}
+ 
+/* Carrusel */
+.carousel {
+  position: relative;
+  width: 100%;
+  height: 550px;
+  overflow: hidden;
+  background-color: black;
+}
+ 
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  height: 100%;
+}
+ 
+.carousel-track a {
+  flex: 0 0 100%;
+  display: block;
+  height: 100%;
+}
+ 
+.carousel-track img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+ 
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2.5rem;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 0.5rem;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10;
+}
+ 
+.arrow.left {
+  left: 1rem;
+}
+ 
+.arrow.right {
+  right: 1rem;
+}
+ 
+.arrow:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+ 
+/* Buscador */
+.search-section {
+  background-color: white;
+  padding: 2% 5%; /* Ajustado el padding para el margen lateral */
+  text-align: left; /* Alineado a la izquierda para el texto principal */
+ 
+  h2{
+    font-size: 3.5rem; /* Ajustado el tamaño del título */
+    color: var(--oxford-blue);
+    margin-bottom: 0.5rem; /* Pequeño margen debajo del título */
+  }
+  p{
+    font-size: 1.7rem; /* Ajustado el tamaño del párrafo */
+    font-weight: 450;
+    margin-bottom: 5rem; /* Margen debajo del párrafo */
+  }
+ 
+  .search-container {
+    display: flex;
+    justify-content: center; /* Centrar el contenedor de búsqueda */
+    align-items: center;
+    margin-top: 1rem;
+    gap: 1.5rem; /* Aumentado el espacio entre el input y el botón de filtro */
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
+  }
+ 
+  .search-input-wrapper {
+    position: relative;
+    /* Ajustes clave para el ancho del input de búsqueda */
+    width: 65rem; /* Ocupa todo el ancho disponible en el contenedor flex */
+    max-width: 900px; /* Limita el ancho máximo para que no sea demasiado grande en escritorios */
+ 
+    input {
+      width: 100%;
+      padding: 1rem 3rem 1rem 1.5rem; /* Aumentado padding para hacer el input más alto y dejar espacio para el icono */
+      border: 1px solid var(--texto-interno); /* Color de borde de variable */
+      border-radius: 10px;
+      font-size: 1.2rem; /* Tamaño de fuente del input */
+      color: var(--oxford-blue); /* Color de texto del input */
+      outline: none; /* Eliminar el contorno al enfocar */
+ 
+      &:focus {
+        border-color: var(--ruddy-blue); /* Color de borde al enfocar */
+        box-shadow: 0 0 5px rgba(108, 165, 255, 0.5); /* Sombra al enfocar */
+      }
+    }
+ 
+    .material-symbols-outlined {
+      position: absolute;
+      right: 1rem; /* Mover el icono más a la derecha */
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--oxford-blue); /* Color del icono de búsqueda */
+      pointer-events: none;
+      font-size: 2rem; /* Aumentar tamaño del icono */
+    }
+  }
+ 
+  .filter-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem; /* Ajustado el espacio entre el icono y el texto del botón */
+    padding: 1rem 1.5rem; /* Aumentado padding para que coincida con el input */
+    border: 1px solid var(--oxford-blue); /* Color de borde azul */
+    border-radius: 10px;
+    background-color: var(--oxford-blue); /* Fondo azul */
+    color: white; /* Texto blanco */
+    font-size: 1.2rem; /* Tamaño de fuente del botón */
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+ 
+    &:hover {
+      background-color: var(--denim); /* Oscurecer al pasar el cursor */
+      border-color: var(--denim);
+      border-width: 5px;
+      color:white ;
+    }
+ 
+    .material-symbols-outlined {
+      font-size: 1.8rem; /* Tamaño del icono del filtro */
+      color: white; /* Color del icono del filtro */
+    }
+  }
+}
+ 
+/* Recomendaciones */
+.recommendations {
+  background-color: white;
+  padding: 1% 5%;
+  text-align: left;
+ 
+ 
+  h3{
+    font-size: 2.2rem;
+    margin-top: 3rem;
+    color: var(--oxford-blue);
+    margin-bottom: 1rem; /* Espacio debajo del título */
+  }
+ 
+  p {
+    text-align: left;
+    max-width: 1000px; /* Limitar ancho del párrafo para legibilidad */
+    margin-left: 0; /* Asegurar que no haya margin auto si no se desea centrado */
+    line-height: 1.5;
+    margin-top: 1%;
+    font-weight: 450;
+    font-size: 1.7rem;
+    color: var(--oxford-blue-2)
+  }
+}
+ 
+/*Foooter*/
+.main-footer {
+    background-color: var(--oxford-blue-2);
+    color: var(--seasalt);
+    padding: 40px 5%; /* Añadimos padding superior e inferior y márgenes laterales */
+    display: flex;
+    flex-wrap: wrap; /* Permite que las columnas se envuelvan en pantallas más pequeñas */
+    justify-content: space-around; /* Distribuye el espacio entre las columnas */
+}
+ 
+.footer-column {
+    flex: 1; /* Hace que las columnas crezcan por igual */
+    min-width: 200px; /* Evita que las columnas se compriman demasiado */
+    margin-bottom: 20px;
+     /* Espacio entre las filas de columnas en pantallas pequeñas */
+}
+ 
+.footer-column h3 {
+    color: var(--ruddy-blue);
+    font-size: 1.5em;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+ 
+.footer-column p {
+    margin-bottom: 3px; /* Corregido a 3px */
+    color: var(--texto-interno);
+}
+ 
+.social-button button{
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  padding: 10px 30px;
+  font-size: 16px ;
+  color: var(--oxford-blue-2);
+  gap: 10px;
+  border: none;
+  border-radius: 50px;
+  background: var(--ruddy-blue);
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  cursor: pointer;
+}
+ 
+.social-button button:hover {
+    transform: scale(1.05);
+}
+ 
+.links-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+ 
+.links-column li {
+    margin-bottom: 8px;
+}
+ 
+.links-column a {
+    color: var(--texto-interno);
+    text-decoration: none;
+}
+ 
+.links-column a:hover {
+    text-decoration: underline;
+    color: var(--seasalt);
+}
+ 
+.recent-posts ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+ 
+.recent-posts li {
+    margin-bottom: 15px;
+}
+ 
+.post-date {
+    display: block;
+    font-size: 0.9em;
+    color: var(--ruddy-blue);
+    margin-bottom: 5px;
+}
+ 
+.recent-posts a {
+    color: var(--texto-interno);
+    text-decoration: none;
+    line-height: 1.4;
+}
+ 
+.recent-posts a:hover {
+    text-decoration: underline;
+    color: var(--seasalt);
+}
+/* Media queries para responsividad */
+@media (max-width: 992px) {
+    .header {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem; /* Reducir gap en móvil */
+        padding: 0.8rem; /* Ajustar padding */
+        a {
+            font-size: 1.2rem; /* Reducir tamaño de fuente de los enlaces del header */
+        }
+    }
+    .carousel {
+        height: 350px; /* Ajustar altura del carrusel en tabletas */
+        .carousel-track img {
+            height: 350px;
+        }
+    }
+    .search-section {
+        padding: 5%; /* Ajustar padding para más espacio */
+        text-align: center; /* Centrar todo el texto en tabletas */
+        h2, p {
+            text-align: center;
+        }
+        h2 {
+            font-size: 2.8rem;
+        }
+        p {
+            font-size: 1.4rem;
+        }
+        .search-container {
+            flex-direction: column; /* Apilar elementos de búsqueda */
+            gap: 1rem;
+        }
+        .search-input-wrapper {
+            max-width: 90%; /* Ancho más flexible en tabletas */
+            input {
+                font-size: 1rem;
+                padding: 0.8rem 2.5rem 0.8rem 1rem;
+            }
+            .material-symbols-outlined {
+                font-size: 1.5rem;
+            }
+        }
+        .filter-button {
+            width: 90%; /* Ocupar casi todo el ancho */
+            font-size: 1rem;
+            padding: 0.8rem 1.2rem;
+            .material-symbols-outlined {
+                font-size: 1.5rem;
+            }
+        }
+    }
+    .recommendations {
+        padding: 5%; /* Ajustar padding */
+        text-align: center;
+        h3 {
+            font-size: 1.8rem;
+        }
+        p {
+            font-size: 1.4rem;
+            max-width: 100%; /* Permitir que el párrafo ocupe todo el ancho */
+            margin: 1rem auto; /* Centrar el párrafo */
+        }
+    }
+    .main-footer {
+        padding: 30px 5%; /* Ajustar padding */
+        flex-direction: column;
+        align-items: flex-start;
+        .footer-column {
+            width: 100%;
+            margin-bottom: 25px;
+        }
+    }
+}
+ 
+@media (max-width: 576px) {
+    .header {
+        padding: 0.5rem;
+        gap: 0.5rem;
+        a {
+            font-size: 1rem;
+        }
+    }
+    .carousel {
+        height: 250px; /* Reducir altura del carrusel en móviles */
+        .carousel-track img {
+            height: 250px;
+        }
+    }
+    .arrow {
+        font-size: 1.8rem;
+        padding: 0.3rem;
+    }
+    .search-section {
+        align-items: center;
+        padding: 1.5rem 0.8rem;
+        h2 {
+            font-size: 2.2rem;
+        }
+        p {
+            font-size: 1.1rem;
+        }
+        .search-input-wrapper {
+            max-width: 100%;
+            input {
+                padding: 0.6rem 2rem 0.6rem 0.8rem;
+                font-size: 0.9rem;
+            }
+            .material-symbols-outlined {
+                font-size: 1.2rem;
+                right: 0.5rem;
+            }
+        }
+        .filter-button {
+            width: 100%;
+            font-size: 0.9rem;
+            padding: 0.6rem 1rem;
+            .material-symbols-outlined {
+                font-size: 1.2rem;
+            }
+        }
+    }
+    .recommendations {
+        padding: 1.5rem 0.8rem;
+        h3 {
+            font-size: 1.5rem;
+        }
+        p {
+            font-size: 1.1rem;
+        }
+    }
+    .main-footer {
+        padding: 15px;
+    }
+}
+.botones {
+  position: relative;
+  display: inline-block;
+}
+ 
+.account-menu .dropdown {
+  position: relative;
+  cursor: pointer;
+}
+ 
+.account-menu .dropdown .material-symbols-outlined {
+  color: white;
+  text-decoration: none;
+  font-size: 1.8rem;
+  font-weight: 350;
+  transition: color 0.3s ease;
+}
+ 
+.account-menu .dropdown:hover .material-symbols-outlined {
+  color: #0056b3; /* Cambia el color al pasar el mouse */
+}
+ 
+.account-menu .dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: white;
+  min-width: 140px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  border-radius: 6px;
+  z-index: 1000;
+  padding: 8px 0;
+}
+ 
+.account-menu .dropdown:hover .dropdown-content {
+  display: block;
+}
+ 
+.account-menu .dropdown-content a {
+  display: block;
+  padding: 10px 20px;
+  color: #333;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  font-size: 18px;
+}
+ 
+.account-menu .dropdown-content a:hover {
+  background-color: #0056b3;
+  color: white;
+}
+.card {
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  padding: 20px;
+  max-width: 900px;
+  font-family: 'Poppins', sans-serif;
+  transition: transform 0.2s ease;
+}
+ 
+.card:hover {
+  transform: scale(1.01);
+}
+ 
+.doctor-info {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+ 
+.doctor-info img {
+  border: 3px solid #e0e0e0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+ 
+.info {
+  flex: 1;
+}
+ 
+.info h3 {
+  margin-top: 0;
+  font-size: 24px;
+  color: #051024; /* Oxford blue */
+}
+ 
+.info p {
+  margin: 4px 0;
+  font-size: 15px;
+  color: #333;
+}
+ 
+.specialties {
+  display: flex;
+  gap: 30px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+ 
+.specialties1 p {
+  margin: 2px 0;
+}
+ 
+.buttons-card {
+  margin-top: 15px;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+ 
+.buttons-card button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 12px;
+  background-color: #0056b3;
+  color: white;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s;
+}
+ 
+.buttons-card button:hover {
+  background-color: #003f8a;
+}
+ 
+.location {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  background-color: #f8f8f8;
+  padding: 15px;
+  border-radius: 12px;
+  margin-top: 20px;
+}
+ 
+.address-text, .phone-text {
+  flex: 1;
+  min-width: 200px;
+}
+ 
+.titulo {
+  font-weight: bold;
+  color: #051024;
+}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+ 
+:root {
+  --oxford-blue: #111835;
+  --oxford-blue-light: #2c3e7e;
+  --oxford-blue-lighter: #40559b;
+  --white: #ffffff;
+}
+ 
+.busqueda-doctor {
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  justify-content: center;
+  padding: 30px 20px;
+}
+ 
+.busqueda-doctor__contenedor {
+  display: flex;
+  gap: 15px;
+  background-color: var(--white);
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 900px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+ 
+.busqueda-doctor__input,
+.busqueda-doctor__select {
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 2px solid var(--oxford-blue);
+  background-color: #fefefe;
+  font-size: 1rem;
+  color: #333;
+  flex: 1 1 250px;
+  transition: border-color 0.3s;
+}
+ 
+.busqueda-doctor__input:focus,
+.busqueda-doctor__select:focus {
+  outline: none;
+  border-color: var(--oxford-blue);
+}
+ 
+.busqueda-doctor__boton {
+  padding: 12px 25px;
+  background-color: var(--oxford-blue);
+  color: var(--white);
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  flex: 1 1 150px;
+}
+ 
+.busqueda-doctor__boton:hover {
+  background-color: var(--oxford-blue-light);
+}
+ 
+.doctores_disponibles{
+  font-size: 35px;
+}

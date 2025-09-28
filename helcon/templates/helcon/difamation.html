@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+  <meta charset="UTF-8">
+  <title data-text-key="pageTitle">Defamation Policy</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="{% static 'css/defamation_policy.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" xintegrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+ 
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+ 
+  <!--Link para fuente-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=language" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  
+</head>
+<body>
+  <!--Barra de navegacion-->
+ <header>
+  
+    <div class="barra-superior">
+    <body>
+  <button onclick="window.history.back()" style="
+  background-color: #111835;
+  color: white;
+  padding: 10px 20px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 20px;
+  transition: background-color 0.3s ease;
+"
+onmouseover="this.style.backgroundColor='#2c3e7e'"
+onmouseout="this.style.backgroundColor='#111835'"
+>
+  ← Volver
+</button>  
+      
+      
+      <div class="botones">
+          <div class="botones">
+  <div class="account-menu">
+    {% if user.is_authenticated %}
+      
+      {% if paciente %}
+        <!-- Paciente logueado -->
+        <div class="dropdown">
+          <span class="material-symbols-outlined">person</span>
+          <div class="dropdown-content">
+            <a href="{% url 'perfil_paciente' %}">Perfil</a>
+            <a href="{% url 'logout' %}">Cerrar sesión</a>
+          </div>
+        </div>
+
+      {% elif doctor %}
+        <!-- Doctor logueado -->
+        <div class="dropdown">
+          {% if doctor.foto_perfil %}
+            <img src="{{ doctor.foto_perfil.url }}" alt="Foto de perfil" style="width:50px; height:50px; border-radius:50%; object-fit:cover;" />
+          {% else %}
+            <img src="{% static 'images/fotoprede.webp' %}" alt="Foto por defecto" style="width:50px; height:50px; border-radius:50%; object-fit:cover;" />
+          {% endif %}
+          <div class="dropdown-content">
+            <a href="{% url 'perfil_doctor' %}">Perfil</a>
+            <a href="{% url 'logout' %}">Cerrar sesión</a>
+          </div>
+        </div>
+      {% endif %}
+
+    {% else %}
+      <!-- No autenticado -->
+      <a href="{% url 'login' %}"><button class="boton-login">Login</button></a>
+      <a href="{% url 'registro' %}" style="margin-left: 15px;"><button class="boton-registro">Sign up</button></a>
+    {% endif %}
+  </div>
+</div>
+
+          <div class="language-dropdown">
+            <div class="boton-idioma" id="language-button" aria-label="Cambiar idioma">
+              <span class="material-symbols-outlined">
+                language
+              </span>
+            </div>
+            <div class="dropdown-menu" id="language-menu">
+              <a href="#" class="dropdown-item" data-lang="es">
+                <div class="flag-icon flag-es"></div>
+                Español
+              </a>
+              <a href="#" class="dropdown-item" data-lang="en">
+                <div class="flag-icon flag-en"></div>
+                English
+              </a>
+            </div>
+          </div>
+      </div>
+    </div>
+
+    <nav class="barra-navegacion">
+    <ul>
+        <li><a href="{% url 'home' %}" data-nav-key="homeNav">Inicio</a></li>
+        <li><a href="{% url 'segpag' %}" data-nav-key="featuresNav">Funcionalidades y Beneficios</a></li>
+        <li><a href="{% url 'blog_view' %}" data-nav-key="aboutNav">Acerca de Nosotros</a></li>
+        <li><a href="{% url 'blog_view' %}" data-nav-key="blogNav">Blog</a></li>
+    </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="defamation-policy-section">
+      <h1 data-text-key="defamation_h1">Defamation Policy</h1>
+      <p data-text-key="defamation_p1">At Health Connectors, we believe in creating a safe and respectful environment where users and healthcare providers can interact with trust. That means we take very seriously any content that may be considered defamatory, offensive, or harmful to others.</p>
+      
+      <h2 data-text-key="defamation_intro_h2">Defamation, in this context, refers to the act of making false or misleading statements about a person or organization that can harm their reputation, either directly or indirectly. This includes—but is not limited to:</h2>
+      <ul>
+        <li data-text-key="defamation_li1">Accusing a person or provider of something serious without proof.</li>
+        <li data-text-key="defamation_li2">Spreading unverified information with the intent to damage someone’s image.</li>
+        <li data-text-key="defamation_li3">Publishing reviews, messages, or posts that are abusive, humiliating, or meant to cause fear or public shaming.</li>
+        <li data-text-key="defamation_li4">Using fake profiles to impersonate others or manipulate opinions.</li>
+      </ul>
+      
+      <h2 data-text-key="defamation_not_tolerate_h2">We do not tolerate:</h2>
+      <ul>
+        <li data-text-key="defamation_not_tolerate_li1">Personal attacks on healthcare professionals or users.</li>
+        <li data-text-key="defamation_not_tolerate_li2">Misleading health information that could cause harm or confusion.</li>
+        <li data-text-key="defamation_not_tolerate_li3">Harassment, threats, or hate speech in any form.</li>
+        <li data-text-key="defamation_not_tolerate_li4">Public shaming or attempts to sabotage someone’s professional work.</li>
+      </ul>
+
+      <h2 data-text-key="defamation_report_h2">If you feel someone has posted defamatory or harmful content:</h2>
+      <p data-text-key="defamation_report_p1">You can report it directly to our support team using the in-app tools or by contacting us at [Insert contact info]. We take these reports seriously and will:</p>
+      <ul>
+        <li data-text-key="defamation_report_li1">Review the content and context carefully.</li>
+        <li data-text-key="defamation_report_li2">Take appropriate action, which may include removing the content, warning the user, or suspending or banning the account.</li>
+        <li data-text-key="defamation_report_li3">Notify the affected parties if necessary.</li>
+      </ul>
+      <p data-text-key="defamation_report_p2">Please note that freedom of speech does not include the right to harm others, spread falsehoods, or disrupt the community. We encourage honest feedback and conversations, but they must be expressed respectfully and based on facts.</p>
+
+      <h2 data-text-key="defamation_consequences_h2">Consequences for Defamation or Harmful Behavior:</h2>
+      <p data-text-key="defamation_consequences_p1">Depending on the severity and frequency, we may:</p>
+      <ul>
+        <li data-text-key="defamation_consequences_li1">Remove or hide the harmful content.</li>
+        <li data-text-key="defamation_consequences_li2">Send a warning or reminder about our Community Guidelines.</li>
+        <li data-text-key="defamation_consequences_li3">Temporarily suspend or permanently deactivate the account involved.</li>
+        <li data-text-key="defamation_consequences_li4">In serious or repeated cases, we may cooperate with relevant authorities if the situation demands it.</li>
+      </ul>
+      <p data-text-key="defamation_consequences_p2">We want every user of Health Connectors to feel confident that their personal and professional integrity is respected. Our community thrives on trust, and we all share the responsibility to protect it.</p>
+    </section>
+  </main>
+
+</body>
+ <footer class="main-footer">
+    <div class="footer-column">
+        <h3>Health<br>Connectors</h3>
+        <p>New Elsiebury</p>
+        <p>634 Halvorson</p>
+        <p>Estates Suite 039</p>
+        <br>
+        <div class="social-button">
+          <a href="https://linktr.ee/Health_Connectors" target="_blank" style="
+  display: inline-block;
+  margin-top: 25px;
+  background-color: #8cb8ff;
+  border: none;
+  border-radius: 12px;
+  color: #000;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 15px 30px;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: 'Poppins', sans-serif;
+">
+  Know more
+</a>
+
+        </div>
+    </div>
+    <div class="footer-column links-column">
+        <h3>Links</h3>
+        <ul class="footer-links">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="#">Pages</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Portfolio</a></li>
+            <li><a href="{% url 'blog_view' %}">Blog</a></li>
+            <li><a href="{% url 'contacto' %}">Contact</a></li>
+        </ul>
+    </div>
+    <div class="footer-column links-column">
+        <br>
+        <ul class="footer-links">
+            <li><a href="{% url 'privacy_policies' %}">Privacy Policies</a></li>
+            <li><a href="{% url 'terms' %}">Term of use</a></li>
+            <li><a href="{% url 'registro' %}">Sign up</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
+            <li><a href="{% url 'difamation' %}">Defamation</a></li>
+        </ul>
+    </div>
+    <div class="footer-column recent-posts-column">
+        <h3>Recent posts</h3>
+        <ul class="recent-posts">
+            <li> <a href="{% url 'journal1' %}">Health Benefits of Sleep</a></li>
+            <li> <a href="{% url 'journal2' %}">Benefits of Excercise</a></li>
+            <li><a href="{% url 'journal3' %}">Stress Management</a></li>
+            <li><a href="{% url 'journal4' %}">The importance of preventive care.</a></li>
+        </ul>
+    </div>
+</footer>
+
+<script src="{% static 'js/defamation_policy.js' %}"></script>

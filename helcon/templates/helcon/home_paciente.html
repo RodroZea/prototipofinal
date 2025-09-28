@@ -1,0 +1,258 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title data-text-key="pageTitle">Health Connectors</title>
+  <link rel="stylesheet" href="{% static 'css/nuevoo.css' %}" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <link rel="stylesheet" href="">
+  <link rel="stylesheet" href="{% static 'css/nuevo.css' %}" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Darker+Grotesque:wght@300..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">  
+</head>
+<body data-static-url="{% static '' %}">
+
+
+  <div class="header">
+    <a href="#" title="Home" data-text-key="homeIconTitle"><span class="material-symbols-outlined">home</span></a>
+    <a href="{% url 'detalle_cita_paciente' %}" title="Notifications"><span class="material-symbols-outlined">notifications</span></a>
+<div class="botones">
+  <div class="account-menu">
+    {% if user.is_authenticated %}
+      <div class="dropdown">
+        <span class="material-symbols-outlined">person</span>
+        <div class="dropdown-content">
+          <a href="{% url 'perfil_paciente' %}" data-text-key="profileLink">Perfil</a>
+          <a href="{% url 'logout' %}" data-text-key="logoutLink">Cerrar sesión</a>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+    <div class="language-dropdown">
+        <div class="boton-idioma" id="language-button" aria-label="Cambiar idioma">
+            <span class="material-symbols-outlined" title="Language">language</span>
+        </div>
+        <div class="dropdown-menu" id="language-menu">
+            <!-- Items de idioma serán generados por JS o se definen aquí si no hay JS -->
+             <a href="#" class="dropdown-item" data-lang="es">
+                <div class="flag-icon flag-es"></div>
+                Español
+            </a>
+            <a href="#" class="dropdown-item" data-lang="en">
+                <div class="flag-icon flag-en"></div>
+                English
+            </a>
+        </div>
+    </div>
+  </div>
+
+<div class="carousel"> 
+  <div class="carousel-track" id="carousel-track">
+    <a href="{% url 'blog_view' %}"><img src="{% static 'images/inicio_encabezado_eng.webp' %}" alt="Imagen 1" /></a>
+    <a href="{% url 'tercerapag' %}"><img src="{% static 'images/inicio_encabezado2_eng.webp' %}" alt="Imagen 2" /></a>
+    <a href="{% url 'segpag' %}"><img src="{% static 'images/inicio_encabezado3_eng.webp' %}" alt="Imagen 3" /></a>
+    <a href="{% url 'contacto' %}"><img src="{% static 'images/inicio_encabezado4_eng.webp' %}" alt="Imagen 4" /></a>
+    <a href="{% url 'privacy_policies' %}"><img src="{% static 'images/inicio_encabezado5_eng.webp' %}" alt="Imagen 5" /></a>
+  </div>
+
+ 
+  <div class="arrow left" id="prev" tabindex="0" data-text-key="carouselPrev" aria-label="Previous slide">
+    <span class="material-symbols-outlined">chevron_left</span>
+  </div>
+  <div class="arrow right" id="next" tabindex="0" data-text-key="carouselNext" aria-label="Next slide">
+    <span class="material-symbols-outlined">chevron_right</span>
+  </div>
+</div>
+
+  <div class="search-section">
+  <h2 data-text-key="welcomeTitle">Welcome to Health Connectors</h2>
+  <p data-text-key="welcomeText">Find your ideal specialist and schedule your appointment easily.</p>
+  <form method="get" class="busqueda-doctor" action="{% url 'home_paciente' %}">
+    <div class="busqueda-doctor__contenedor">
+      <input type="text" name="q" placeholder="Buscar por nombre..." value="{{ query }}" class="busqueda-doctor__input" data-text-key="searchPlaceholder" />
+
+      <select class="busqueda-doctor__contenedor" name="especialidad"> 
+        <option value="" data-text-key="allSpecialties">Todas las especialidades</option> 
+        <option value="Cardiología" {% if especialidad == "Cardiología" %}selected{% endif %} data-text-key="cardiology">Cardiología</option> 
+        <option value="Dermatología" {% if especialidad == "Dermatología" %}selected{% endif %} data-text-key="dermatology">Dermatología</option> 
+        <option value="Pediatría" {% if especialidad == "Pediatría" %}selected{% endif %} data-text-key="pediatrics">Pediatría</option> 
+        <option value="Alergología" {% if especialidad == "Alergología" %}selected{% endif %} data-text-key="allergology">Alergología</option>
+        <option value="Anestesiología" {% if especialidad == "Anestesiología" %}selected{% endif %} data-text-key="anesthesiology">Anestesiología</option>
+        <option value="Cirugía General" {% if especialidad == "Cirugía General" %}selected{% endif %} data-text-key="generalSurgery">Cirugía General</option>
+        <option value="Endocrinología" {% if especialidad == "Endocrinología" %}selected{% endif %} data-text-key="endocrinology">Endocrinología</option>
+        <option value="Gastroenterología" {% if especialidad == "Gastroenterología" %}selected{% endif %} data-text-key="gastroenterology">Gastroenterología</option>
+        <option value="Geriatría" {% if especialidad == "Geriatría" %}selected{% endif %} data-text-key="geriatrics">Geriatría</option>
+        <option value="Ginecología" {% if especialidad == "Ginecología" %}selected{% endif %} data-text-key="gynecology">Ginecología</option>
+        <option value="Hematología" {% if especialidad == "Hematología" %}selected{% endif %} data-text-key="hematology">Hematología</option>
+        <option value="Infectología" {% if especialidad == "Infectología" %}selected{% endif %} data-text-key="infectiousDiseases">Infectología</option>
+        <option value="Medicina General" {% if especialidad == "Medicina General" %}selected{% endif %} data-text-key="generalMedicine">Medicina General</option>
+        <option value="Medicina Interna" {% if especialidad == "Medicina Interna" %}selected{% endif %} data-text-key="internalMedicine">Medicina Interna</option>
+        <option value="Nefrología" {% if especialidad == "Nefrología" %}selected{% endif %} data-text-key="nephrology">Nefrología</option>
+        <option value="Neumología" {% if especialidad == "Neumología" %}selected{% endif %} data-text-key="pulmonology">Neumología</option>
+        <option value="Neurología" {% if especialidad == "Neurología" %}selected{% endif %} data-text-key="neurology">Neurología</option>
+        <option value="Nutrición" {% if especialidad == "Nutrición" %}selected{% endif %} data-text-key="nutrition">Nutrición</option>
+        <option value="Oncología" {% if especialidad == "Oncología" %}selected{% endif %} data-text-key="oncology">Oncología</option>
+        <option value="Oftalmología" {% if especialidad == "Oftalmología" %}selected{% endif %} data-text-key="ophthalmology">Oftalmología</option>
+        <option value="Otorrinolaringología" {% if especialidad == "Otorrinolaringología" %}selected{% endif %} data-text-key="otorhinolaryngology">Otorrinolaringología</option>
+        <option value="Psiquiatría" {% if especialidad == "Psiquiatría" %}selected{% endif %} data-text-key="psychiatry">Psiquiatría</option>
+        <option value="Radiología" {% if especialidad == "Radiología" %}selected{% endif %} data-text-key="radiology">Radiología</option>
+        <option value="Reumatología" {% if especialidad == "Reumatología" %}selected{% endif %} data-text-key="rheumatology">Reumatología</option>
+        <option value="Traumatología" {% if especialidad == "Traumatología" %}selected{% endif %} data-text-key="traumatology">Traumatología</option>
+        <option value="Urología" {% if especialidad == "Urología" %}selected{% endif %} data-text-key="urology">Urología</option>
+      </select>
+
+      <button type="submit" class="busqueda-doctor__boton" data-text-key="searchButton">Buscar</button>
+    </div>
+  </form>
+<h2 class="doctores_disponibles" data-text-key="availableDoctors">Todos los doctores disponibles</h2>
+<div>
+  {% for doctor in doctores %}
+    <div>
+      <div class="card" style="padding: 1rem; margin-bottom: 1rem; border-radius: 8px; {% if doctor.recomendado == 'si' %}border: 3px solid gold;{% else %}border: 1px solid #ccc;{% endif %}">
+        <div class="doctor-info" style="display: flex; align-items: center; gap: 1rem;">
+          {% if doctor.foto_perfil %}
+            <img src="{{ doctor.foto_perfil.url }}" alt="Foto de perfil"
+              style="width:180px; height:180px; border-radius:50%; object-fit:cover; {% if doctor.recomendado == 'si' %}border: 3px solid gold;{% endif %}" />
+          {% else %}
+            <img src="{% static 'images/fotoprede.webp' %}" alt="Foto predeterminada"
+              style="width:180px; height:180px; border-radius:50%; object-fit:cover; {% if doctor.recomendado == 'si' %}border: 3px solid gold;{% endif %}" />
+          {% endif %}
+          <div class="info">
+            <h3 {% if doctor.recomendado == 'si' %}style="color:gold; margin:0;"{% else %}style="margin:0;"{% endif %}>
+              {{ doctor.user.first_name }} {{ doctor.user.last_name }}
+            </h3>
+            {% if doctor.recomendado == 'si' %}
+              <p><strong style="color:gold;" data-text-key="recommended">★ Recomendado</strong></p>
+            {% endif %}
+            <p><strong data-text-key="currentStatus">Estado actual:</strong> {{ doctor.estado_switch }}</p>
+            <p><strong data-text-key="suitability">NO,Idoneidad:</strong> {{ doctor.idoneidad }}</p>
+            <p><strong data-text-key="credential">Credencial:</strong> {{ doctor.credential_number }}</p>
+            <p><strong data-text-key="email">Email:</strong> {{ doctor.user.username }}</p>
+            <div class="specialties">
+              <div class="specialties1 contenido_especialidades">
+                <p><strong data-text-key="specialties">Especialidades:</strong> {{ doctor.especialidad }}</p>
+              </div>
+              <div class="specialties1">
+                <p><strong data-text-key="hospitalAffiliation">Hospital Affiliation:</strong> {{ doctor.ubicacion }}</p>
+              </div>
+            </div>
+            <div class="buttons-card" style="margin-top: 1rem;">
+              <button class="btn-schedule" onclick="window.location.href='{% url 'agenda' doctor.id %}'" data-text-key="scheduleAppointment">Agendar cita</button>
+              <button onclick="window.location.href='{% url 'mas_informacion' doctor.id %}'" data-text-key="moreInformation">Más información</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% empty %}
+    <li data-text-key="noDoctors">No hay doctores disponibles.</li>
+  {% endfor %}
+</div>
+  <div class=".recommendations">
+    <h2 data-text-key="specialOffersTitle">Special offers for you</h2>
+    <p data-text-key="specialOffersText">
+      Access special promotions and discounts with Health Connectors. Book your appointments easily and make the most of your healthcare experience.
+    </p>
+  </div>
+    <div class="secondary-carousel">
+  <div class="arrow-secondary left-secondary" data-text-key="previousOffer" aria-label="Anterior">
+    <span class="material-symbols-outlined">chevron_left</span>
+  </div>
+ 
+  <div class="carousel-wrapper-secondary" id="carousel-wrapper-secondary">
+    <div class="carousel-slide-secondary">
+      <img src="{% static 'images/cupon1_eng.webp' %}" data-img-key="cupon1" alt="Oferta 3" />
+    </div>
+    <div class="carousel-slide-secondary">
+      <img src="{% static 'images/cupon4_eng.webp' %}" data-img-key="cupon2" alt="Oferta 1" />
+    </div>
+    <div class="carousel-slide-secondary">
+      <img src="{% static 'images/cupon2_eng.webp' %}" data-img-key="cupon3" alt="Oferta 2" />
+    </div>
+    <div class="carousel-slide-secondary">
+      <img src="{% static 'images/cupon3_eng.webp' %}" data-img-key="cupon4" alt="Oferta 3" />
+    </div>
+    
+  </div>
+ 
+  <div id="popup-modal" class="popup-modal">
+  <div class="popup-content">
+    <span class="close-popup">&times;</span>
+    <img id="popup-image" src="" alt="Oferta ampliada" />
+  </div>
+</div>
+ 
+  <div class="arrow-secondary right-secondary" data-text-key="nextOffer" aria-label="Siguiente">
+    <span class="material-symbols-outlined">chevron_right</span>
+  </div>
+</div>
+ 
+</div>
+  <script src="{% static 'js/nuevoo.js' %}"></script>
+  <!-- Nuevo script de traducción para pacientes -->
+  <script src="{% static 'js/translation_paciente.js' %}"></script>
+</body>
+ <footer class="main-footer">
+    <div class="footer-column">
+        <h3>Health<br>Connectors</h3>
+        <p>New Elsiebury</p>
+        <p>634 Halvorson</p>
+        <p>Estates Suite 039</p>
+        <br>
+        <div class="social-button">
+          <a href="https://linktr.ee/Health_Connectors" target="_blank" style="
+  display: inline-block;
+  margin-top: 25px;
+  background-color: #8cb8ff;
+  border: none;
+  border-radius: 12px;
+  color: #000;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 15px 30px;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: 'Poppins', sans-serif;
+">
+  Know more
+</a>
+
+        </div>
+    </div>
+    <div class="footer-column links-column">
+        <h3>Links</h3>
+        <ul class="footer-links">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="#">Pages</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Portfolio</a></li>
+            <li><a href="{% url 'blog_view' %}">Blog</a></li>
+            <li><a href="{% url 'contacto' %}">Contact</a></li>
+        </ul>
+    </div>
+    <div class="footer-column links-column">
+        <br>
+        <ul class="footer-links">
+            <li><a href="{% url 'privacy_policies' %}">Privacy Policies</a></li>
+            <li><a href="{% url 'terms' %}">Term of use</a></li>
+            <li><a href="{% url 'registro' %}">Sign up</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
+            <li><a href="{% url 'difamation' %}">Defamation</a></li>
+        </ul>
+    </div>
+    <div class="footer-column recent-posts-column">
+        <h3>Recent posts</h3>
+        <ul class="recent-posts">
+            <li> <a href="{% url 'journal1' %}">Health Benefits of Sleep</a></li>
+            <li> <a href="{% url 'journal2' %}">Benefits of Excercise</a></li>
+            <li><a href="{% url 'journal3' %}">Stress Management</a></li>
+            <li><a href="{% url 'journal4' %}">The importance of preventive care.</a></li>
+        </ul>
+    </div>
+</footer>
+</html>

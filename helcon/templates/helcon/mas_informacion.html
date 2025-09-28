@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  {% load i18n %}
+  {% load static %}
+  <meta charset="UTF-8" />
+  <title data-text-key="pageTitle">Información del Doctor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ 
+  <link rel="stylesheet" href="{% static 'css/mas_informacion.css' %}" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/a2e0e6ad65.js" crossorigin="anonymous"></script>
+  <!-- Link para Material Symbols (icono de idioma) -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=language" />
+</head>
+<body>
+  <div class="top-section"></div>
+ 
+  <div class="container">
+    <a href="{% url 'dissplay' %}" class="back-link" data-text-key="back_link">
+      <i class="fas fa-arrow-left"></i> Volver
+    </a>
+ 
+    <div class="card">
+      <!-- Botón de Idioma - Posicionado dentro del card como contenedor principal del contenido -->
+      <div class="language-dropdown">
+        <div class="boton-idioma" id="language-button" aria-label="Cambiar idioma">
+          <span class="material-symbols-outlined">language</span>
+        </div>
+        <div class="dropdown-menu" id="language-menu">
+          <a href="#" class="dropdown-item" data-lang="es">
+            <div class="flag-icon flag-es"></div>
+            Español
+          </a>
+          <a href="#" class="dropdown-item" data-lang="en">
+            <div class="flag-icon flag-en"></div>
+            English
+          </a>
+        </div>
+      </div>
+ 
+      <div class="left">
+        {% if doctor.foto_perfil %}
+                <img src="{{ doctor.foto_perfil.url }}" alt="Foto de perfil" style="width:200px; height:200px; border-radius:300%; object-fit:cover;" />
+              {% else %}
+                <img src="{% static 'images/fotoprede.webp' %}" alt="Foto por defecto" style="width:24px; height:24px; border-radius:50%; object-fit:cover;" />
+              {% endif %}
+        <h2 data-text-key="doctor_name_full">{{ doctor.user.first_name }} {{ doctor.user.last_name }}</h2>
+        <p class="specialty" data-text-key="doctor_specialty_value">{% trans doctor.especialidad %}</p>
+      </div>
+ 
+      <div class="right">
+        <p><strong data-text-key="description_label">Descripcion:</strong> <span class="dynamic-value">{{ doctor.descripcion }}</span></p>
+        <p><strong data-text-key="suitability_label">Idoneidad:</strong> <span class="dynamic-value">{{ doctor.idoneidad }}</span></p>
+        <p><strong data-text-key="studies_label">Estudios:</strong> <span class="dynamic-value">{{ doctor.estudios }}</span></p>
+        <p><strong data-text-key="credential_label">Credencial:</strong> <span class="dynamic-value">{{ doctor.credential_number }}</span></p>
+        <p><strong data-text-key="email_label">Correo:</strong> <span class="dynamic-value">{{ doctor.user.email }}</span></p>
+        <p><strong data-text-key="location_label">Ubicación:</strong> <span class="dynamic-value">{{ doctor.ubicacion }}</span></p>
+        <p><strong data-text-key="phone_label">Teléfono:</strong> <span class="dynamic-value">{{ doctor.phone }}</span></p>
+ 
+        <div class="buttons">
+          <button class="btn" onclick="window.location.href='{% url 'agenda' doctor.id %}'" data-text-key="btn_schedule">Agendar cita</button>
+          <a href="{% url 'dissplay' %}" class="btn-outline" data-text-key="btn_search_other">Buscar Otro</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="{% static 'js/mas_informacion.js' %}"></script>
+</body>
+</html>
+ 
+ 

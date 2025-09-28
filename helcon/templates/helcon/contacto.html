@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title data-text-key="pageTitle">Health Connectors - Contacto</title>
+ 
+  <!-- Links a Google Fonts para Poppins y Material Symbols Outlined -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=language,person" />
+ 
+  <style>
+    /* Variables de color globales */
+    :root {
+      --seasalt: #FBFAF8ff;
+      --ruddy-blue: #6CA5FFff;
+      --denim: #245DB5ff;
+      --oxford-blue: #111835ff;
+      --oxford-blue-2: #051024ff;
+      --texto-interno: #C9C9C9;
+      --rubby-blue2: #DAE8FF; /* Azul muy claro */
+    }
+ 
+    /* Reseteo básico y tipografía global */
+    * {
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      overflow-x: hidden;
+      background-color: var(--seasalt); /* Fondo claro general */
+    }
+ 
+    /* Barra de navegación */
+    header {
+      .barra-superior {
+        background-color: var(--oxford-blue-2);
+        display: flex;
+        align-items: center;
+        justify-content: space-between; /* Alinea Home a la izquierda, botones a la derecha */
+        padding: 15px 20px;
+        position: relative;
+        z-index: 1001;
+      }
+      .barra-superior .header-back-button { /* Estilo del botón "Volver" */
+        background-color: var(--oxford-blue);
+        color: white;
+        padding: 10px 20px;
+        font-family: 'Poppins', sans-serif;
+        font-size: 1rem;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        margin-right: 20px; /* Espacio a la derecha */
+        transition: background-color 0.3s ease;
+      }
+      .barra-superior .header-back-button:hover {
+        background-color: var(--oxford-blue-light); /* Usar variable si está definida, sino color fijo */
+      }
+ 
+ 
+      .botones {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .botones .boton-login, .botones .boton-registro {
+        background-color: var(--ruddy-blue);
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 25px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+      }
+      .botones .boton-login {
+        background:var(--oxford-blue);
+        color: var(--ruddy-blue);
+        border: 2px solid var(--ruddy-blue);
+      }
+      .botones .boton-login:hover {
+        background-color: lighten(var(--oxford-blue), 5%);
+        border-color: lighten(var(--ruddy-blue), 5%);
+      }
+ 
+      /* Estilos para el menú de cuenta */
+      .account-menu .dropdown {
+        position: relative;
+        cursor: pointer;
+      }
+      .account-menu .dropdown .material-symbols-outlined,
+      .account-menu .dropdown img {
+        font-size: 32px;
+        color: white; /* Color BLANCO para los iconos en la barra superior */
+        transition: color 0.3s ease;
+        width: 32px; /* Asegura el tamaño de la imagen de perfil */
+        height: 32px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+      .account-menu .dropdown:hover .material-symbols-outlined {
+        color: var(--ruddy-blue);
+      }
+      .account-menu .dropdown-content {
+        display: none;
+        position: absolute;
+        right: 0;
+        background-color: white;
+        min-width: 140px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        border-radius: 6px;
+        z-index: 1000;
+        padding: 8px 0;
+      }
+      .account-menu .dropdown:hover .dropdown-content {
+        display: block;
+      }
+      .account-menu .dropdown-content a {
+        display: block;
+        padding: 10px 20px;
+        color: #333;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+      }
+      .account-menu .dropdown-content a:hover {
+        background-color: var(--ruddy-blue);
+        color: white;
+      }
+ 
+      /* Estilos para el botón de idioma (Material Symbols) */
+      .language-dropdown {
+        position: relative;
+        display: inline-block;
+        vertical-align: middle;
+      }
+      .language-dropdown .boton-idioma {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px; /* Tamaño del área del icono para clic */
+        height: 32px;
+        /* Quitamos fondo circular si queremos solo el icono */
+      }
+      .language-dropdown .boton-idioma .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 32;
+        color: white; /* Color blanco para el icono de idioma */
+        font-size: 32px;
+        transition: color 0.3s ease;
+      }
+      .language-dropdown .boton-idioma:hover .material-symbols-outlined {
+        color: var(--ruddy-blue);
+      }
+      .language-dropdown .dropdown-menu {
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        position: absolute;
+        background-color: #ffffff;
+        min-width: 180px;
+        box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+        border-radius: 8px;
+        z-index: 1003; /* Mayor z-index para el menú */
+        top: 100%;
+        right: 0;
+      }
+      .language-dropdown .dropdown-menu.show {
+        visibility: visible;
+        opacity: 1;
+      }
+      .language-dropdown .dropdown-item {
+        display: flex;
+        align-items: center;
+        padding: 12px 16px;
+        color: #333;
+        text-decoration: none;
+        transition: background-color 0.2s ease;
+        font-family: 'Poppins', sans-serif;
+        font-size: 14px;
+      }
+      .language-dropdown .dropdown-item:hover {
+        background-color: #f5f5f5;
+      }
+      .language-dropdown .dropdown-item .flag-icon {
+        width: 20px;
+        height: 15px;
+        margin-right: 10px;
+        border-radius: 2px;
+        background-size: cover;
+        background-position: center;
+      }
+      .language-dropdown .dropdown-item .flag-es {
+        background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzUwIiBoZWlnaHQ9IjUwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9Ijc1MCIgaGVpZ2h0PSI1MDAiIGZpbGw9IiNBQTAwMDAiLz4KPHJlY3QyeT0iMTI1IiB3aWR0aD0iNzUwIiBoZWlnaHQ9IjI1MCIgZmlsbD0iI0ZGRkYwMCIvPgo8L3N2Zz4=');
+      }
+      .language-dropdown .dropdown-item .flag-en {
+        background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI2MDAiIHZpZXdCb3g9IjAgMCAxMjAwIDYwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjEyMDAiIGhlaWdodD0iNjAwIiBmaWxsPSIjMDA5NkZGIi8+CjxwYXRoIGQ9Im0wLDAgaDEyMDBMIDAsNjAwIE0wLDYwMCBoMTIwMEwgMCwwIiBzdHJva2U9IiNGRkZGRkYiIHN0cm9rZS13aWR0aD0iMTIwIi8+CjxwYXRoIGQ9Im0wLDAgaDEyMDBMIDAsNjAwIE0wLDYwMCBoMTIwMEwgMCwwIiBzdHJva2U9IiNGRjAwMDAiIHN0cm9rZS13aWR0aD0iODAiLz4KPHBhdGggZD0iTTYwMCwwdjYwMCBNMCwzMDBoMTIwMCIgc3Ryb2tlPSIjRkZGRkZGIiBzdHJva2Utd2lkdGg9IjIwMCIvPgo8cGF0aCBkPSJNNjAwLDB2NjAwIE0wLDMwMGgxMjAwIiBzdHJva2U9IiNGRjAwMDAiIHN0cm9rZS13aWR0aD0iMTIwIi8+Cjwvc3ZnPg==');
+      }
+ 
+      .barra-navegacion {
+        background-color: var(--oxford-blue);
+        padding: 20px 20px; /* Reducido un poco para que no sea tan alto como en welcome.css */
+        z-index: 1000;
+      }  
+      .barra-navegacion ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        gap: 40px; /* Ajustado el gap */
+        justify-content: flex-end;
+      }
+      .barra-navegacion a {
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s ease;
+      }
+      .barra-navegacion a:hover {
+        text-decoration: none;
+        color: var(--ruddy-blue);
+        font-weight: 800;
+      }
+    }
+ 
+    /* Contact form styles (from welcome.css) */
+    .contact-container {
+      min-height: 100vh; /* Usa min-height para que crezca si el contenido lo requiere */
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      background-color: white;
+      padding: 50px 20px; /* Añadir padding vertical y horizontal para móviles */
+      flex-wrap: wrap; /* Permitir que los paneles se envuelvan */
+    }
+    .container-left {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+      flex: 1; /* Permite que ocupe espacio disponible */
+      min-width: 300px; /* Ancho mínimo para el formulario */
+      max-width: 500px; /* Ancho máximo para el formulario */
+      margin: 20px; /* Margen para centrar en móviles */
+    }
+    .container-left-little h2 {
+      font-weight: 700;
+      font-size: 75px;
+      margin-bottom: 5px;
+      line-height: 1.1; /* Ajustar line-height */
+    }
+    .get-touch {
+      color: var(--ruddy-blue);
+    }
+    #color-container {
+      color: var(--oxford-blue);
+    }
+    .inputs-class {
+      width: 100%; /* Ocupa el 100% del contenedor */
+      height: 50px;
+      border: none;
+      outline: none;
+      padding-left: 25px;
+      font-weight: 500;
+      color: var(--ruddy-blue);
+      border-radius: 50px;
+      background: var(--rubby-blue2);
+      transition: all 0.3s ease; /* Transición para focus */
+    }
+    .container-left textarea {
+      height: 170px;
+      padding-top: 15px;
+      border-radius: 20px;
+    }
+    .inputs-class:focus {
+      border: 2px solid var(--oxford-blue);
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      transform: scale(1.01);
+    }
+    .container-left button {
+      display: flex;
+      align-items: center;
+      font-weight: 650;
+      padding: 15px 35px;
+      font-size: 20px;
+      color: var(--ruddy-blue);
+      gap: 10px;
+      border: none;
+      border-radius: 50px;
+      background: var(--oxford-blue);
+      transition: transform 0.3s ease, background-color 0.3s ease;
+      cursor: pointer;
+    }
+    .container-left button:hover {
+      transform: scale(1.05);
+    }
+    .container-right {
+      flex: 1; /* Permite que la imagen ocupe espacio disponible */
+      min-width: 300px; /* Ancho mínimo para la imagen */
+      max-width: 500px; /* Ancho máximo para la imagen */
+      margin: 20px;
+      display: flex; /* Para centrar la imagen si es más pequeña */
+      justify-content: center;
+      align-items: center;
+    }
+    .imagen_contacto {
+      width: 100%; /* La imagen ocupa el 100% de su contenedor */
+      height: auto;
+      display: block; /* Elimina espacio extra debajo de la imagen */
+    }
+ 
+    /* Media queries para responsividad */
+    @media (max-width: 992px) {
+      .barra-superior {
+        flex-direction: column;
+        align-items: flex-start; /* Alinea los elementos a la izquierda */
+      }
+      .barra-superior .header-back-button {
+        margin-right: 0;
+        margin-bottom: 10px;
+      }
+      .barra-navegacion ul {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 15px;
+      }
+      .contact-container {
+        flex-direction: column; /* Apila el formulario y la imagen */
+        align-items: center;
+        padding: 30px 15px;
+      }
+      .container-left, .container-right {
+        max-width: 90%; /* Más ancho en tablets */
+      }
+      .container-left-little h2 {
+        font-size: 55px;
+      }
+      .inputs-class {
+        width: 100%;
+      }
+      .container-left button {
+        width: 100%; /* Botón ocupa todo el ancho */
+      }
+    }
+ 
+    @media (max-width: 576px) {
+      .barra-superior {
+        padding: 10px 15px;
+      }
+      .barra-navegacion ul {
+        padding: 15px 10px;
+        gap: 10px;
+        font-size: 0.9em;
+      }
+      .container-left-little h2 {
+        font-size: 40px;
+      }
+      .inputs-class, .container-left button {
+        padding: 12px 15px;
+        font-size: 16px;
+      }
+      .container-left textarea {
+        height: 120px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="barra-superior">
+      <!-- Botón de "Volver" -->
+      <button onclick="window.history.back()" class="header-back-button" data-text-key="backButton">← Volver</button>
+     
+      <div class="botones">
+        <!-- Menú de cuenta -->
+        <div class="account-menu">
+          {% if user.is_authenticated %}
+            {% if paciente %}
+              <div class="dropdown">
+                <span class="material-symbols-outlined">person</span>
+                <div class="dropdown-content">
+                  <a href="{% url 'perfil_paciente' %}" data-text-key="profileLink">Perfil</a>
+                  <a href="{% url 'logout' %}" data-text-key="logoutLink">Cerrar sesión</a>
+                </div>
+              </div>
+            {% elif doctor %}
+              <div class="dropdown">
+                {% if doctor.foto_perfil %}
+                  <img src="{{ doctor.foto_perfil.url }}" alt="Foto de perfil" />
+                {% else %}
+                  <img src="{% static 'images/fotoprede.webp' %}" alt="Foto por defecto" />
+                {% endif %}
+                <div class="dropdown-content">
+                  <a href="{% url 'perfil_doctor' %}" data-text-key="profileLink">Perfil</a>
+                  <a href="{% url 'logout' %}" data-text-key="logoutLink">Cerrar sesión</a>
+                </div>
+              </div>
+            {% endif %}
+          {% else %}
+            <a href="{% url 'login' %}"><button class="boton-login" data-text-key="loginButton">Login</button></a>
+            <a href="{% url 'registro' %}" style="margin-left: 15px;"><button class="boton-registro" data-text-key="signupButton">Sign up</button></a>
+          {% endif %}
+        </div>
+ 
+        <!-- Menú de idioma -->
+        <div class="language-dropdown">
+          <div class="boton-idioma" id="language-button" aria-label="Cambiar idioma">
+            <span class="material-symbols-outlined">language</span>
+          </div>
+          <div class="dropdown-menu" id="language-menu">
+            <a href="#" class="dropdown-item" data-lang="es">
+              <div class="flag-icon flag-es"></div>
+              Español
+            </a>
+            <a href="#" class="dropdown-item" data-lang="en">
+              <div class="flag-icon flag-en"></div>
+              English
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+    <nav class="barra-navegacion">
+      <ul>
+        <li><a href="{% url 'home' %}" data-nav-key="homeNav">Inicio</a></li>
+        <li><a href="{% url 'segpag' %}" data-nav-key="featuresNav">Funcionalidades y Beneficios</a></li>
+        <li><a href="{% url 'tercerapag' %}" data-nav-key="aboutNav">Acerca de Nosotros</a></li>
+        <li><a href="{% url 'blog_view' %}" data-nav-key="blogNav">Blog</a></li>
+      </ul>
+    </nav>
+  </header>
+ 
+  <main>
+    <!-- Contenido de la sección de contacto extraído de welcome.html -->
+    <div class="contact-container" id="contact-container">
+      <form action="https://api.web3forms.com/submit" method="POST">
+        <div class="container-left">
+          <div class="container-left-little">
+            <h2 data-text-key="contact_h2"><span id="color-container" data-text-key="contact_span1"> Get in</span> <span class="get-touch" data-text-key="contact_span2"> touch</span></h2>
+          </div>
+          <input type="hidden" name="access_key" value="ac296c37-4f57-4b23-aff9-fdd2de57012e" />
+          <input type="text" name="name" placeholder="Your name" class="inputs-class" required data-text-key="contact_name_placeholder"/>
+          <input type="email" name="email" placeholder="Your email" class="inputs-class" required data-text-key="contact_email_placeholder"/>
+          <textarea name="message" placeholder="Your message" class="inputs-class" required data-text-key="contact_message_placeholder"></textarea>
+          <button type="submit" data-text-key="contact_submit_button">Submit</button>
+        </div>
+      </form>
+      <div class="container-right">
+        <img src="{% static 'images/tipo-get-in-touch.webp' %}" alt="Contacto imagen" class="imagen_contacto" data-image-key="contact_image"/>
+      </div>
+    </div>
+  </main>
+ 
+  <script>
+    // --- Lógica de Animación para la Sección de Contacto (adaptada de welcome.js) ---
+    class ContactAnimation {
+        constructor() {
+            this.init();
+        }
+ 
+        init() {
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', () => this.setup());
+            } else {
+                this.setup();
+            }
+        }
+ 
+        setup() {
+            this.initContactSection();
+        }
+ 
+        initContactSection() {
+            const contactContainer = document.querySelector('.contact-container');
+            if (!contactContainer) return;
+ 
+            // Hide elements initially
+            const formElements = contactContainer.querySelectorAll('.container-left > *, .inputs-class, button[type="submit"]');
+            const contactImage = contactContainer.querySelector('.container-right img');
+ 
+            formElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateX(-30px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            });
+ 
+            if (contactImage) {
+                contactImage.style.opacity = '0';
+                contactImage.style.transform = 'translateX(30px)';
+                contactImage.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            }
+ 
+            // Set up the intersection observer
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Animate form elements in sequence
+                        formElements.forEach((el, index) => {
+                            setTimeout(() => {
+                                el.style.opacity = '1';
+                                el.style.transform = 'translateX(0)';
+                            }, index * 150);
+                        });
+ 
+                        // Animate image
+                        if (contactImage) {
+                            setTimeout(() => {
+                                contactImage.style.opacity = '1';
+                                contactImage.style.transform = 'translateX(0)';
+                            }, formElements.length * 150); // Start image animation after form elements
+                        }
+                        observer.unobserve(contactContainer); // Stop observing once animated
+                    }
+                });
+            }, { threshold: 0.2 });
+ 
+            observer.observe(contactContainer);
+ 
+            // Hover effects for inputs
+            const inputs = contactContainer.querySelectorAll('.inputs-class');
+            inputs.forEach(input => {
+                input.addEventListener('focus', () => {
+                    input.style.transform = 'scale(1.02)';
+                    input.style.boxShadow = '0 0 10px rgba(0,0,0,0.1)';
+                });
+ 
+                input.addEventListener('blur', () => {
+                    input.style.transform = 'scale(1)';
+                    input.style.boxShadow = 'none';
+                });
+            });
+ 
+            // Effects for the button (already defined in CSS, but reinforcing here)
+            const submitBtn = contactContainer.querySelector('button[type="submit"]');
+            if (submitBtn) {
+                submitBtn.addEventListener('mouseenter', () => {
+                    submitBtn.style.transform = 'translateY(-3px)';
+                    submitBtn.style.boxShadow = '0 5px 15px rgba(0,0,0,0.2)';
+                });
+ 
+                submitBtn.addEventListener('mouseleave', () => {
+                    submitBtn.style.transform = 'translateY(0)';
+                    submitBtn.style.boxShadow = 'none';
+                });
+            }
+        }
+    }
+    const contactAnimation = new ContactAnimation();
+ 
+ 
+    // --- Lógica de Traducción y Menú de Idiomas (adaptada de welcome.js/defamation_policy.js) ---
+    document.addEventListener('DOMContentLoaded', function() {
+        setupLanguageDropdown();
+       
+        function setupLanguageDropdown() {
+            const languageButton = document.getElementById('language-button');
+            const languageMenu = document.getElementById('language-menu');
+            const dropdownItems = document.querySelectorAll('.language-dropdown .dropdown-item');
+ 
+            if (languageButton && languageMenu && dropdownItems.length > 0) {
+                languageButton.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    languageMenu.classList.toggle('show');
+                });
+               
+                document.addEventListener('click', function(e) {
+                    if (!languageButton.contains(e.target) && !languageMenu.contains(e.target)) {
+                        languageMenu.classList.remove('show');
+                    }
+                });
+               
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape') {
+                        languageMenu.classList.remove('show');
+                    }
+                });
+               
+                dropdownItems.forEach(item => {
+                    item.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const selectedLang = this.getAttribute('data-lang');
+                        localStorage.setItem('selectedLanguage', selectedLang);
+                        changeLanguage(selectedLang);
+                        languageMenu.classList.remove('show');
+                    });
+                });
+            } else {
+                console.warn("Language dropdown elements not found in contact_page.html.");
+            }
+        }
+ 
+        function changeLanguage(lang) {
+            const translations = {
+                es: {
+                    pageTitle: 'Health Connectors - Contacto',
+                    backButton: '← Volver',
+                    profileLink: 'Perfil',
+                    logoutLink: 'Cerrar sesión',
+                    loginButton: 'Iniciar Sesión',
+                    signupButton: 'Registrarse',
+                    homeNav: 'Inicio',
+                    featuresNav: 'Funcionalidades y Beneficios',
+                    aboutNav: 'Acerca de Nosotros',
+                    blogNav: 'Blog',
+                    contact_h2: '<span id="color-container" data-text-key="contact_span1"> Ponte en</span> <span class="get-touch" data-text-key="contact_span2"> contacto</span>',
+                    contact_span1: 'Ponte en',
+                    contact_span2: 'contacto',
+                    contact_name_placeholder: 'Tu nombre',
+                    contact_email_placeholder: 'Tu correo electrónico',
+                    contact_message_placeholder: 'Tu mensaje',
+                    contact_submit_button: 'Enviar',
+                },
+                en: {
+                    pageTitle: 'Health Connectors - Contact',
+                    backButton: '← Back',
+                    profileLink: 'Profile',
+                    logoutLink: 'Logout',
+                    loginButton: 'Login',
+                    signupButton: 'Sign up',
+                    homeNav: 'Home',
+                    featuresNav: 'Features and Benefits',
+                    aboutNav: 'About Us',
+                    blogNav: 'Blog',
+                    contact_h2: '<span id="color-container" data-text-key="contact_span1"> Get in</span> <span class="get-touch" data-text-key="contact_span2"> touch</span>',
+                    contact_span1: 'Get in',
+                    contact_span2: 'touch',
+                    contact_name_placeholder: 'Your name',
+                    contact_email_placeholder: 'Your email',
+                    contact_message_placeholder: 'Your message',
+                    contact_submit_button: 'Submit',
+                }
+            };
+           
+            const texts = translations[lang];
+           
+            if (texts) {
+                // Translate page title
+                const pageTitleElement = document.querySelector('title[data-text-key="pageTitle"]');
+                if (pageTitleElement) pageTitleElement.textContent = texts.pageTitle;
+ 
+                // Header elements
+                const backButton = document.querySelector('[data-text-key="backButton"]');
+                if (backButton) backButton.textContent = texts.backButton;
+ 
+                const profileLink = document.querySelector('[data-text-key="profileLink"]');
+                if (profileLink) profileLink.textContent = texts.profileLink;
+                const logoutLink = document.querySelector('[data-text-key="logoutLink"]');
+                if (logoutLink) logoutLink.textContent = texts.logoutLink;
+                const loginButton = document.querySelector('[data-text-key="loginButton"]');
+                if (loginButton) loginButton.textContent = texts.loginButton;
+                const signupButton = document.querySelector('[data-text-key="signupButton"]');
+                if (signupButton) signupButton.textContent = texts.signupButton;
+ 
+                // Navigation links
+                document.querySelectorAll('nav ul li a[data-nav-key]').forEach(link => {
+                    const key = link.getAttribute('data-nav-key');
+                    if (key && texts[key]) link.textContent = texts[key];
+                });
+ 
+                // Contact section elements
+                const contactH2 = document.querySelector('h2[data-text-key="contact_h2"]');
+                if (contactH2) {
+                    contactH2.innerHTML = `<span id="color-container" data-text-key="contact_span1">${texts.contact_span1}</span> <span class="get-touch" data-text-key="contact_span2">${texts.contact_span2}</span>`;
+                }
+                const contactNamePlaceholder = document.querySelector('input[data-text-key="contact_name_placeholder"]');
+                if (contactNamePlaceholder) contactNamePlaceholder.placeholder = texts.contact_name_placeholder;
+                const contactEmailPlaceholder = document.querySelector('input[data-text-key="contact_email_placeholder"]');
+                if (contactEmailPlaceholder) contactEmailPlaceholder.placeholder = texts.contact_email_placeholder;
+                const contactMessagePlaceholder = document.querySelector('textarea[data-text-key="contact_message_placeholder"]');
+                if (contactMessagePlaceholder) contactMessagePlaceholder.placeholder = texts.contact_message_placeholder;
+                const contactSubmitButton = document.querySelector('button[data-text-key="contact_submit_button"]');
+                if (contactSubmitButton) contactSubmitButton.textContent = texts.contact_submit_button;
+ 
+                document.documentElement.lang = lang;
+            }
+        }
+ 
+        // Initial language load
+        const savedLanguage = localStorage.getItem('selectedLanguage');
+        if (savedLanguage) {
+            changeLanguage(savedLanguage);
+        } else {
+            const browserLang = navigator.language || navigator.userLanguage;
+            const detectedLang = browserLang.startsWith('es') ? 'es' : 'en';
+            changeLanguage(detectedLang);
+        }
+    });
+  </script>
+</body>
+</html>
+ 

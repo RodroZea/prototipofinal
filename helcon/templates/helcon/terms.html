@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+  <meta charset="UTF-8">
+  <title data-text-key="pageTitle">Terms and Conditions of Use</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="{% static 'css/defamation_policy.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" xintegrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+ 
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+ 
+  <!--Link para fuente-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=language" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  
+</head>
+<body>
+  <!--Barra de navegacion-->
+  <header>
+  
+    <div class="barra-superior">
+    <body>
+  <button onclick="window.history.back()" style="
+  background-color: #111835;
+  color: white;
+  padding: 10px 20px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 20px;
+  transition: background-color 0.3s ease;
+"
+onmouseover="this.style.backgroundColor='#2c3e7e'"
+onmouseout="this.style.backgroundColor='#111835'"
+>
+  ← Volver
+</button>  
+      
+      
+      <div class="botones">
+          <div class="botones">
+  <div class="account-menu">
+    {% if user.is_authenticated %}
+      
+      {% if paciente %}
+        <!-- Paciente logueado -->
+        <div class="dropdown">
+          <span class="material-symbols-outlined">person</span>
+          <div class="dropdown-content">
+            <a href="{% url 'perfil_paciente' %}">Perfil</a>
+            <a href="{% url 'logout' %}">Cerrar sesión</a>
+          </div>
+        </div>
+
+      {% elif doctor %}
+        <!-- Doctor logueado -->
+        <div class="dropdown">
+          {% if doctor.foto_perfil %}
+            <img src="{{ doctor.foto_perfil.url }}" alt="Foto de perfil" style="width:50px; height:50px; border-radius:50%; object-fit:cover;" />
+          {% else %}
+            <img src="{% static 'images/fotoprede.webp' %}" alt="Foto por defecto" style="width:50px; height:50px; border-radius:50%; object-fit:cover;" />
+          {% endif %}
+          <div class="dropdown-content">
+            <a href="{% url 'perfil_doctor' %}">Perfil</a>
+            <a href="{% url 'logout' %}">Cerrar sesión</a>
+          </div>
+        </div>
+      {% endif %}
+
+    {% else %}
+      <!-- No autenticado -->
+      <a href="{% url 'login' %}"><button class="boton-login">Login</button></a>
+      <a href="{% url 'registro' %}" style="margin-left: 15px;"><button class="boton-registro">Sign up</button></a>
+    {% endif %}
+  </div>
+</div>
+
+          <div class="language-dropdown">
+            <div class="boton-idioma" id="language-button" aria-label="Cambiar idioma">
+              <span class="material-symbols-outlined">
+                language
+              </span>
+            </div>
+            <div class="dropdown-menu" id="language-menu">
+              <a href="#" class="dropdown-item" data-lang="es">
+                <div class="flag-icon flag-es"></div>
+                Español
+              </a>
+              <a href="#" class="dropdown-item" data-lang="en">
+                <div class="flag-icon flag-en"></div>
+                English
+              </a>
+            </div>
+          </div>
+      </div>
+    </div>
+
+    <nav class="barra-navegacion">
+    <ul>
+        <li><a href="{% url 'home' %}" data-nav-key="homeNav">Inicio</a></li>
+        <li><a href="{% url 'segpag' %}" data-nav-key="featuresNav">Funcionalidades y Beneficios</a></li>
+        <li><a href="{% url 'blog_view' %}" data-nav-key="aboutNav">Acerca de Nosotros</a></li>
+        <li><a href="{% url 'blog_view' %}" data-nav-key="blogNav">Blog</a></li>
+    </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="terms-section">
+      <h1 data-text-key="terms_h1">Terms and Conditions of Use</h1>
+      <p data-text-key="terms_p1">Welcome to Health Connectors. These Terms and Conditions explain how our service works and what we expect from you as a user. By accessing or using our platform, you agree to these terms. If you don’t agree, please do not use our services.</p>
+      
+      <h2 data-text-key="intro_h2">1. Introduction</h2>
+      <p data-text-key="intro_p1">Health Connectors is a digital platform that connects users with healthcare providers, helping to simplify access to medical services, track personal health data, and offer personalized wellness recommendations. Our goal is to make healthcare more accessible, safe, and supportive.</p>
+      
+      <h2 data-text-key="eligibility_h2">2. Eligibility</h2>
+      <p data-text-key="eligibility_p1">To use Health Connectors, you must be at least 18 years old or have permission from a parent or legal guardian if you are a minor. By creating an account or using our services, you confirm that the information you provide is true and accurate.</p>
+      
+      <h2 data-text-key="services_h2">3. Our Services</h2>
+      <p data-text-key="services_p1">Through Health Connectors, you can:</p>
+      <ul>
+        <li data-text-key="services_li1">Create and manage a personal health profile.</li>
+        <li data-text-key="services_li2">Book and manage appointments with healthcare providers.</li>
+        <li data-text-key="services_li3">Receive general health information and reminders.</li>
+        <li data-text-key="services_li4">Access suggestions and resources based on your preferences and habits.</li>
+      </ul>
+      <p data-text-key="services_p2">Please remember that Health Connectors is not a substitute for medical advice, diagnosis, or treatment. We encourage all users to consult licensed professionals for any serious medical concerns.</p>
+      
+      <h2 data-text-key="responsibilities_h2">4. Your Responsibilities</h2>
+      <p data-text-key="responsibilities_p1">As a user, you agree to:</p>
+      <ul>
+        <li data-text-key="responsibilities_li1">Use the platform respectfully and legally.</li>
+        <li data-text-key="responsibilities_li2">Provide honest and updated information.</li>
+        <li data-text-key="responsibilities_li3">Not share your account with others.</li>
+        <li data-text-key="responsibilities_li4">Not use the service to harm, harass, or mislead others.</li>
+      </ul>
+      <p data-text-key="responsibilities_p2">We want the platform to remain safe and welcoming for all users.</p>
+      
+      <h2 data-text-key="data_h2">5. Your Data</h2>
+      <p data-text-key="data_p1">When you use Health Connectors, you may share personal and health-related data. We handle all your data responsibly and according to our Privacy Policy. Your information helps us improve your experience and offer personalized content.</p>
+      <p data-text-key="data_p2">We will never sell your personal data or share it without your clear permission, unless required by law or to protect your safety.</p>
+      
+      <h2 data-text-key="security_h2">6. Account Security</h2>
+      <p data-text-key="security_p1">You are responsible for keeping your account credentials safe. Please do not share your password. If you notice anything unusual or think your account was accessed without permission, let us know immediately so we can help protect your information.</p>
+      
+      <h2 data-text-key="content_use_h2">7. Content and Use</h2>
+      <p data-text-key="content_use_p1">Everything you see on the platform—texts, graphics, layout, and features—is part of our service. You can use it for personal, non-commercial purposes only. Please do not copy, modify, or misuse the content, and always respect the work of our team and partners.</p>
+      
+      <h2 data-text-key="updates_h2">8. Platform Updates</h2>
+      <p data-text-key="updates_p1">We may improve or update our platform regularly. Sometimes, features might change or be removed to improve user experience. We will do our best to keep you informed when major updates happen, and we appreciate your feedback as we grow.</p>
+      
+      <h2 data-text-key="privacy_section_h2">9. Privacy</h2>
+      <p data-text-key="privacy_section_p1">We care deeply about your privacy. Our platform follows strict standards to ensure your information stays protected. We collect only the data we need to make your experience better, and we use encryption and security tools to keep it safe.</p>
+      <p data-text-key="privacy_section_p2">For more details on how we handle your personal and health information, please read our full Privacy Policy.</p>
+    </section>
+  </main>
+
+</body>
+ <footer class="main-footer">
+    <div class="footer-column">
+        <h3>Health<br>Connectors</h3>
+        <p>New Elsiebury</p>
+        <p>634 Halvorson</p>
+        <p>Estates Suite 039</p>
+        <br>
+        <div class="social-button">
+          <a href="https://linktr.ee/Health_Connectors" target="_blank" style="
+  display: inline-block;
+  margin-top: 25px;
+  background-color: #8cb8ff;
+  border: none;
+  border-radius: 12px;
+  color: #000;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 15px 30px;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: 'Poppins', sans-serif;
+">
+  Know more
+</a>
+
+        </div>
+    </div>
+    <div class="footer-column links-column">
+        <h3>Links</h3>
+        <ul class="footer-links">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="#">Pages</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Portfolio</a></li>
+            <li><a href="{% url 'blog_view' %}">Blog</a></li>
+            <li><a href="{% url 'contacto' %}">Contact</a></li>
+        </ul>
+    </div>
+    <div class="footer-column links-column">
+        <br>
+        <ul class="footer-links">
+            <li><a href="{% url 'privacy_policies' %}">Privacy Policies</a></li>
+            <li><a href="{% url 'terms' %}">Term of use</a></li>
+            <li><a href="{% url 'registro' %}">Sign up</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
+            <li><a href="{% url 'difamation' %}">Defamation</a></li>
+        </ul>
+    </div>
+    <div class="footer-column recent-posts-column">
+        <h3>Recent posts</h3>
+        <ul class="recent-posts">
+            <li> <a href="{% url 'journal1' %}">Health Benefits of Sleep</a></li>
+            <li> <a href="{% url 'journal2' %}">Benefits of Excercise</a></li>
+            <li><a href="{% url 'journal3' %}">Stress Management</a></li>
+            <li><a href="{% url 'journal4' %}">The importance of preventive care.</a></li>
+        </ul>
+    </div>
+</footer>
+
+<script src="{% static 'js/terms.js' %}"></script>

@@ -1,0 +1,186 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title data-text-key="pageTitle">Perfil Doctor</title>
+  <link rel="stylesheet" href="{% static 'css/perfil_doctor.css' %}" />
+  <!-- Link para Material Symbols (icono de idioma) -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=language" />
+  <!-- Link para fuente Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <!-- Font Awesome para iconos si es necesario -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" xintegrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+  <div class="profile-container">
+    <!-- Botón de Idioma -->
+    <div class="language-dropdown">
+        <div class="boton-idioma" id="language-button" aria-label="Cambiar idioma">
+            <span class="material-symbols-outlined">
+                language
+            </span>
+        </div>
+        <div class="dropdown-menu" id="language-menu">
+            <a href="#" class="dropdown-item" data-lang="es">
+                <div class="flag-icon flag-es"></div>
+                Español
+            </a>
+            <a href="#" class="dropdown-item" data-lang="en">
+                <div class="flag-icon flag-en"></div>
+                English
+            </a>
+        </div>
+    </div>
+ 
+    <!-- Formulario oculto para subir foto -->
+    <form id="fotoForm" method="post" enctype="multipart/form-data" style="display:none;" action="{% url 'perfil_doctor' %}">
+      {% csrf_token %}
+      <input type="file" id="foto_perfil" name="foto_perfil" accept="image/*" />
+    </form>
+ 
+    <!-- Foto con overlay para cambiar foto -->
+    <div class="foto-wrapper" title="Haz clic para cambiar foto" data-text-key="change_photo_title" style="cursor:pointer;">
+      {% if doctor.foto_perfil %}
+        <img src="{{ doctor.foto_perfil.url }}" alt="Foto de perfil" class="foto-perfil" />
+      {% else %}
+        <img src="{% static 'images/default_profile.png' %}" alt="Sin foto" class="foto-perfil" />
+      {% endif %}
+      <div class="foto-overlay" data-text-key="change_photo_overlay">Cambiar foto</div>
+    </div>
+    <div>
+ <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+ 
+    <!-- Campo oculto para enviar 'desactivado' si el checkbox no está marcado -->
+    <input type="hidden" name="estado_switch" value="No acepta nuevos pacientes" />
+ 
+    <label class="switch">
+      <input type="checkbox" name="estado_switch" value="Aceptando nuevos pacientes"
+             {% if doctor.estado_switch == 'Aceptando nuevos pacientes' %}checked{% endif %}>
+      <span class="slider"></span>
+    </label>
+ 
+    <button type="submit" class="btn-guardar" data-text-key="save">Guardar</button>
+  </form>
+ 
+  <p>Estado actual: <strong>{{ doctor.estado_switch }}</strong></p>
+  </label>
+ 
+</form>
+<div>
+    <div class="profile-data">
+      <p><strong data-text-key="name_label">Nombre:</strong> <span class="dynamic-value">{{ doctor.user.first_name }} {{ doctor.user.last_name }}</span></p>
+      <p><strong data-text-key="specialty_label">Especialidad:</strong> <span class="dynamic-value">{{ doctor.especialidad }}</span></p>
+      <p><strong data-text-key="suitability_label">Idoneidad:</strong> <span class="dynamic-value">{{ doctor.idoneidad }}</span></p>
+      <p><strong data-text-key="studies_label">Estudios:</strong> <span class="dynamic-value">{{ doctor.estudios }}</span></p>
+      <p><strong data-text-key="description_label">Descripción:</strong> <span class="dynamic-value">{{ doctor.descripcion }}</span></p>
+      <p><strong data-text-key="phone_label">Teléfono:</strong> <span class="dynamic-value">{{ doctor.phone }}</span></p>
+      <p><strong data-text-key="location_label">Ubicación:</strong> <span class="dynamic-value">{{ doctor.ubicacion }}</span></p>
+      <p><strong data-text-key="location_label">PrecioBase:</strong> <span class="dynamic-value">{{ doctor.preciobase }}</span></p>
+
+    </div>
+ 
+    <div class="buttons-container">
+      <a href="{% url 'home' %}" class="btn-regresar" data-text-key="return_home_button">Regresar al Home</a>
+      <button id="btnEditar" class="edit-btn" type="button" data-text-key="edit_profile_button">Editar Perfil</button>
+    </div>
+  </div>
+ 
+  <!-- Modal para editar perfil -->
+  <div id="modal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="modalTitle" aria-modal="true" style="display:none;">
+    <div class="modal-content">
+      <h2 id="modalTitle" data-text-key="edit_profile_modal_title">Editar Perfil</h2>
+      <form method="post" action="{% url 'perfil_doctor' %}">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="especialidad" data-text-key="modal_specialty_label">Especialidad</label>
+          <select id="especialidad" name="especialidad" required>
+            <option value="" disabled>Seleccione especialidad</option>
+            <option value="Cardiología" {% if doctor.especialidad == "Cardiología" %}selected{% endif %}>Cardiología</option>
+            <option value="Pediatría" {% if doctor.especialidad == "Pediatría" %}selected{% endif %}>Pediatría</option>
+            <option value="Dermatología" {% if doctor.especialidad == "Dermatología" %}selected{% endif %}>Dermatología</option>
+            <option value="Alergología" {% if doctor.especialidad == "Alergología" %}selected{% endif %}>Alergología</option>
+<option value="Anestesiología" {% if doctor.especialidad == "Anestesiología" %}selected{% endif %}>Anestesiología</option>
+
+<option value="Cirugía General" {% if doctor.especialidad == "Cirugía General" %}selected{% endif %}>Cirugía General</option>
+<option value="Dermatología" {% if doctor.especialidad == "Dermatología" %}selected{% endif %}>Dermatología</option>
+<option value="Endocrinología" {% if doctor.especialidad == "Endocrinología" %}selected{% endif %}>Endocrinología</option>
+<option value="Gastroenterología" {% if doctor.especialidad == "Gastroenterología" %}selected{% endif %}>Gastroenterología</option>
+<option value="Geriatría" {% if doctor.especialidad == "Geriatría" %}selected{% endif %}>Geriatría</option>
+<option value="Ginecología" {% if doctor.especialidad == "Ginecología" %}selected{% endif %}>Ginecología</option>
+<option value="Hematología" {% if doctor.especialidad == "Hematología" %}selected{% endif %}>Hematología</option>
+<option value="Infectología" {% if doctor.especialidad == "Infectología" %}selected{% endif %}>Infectología</option>
+<option value="Medicina General" {% if doctor.especialidad == "Medicina General" %}selected{% endif %}>Medicina General</option>
+<option value="Medicina Interna" {% if doctor.especialidad == "Medicina Interna" %}selected{% endif %}>Medicina Interna</option>
+<option value="Nefrología" {% if doctor.especialidad == "Nefrología" %}selected{% endif %}>Nefrología</option>
+<option value="Neumología" {% if doctor.especialidad == "Neumología" %}selected{% endif %}>Neumología</option>
+<option value="Neurología" {% if doctor.especialidad == "Neurología" %}selected{% endif %}>Neurología</option>
+<option value="Nutrición" {% if doctor.especialidad == "Nutrición" %}selected{% endif %}>Nutrición</option>
+<option value="Oncología" {% if doctor.especialidad == "Oncología" %}selected{% endif %}>Oncología</option>
+<option value="Oftalmología" {% if doctor.especialidad == "Oftalmología" %}selected{% endif %}>Oftalmología</option>
+<option value="Otorrinolaringología" {% if doctor.especialidad == "Otorrinolaringología" %}selected{% endif %}>Otorrinolaringología</option>
+<option value="Pediatría" {% if doctor.especialidad == "Pediatría" %}selected{% endif %}>Pediatría</option>
+<option value="Psiquiatría" {% if doctor.especialidad == "Psiquiatría" %}selected{% endif %}>Psiquiatría</option>
+<option value="Radiología" {% if doctor.especialidad == "Radiología" %}selected{% endif %}>Radiología</option>
+<option value="Reumatología" {% if doctor.especialidad == "Reumatología" %}selected{% endif %}>Reumatología</option>
+<option value="Traumatología" {% if doctor.especialidad == "Traumatología" %}selected{% endif %}>Traumatología</option>
+<option value="Urología" {% if doctor.especialidad == "Urología" %}selected{% endif %}>Urología</option>
+ 
+            <!-- Agrega más opciones aquí -->
+          </select>
+        </div>
+ 
+        <div class="form-group">
+          <label for="idoneidad" data-text-key="modal_suitability_label">Idoneidad</label>
+          <input type="text" id="idoneidad" name="idoneidad" value="{{ doctor.idoneidad }}" required>
+        </div>
+ 
+        <div class="form-group">
+          <label for="estudios" data-text-key="modal_studies_label">Estudios</label>
+          <textarea id="estudios" name="estudios" required>{{ doctor.estudios }}</textarea>
+        </div>
+ 
+        <div class="form-group">
+          <label for="descripcion" data-text-key="modal_description_label">Descripción</label>
+          <textarea id="descripcion" name="descripcion" required>{{ doctor.descripcion }}</textarea>
+        </div>
+ 
+        <div class="form-group">
+          <label for="phone" data-text-key="modal_phone_label">Teléfono</label>
+          <input type="text" id="phone" name="phone" value="{{ doctor.phone }}" required>
+        </div>
+ 
+        <div class="form-group">
+          <label for="ubicacion" data-text-key="modal_location_label">Ubicación</label>
+          <input type="text" id="ubicacion" name="ubicacion" value="{{ doctor.ubicacion }}" required>
+        </div>
+
+         <div class="form-group">
+          <label for="preciobase" data-text-key="modal_location_label">Precio Base</label>
+          <input type="text" id="ubicacion" name="preciobase" value="{{ cita.precio }}" required>
+        </div>
+ 
+        <button type="submit" class="save-btn" data-text-key="modal_save_changes_button">Guardar Cambios</button>
+        <br>
+        <button type="button" class="cancel-btn" id="btnCancelarModal" data-text-key="modal_cancel_button">Cancelar</button>
+      </form>
+    </div>
+  </div>
+  <div class="recomendaciones_de_doctores">
+{% if doctor.id %}
+  <a href="{% url 'recomendacion_doctor' doctor.id %}" data-text-key="recomendado_button"  class="btn-circular">
+    Quieres ser recomendado?
+  </a>
+{% else %}
+  <p>No se encontró el ID del doctor.</p>
+{% endif %}
+</div>
+ 
+</body>
+<script src="{% static 'js/perfil_doctor.js' %}"></script>
+</html>
+ 
+ 
+ 

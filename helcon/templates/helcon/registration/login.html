@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="es">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Health Connectors</title>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+</head>
+
+<body>
+
+<div class="todo">
+    
+    <div class="pt-iz" id="login-box">
+        <nav class="nav-list">
+            <li class="nav-item"><a href="{% url 'home' %}">Inicio</a></li>
+            <li class="nav-item"><a href="#">Funcionalidades</a></li>
+            <li class="nav-item"><a href="#">About Us</a></li>
+            <li class="nav-item"><a href="#">Blog</a></li>
+            <li class="nav-item"><a href="#"><span>Login</span></a></li>
+        </nav>
+
+        <h1 id="login-titulo">Login</h1>
+
+  <form name="f1" action="{% url 'login' %}" method="post">
+    {% csrf_token %}
+    <input type="text" name="username" required placeholder="Username"><br><br>
+    <input type="password" name="password" required placeholder="Password"><br><br>
+    <input type="submit" value="Submit"><br><br>
+</form>
+
+    </div>
+
+    <div class="pt-de">
+        <div class="contenido">
+            <h2 id="titulo"><span>HEALTH </span> CONNECTORS</h2>
+            <img src="{% static 'images/mano_corazon.webp' %}" alt="">
+        </div>
+    </div>
+</div>
+  <script src="{% static 'js/login.js' %}"></script>
+</body>
+</html>
+
+

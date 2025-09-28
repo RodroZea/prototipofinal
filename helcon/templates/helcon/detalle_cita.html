@@ -1,0 +1,93 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Detalles de la Cita</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 40px;
+    }
+
+    .container {
+      background-color: white;
+      max-width: 600px;
+      margin: auto;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      color: #0B2545;
+    }
+
+    h2 {
+      text-align: center;
+      color: #0B2545;
+      margin-bottom: 30px;
+    }
+
+    p {
+      font-size: 1rem;
+      margin-bottom: 10px;
+    }
+
+    strong {
+      color: #0B2545;
+    }
+
+    .precio-final {
+      font-weight: bold;
+      color: #1D4ED8;
+      font-size: 1.2rem;
+      margin-top: 15px;
+    }
+
+    .btn-danger {
+      background-color: #e63946;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin-top: 30px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      display: block;
+      width: 100%;
+    }
+
+    .btn-danger:hover {
+      background-color: #d62828;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Detalles de la Cita</h2>
+
+    <p><strong>Paciente:</strong> {{ cita.nombre }}</p>
+    <p><strong>Motivo de Visita:</strong> {{ cita.motivo_visita }}</p>
+    <p><strong>Datos de Consulta:</strong> {{ cita.datos_consulta }}</p>
+    <p><strong>Aseguradora:</strong> {{ cita.aseguradora }}</p>
+    <p><strong>Fecha:</strong> {{ cita.fecha }}</p>
+    <p><strong>Hora:</strong> {{ cita.hora }}</p>
+
+    {% if precio_base %}
+      <hr>
+      <p><strong>Precio Base del Doctor:</strong> ${{ precio_base }}</p>
+      <p><strong>Descuento aplicado:</strong> {{ descuento }}</p>
+      <p class="precio-final">Total base a cobrar: ${{ precio_con_descuento }}</p>
+    {% else %}
+      <p style="color: red;"><strong>Este doctor no tiene un precio base asignado.</strong></p>
+    {% endif %}
+
+    <form method="POST" onsubmit="return confirm('¿Estás seguro que deseas cancelar esta cita?');">
+      {% csrf_token %}
+      <input type="hidden" name="accion" value="cancelar">
+      <button type="submit" class="btn-danger">❌ Cancelar Cita</button>
+    </form>
+  </div>
+</body>
+</html>

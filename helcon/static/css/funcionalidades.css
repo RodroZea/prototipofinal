@@ -1,0 +1,71 @@
+/* ===== Animaciones al hacer scroll ===== */
+:root {
+    --seasalt: #FBFAF8ff;
+    --ruddy-blue: #6CA5FFff;
+    --denim: #245DB5ff;
+    --oxford-blue: #111835ff;
+    --oxford-blue-2: #051024ff;
+    --texto-interno: #C9C9C9;
+    --rubby-blue2: #DAE8FF;
+}
+.scroll-animate {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease;
+}
+
+.active-animation {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Subtítulos específicos: entrada lateral */
+h2.scroll-animate {
+  transform: translateX(100px);
+}
+
+h2.active-animation {
+  transform: translateX(0);
+}
+
+/* Botones: efecto inicial y hover */
+button.scroll-animate {
+  transform: scale(0.8);
+  opacity: 0;
+  transition: all 0.6s ease;
+}
+
+button.active-animation {
+  transform: scale(1);
+  opacity: 1;
+}
+
+button:hover {
+  background-color: var(--denim);
+  transform: scale(1.05);
+  transition: 0.3s ease;
+}
+
+/* === NUEVO: rebote al hacer clic === */
+.click-bounce {
+  animation: bounceClick 0.3s ease;
+}
+
+@keyframes bounceClick {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+/* Imágenes */
+img.scroll-animate {
+  transform: translateY(40px);
+  opacity: 0;
+  transition: all 0.8s ease;
+}
+
+img.active-animation {
+  transform: translateY(0);
+  opacity: 1;
+}
+

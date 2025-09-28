@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title data-text-key="pageTitle">Company Info</title>
+  <link rel="stylesheet" href="{% static 'css/tercerapagina.css' %}" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" xintegrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    xintegrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!--Link para fuente-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    xintegrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!--Barra de navegacion-->
+<header>
+  
+    <div class="barra-superior">
+    <body>
+  <button onclick="window.history.back()" style="
+  background-color: #111835;
+  color: white;
+  padding: 10px 20px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 20px;
+  transition: background-color 0.3s ease;
+"
+onmouseover="this.style.backgroundColor='#2c3e7e'"
+onmouseout="this.style.backgroundColor='#111835'"
+>
+  ← Volver
+</button>  
+      
+      
+      <div class="botones">
+          <div class="botones">
+  <div class="account-menu">
+    {% if user.is_authenticated %}
+      
+      {% if paciente %}
+        <!-- Paciente logueado -->
+        <div class="dropdown">
+          <span class="material-symbols-outlined">person</span>
+          <div class="dropdown-content">
+            <a href="{% url 'perfil_paciente' %}">Perfil</a>
+            <a href="{% url 'logout' %}">Cerrar sesión</a>
+          </div>
+        </div>
+
+      {% elif doctor %}
+        <!-- Doctor logueado -->
+        <div class="dropdown">
+          {% if doctor.foto_perfil %}
+            <img src="{{ doctor.foto_perfil.url }}" alt="Foto de perfil" style="width:50px; height:50px; border-radius:50%; object-fit:cover;" />
+          {% else %}
+            <img src="{% static 'images/fotoprede.webp' %}" alt="Foto por defecto" style="width:50px; height:50px; border-radius:50%; object-fit:cover;" />
+          {% endif %}
+          <div class="dropdown-content">
+            <a href="{% url 'perfil_doctor' %}">Perfil</a>
+            <a href="{% url 'logout' %}">Cerrar sesión</a>
+          </div>
+        </div>
+      {% endif %}
+
+    {% else %}
+      <!-- No autenticado -->
+      <a href="{% url 'login' %}"><button class="boton-login">Login</button></a>
+      <a href="{% url 'registro' %}" style="margin-left: 15px;"><button class="boton-registro">Sign up</button></a>
+    {% endif %}
+  </div>
+</div>
+
+          <div class="language-dropdown">
+            <div class="boton-idioma" id="language-button" aria-label="Cambiar idioma">
+              <span class="material-symbols-outlined">
+                language
+              </span>
+            </div>
+            <div class="dropdown-menu" id="language-menu">
+              <a href="#" class="dropdown-item" data-lang="es">
+                <div class="flag-icon flag-es"></div>
+                Español
+              </a>
+              <a href="#" class="dropdown-item" data-lang="en">
+                <div class="flag-icon flag-en"></div>
+                English
+              </a>
+            </div>
+          </div>
+      </div>
+    </div>
+
+    <nav class="barra-navegacion">
+    <ul>
+        <li><a href="{% url 'home' %}" data-nav-key="homeNav">Inicio</a></li>
+        <li><a href="{% url 'segpag' %}" data-nav-key="featuresNav">Funcionalidades y Beneficios</a></li>
+        <li><a href="{% url 'blog_view' %}" data-nav-key="aboutNav">Acerca de Nosotros</a></li>
+        <li><a href="{% url 'blog_view' %}" data-nav-key="blogNav">Blog</a></li>
+    </ul>
+    </nav>
+  </header>
+
+
+  <main class="main">
+
+    <section class="about-section">
+      <div class="about-text">
+        <div class="tags">
+          <span data-text-key="about_tag_1">Caring</span> |
+          <span data-text-key="about_tag_2">Accessible</span> |
+          <span data-text-key="about_tag_3">Empowering</span>
+        </div>
+        <h2 data-text-key="about_h2">About Our Company and History</h2> <br>
+        <p data-text-key="about_p1">At Health Connectors, we are a website developed by the Gürteltier team, dedicated to improving access to quality healthcare services. Our team consists of professionals from fields such as technology, healthcare, and management, working together to create an innovative platform that connects patients, providers, and businesses in the healthcare sector.</p>
+        <p data-text-key="about_p2">We aim to simplify the process of finding medical care, making it more accessible and efficient for users while promoting the well-being of the communities we serve. By leveraging cutting-edge technology, we ensure that health solutions are within reach for everyone.</p>
+      </div>
+      <div class="about-image">
+        <img src="appointment.webp" alt="Appointment image" data-image-key="image_appointment"/>
+      </div>
+    </section>
+
+    <section class="mission-section">
+      <div class="mission-image">
+        <img src="{% static 'images/chica_verde.webp' %}" alt="Smiling woman" data-image-key="image_mission"/>
+      </div>
+      <div class="mission-text">
+        <h2 data-text-key="mission_h2">Our mission</h2>
+        <p data-text-key="mission_p1">Our mission is to revolutionize access to healthcare by creating a digital ecosystem where patients, healthcare professionals, and institutions are seamlessly connected. We are committed to eliminating barriers to care—such as inefficiencies, lack of coordination, and limited access—through a secure, intuitive, and inclusive platform.</p>
+        <p data-text-key="mission_p2">By empowering individuals to manage their health and supporting providers with smart tools, we aim to build a healthcare experience that is efficient, human-centered, and focused on improving the well-being of every community we serve.</p>
+      </div>
+    </section>
+
+    <section class="purpose-section">
+      <h2 data-text-key="purpose_h2">Our principal purpose</h2>
+      <p data-text-key="purpose_p1">At Health Connectors, we primarily focus on making it easy for individuals to organize medical appointments from the comfort of their homes. Through our platform, users can connect with healthcare providers, schedule consultations, and manage their medical appointments efficiently.</p>
+      <p data-text-key="purpose_p2">Additionally, we offer a range of health-related resources, such as wellness tips and guidance, to support users in maintaining their overall health. By streamlining the appointment process and providing valuable health information, we ensure that access to care is both convenient and comprehensive, enhancing the overall healthcare experience.</p>
+    </section>
+
+    <section class="privacy-section">
+      <img src="{% static 'images/your_privacy.webp' %}" alt="Privacy image" data-image-key="image_privacy"/>
+      <div class="privacy-text">
+    </section>
+
+    <section class="purpose-section">
+  <h2 data-text-key="groups_h2">Discover more about our work groups</h2>
+  <p data-text-key="groups_p">At Health Connectors, our work is driven by four specialized teams that collaborate to build a seamless healthcare experience:</p>
+</section>
+
+<section class="teams-section">
+  <div class="teams-grid">
+    
+    <!-- Card 1 -->
+    <div class="team-card">
+      <div class="card-inner">
+        <div class="card-front">
+          <img class="background-image" src="{% static 'images/morasporsiacaso.webp' %}" alt="Blueberries" data-image-key="team_bg_design" />
+          <div class="team-info-area" id="azul-fondo">
+            <img class="team-title-image" src="{% static 'images/letter_design.webp' %}" alt="Design Team" data-image-key="team_title_design"/>
+          </div>
+        </div>
+        <div class="card-back">
+          <img src="{% static 'images/about_html_nombres.webp' %}" alt="" data-image-key="team_names_design">
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="team-card">
+      <div class="card-inner">
+        <div class="card-front">
+          <img class="background-image" src="{% static 'images/cerezas.webp' %}" alt="Cherries" data-image-key="team_bg_htmlcss"/>
+          <div class="team-info-area">
+            <img class="team-title-image" src="{% static 'images/css_letter.webp' %}" alt="HTML and CSS Team" data-image-key="team_title_htmlcss"/>
+          </div>
+        </div>
+        <div class="card-back">
+          <img src="{% static 'images/about_java_nombres.webp' %}" alt="" data-image-key="team_names_htmlcss">
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="team-card">
+      <div class="card-inner">
+        <div class="card-front">
+          <img class="background-image" src="{% static 'images/moritas.webp' %}" alt="Blackberries" data-image-key="team_bg_javascript"/>
+          <div class="team-info-area">
+            <img class="team-title-image" src="{% static 'images/java_letras.webp' %}" alt="JavaScript Team" data-image-key="team_title_javascript"/>
+          </div>
+        </div>
+        <div class="card-back">
+          <img src="{% static 'images/about_java_nombres.webp' %}" alt="" data-image-key="team_names_javascript">
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="team-card">
+      <div class="card-inner">
+        <div class="card-front">
+          <img class="background-image" src="{% static 'images/fresita.webp' %}"" alt="Strawberry" data-image-key="team_bg_database"/>
+          <div class="team-info-area" id="azul-fondo">
+            <img class="team-title-image" src="{% static 'images/base_letter.webp' %}" alt="Database Team" data-image-key="team_title_database"/>
+          </div>
+        </div>
+        <div class="card-back">
+          <img src="{% static 'images/about_database_nombres.webp' %}" alt="" data-image-key="team_names_database">
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+</body>
+
+<footer class="main-footer">
+    <div class="footer-column">
+        <h3>Health<br>Connectors</h3>
+        <p>New Elsiebury</p>
+        <p>634 Halvorson</p>
+        <p>Estates Suite 039</p>
+        <br>
+        <div class="social-button">
+          <button type="submit">know more</button>
+        </div>
+    </div>
+    <div class="footer-column links-column">
+        <h3>Links</h3>
+        <ul class="footer-links">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="#">Pages</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Portfolio</a></li>
+            <li><a href="{% url 'blog_view' %}">Blog</a></li>
+            <li><a href="{% url 'contacto' %}">Contact</a></li>
+        </ul>
+    </div>
+    <div class="footer-column links-column">
+        <br>
+        <ul class="footer-links">
+            <li><a href="{% url 'privacy_policies' %}">Privacy Policies</a></li>
+            <li><a href="{% url 'terms' %}">Term of use</a></li>
+            <li><a href="{% url 'registro' %}">Sign up</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
+            <li><a href="{% url 'difamation' %}">Defamation</a></li>
+        </ul>
+    </div>
+    <div class="footer-column recent-posts-column">
+        <h3>Recent posts</h3>
+        <ul class="recent-posts">
+            <li> <a href="{% url 'journal1' %}">Health Benefits of Sleep</a></li>
+            <li> <a href="{% url 'journal2' %}">Benefits of Excercise</a></li>
+            <li><a href="{% url 'journal3' %}">Stress Management</a></li>
+            <li><a href="{% url 'journal4' %}">The importance of preventive care.</a></li>
+        </ul>
+    </div>
+</footer>
+
+
+<script src="{% static 'js/tercerapaginaa.js' %}"></script>

@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title data-text-key="pageTitle">Company Info</title>
+  <link rel="stylesheet" href="{% static 'css/journal1.css' %}" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" xintegrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+  <!--Link para fuente-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=language" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!--Barra de navegacion-->
+  <header>
+  
+    <div class="barra-superior">
+    <body>
+  <button onclick="window.history.back()" style="
+  background-color: #111835;
+  color: white;
+  padding: 10px 20px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 20px;
+  transition: background-color 0.3s ease;
+"
+onmouseover="this.style.backgroundColor='#2c3e7e'"
+onmouseout="this.style.backgroundColor='#111835'"
+>
+  ← Volver
+</button>  
+      
+      
+      <div class="botones">
+          <div class="botones">
+  <div class="account-menu">
+    {% if user.is_authenticated %}
+      
+      {% if paciente %}
+        <!-- Paciente logueado -->
+        <div class="dropdown">
+          <span class="material-symbols-outlined">person</span>
+          <div class="dropdown-content">
+            <a href="{% url 'perfil_paciente' %}">Perfil</a>
+            <a href="{% url 'logout' %}">Cerrar sesión</a>
+          </div>
+        </div>
+
+      {% elif doctor %}
+        <!-- Doctor logueado -->
+        <div class="dropdown">
+          {% if doctor.foto_perfil %}
+            <img src="{{ doctor.foto_perfil.url }}" alt="Foto de perfil" style="width:50px; height:50px; border-radius:50%; object-fit:cover;" />
+          {% else %}
+            <img src="{% static 'images/fotoprede.webp' %}" alt="Foto por defecto" style="width:50px; height:50px; border-radius:50%; object-fit:cover;" />
+          {% endif %}
+          <div class="dropdown-content">
+            <a href="{% url 'perfil_doctor' %}">Perfil</a>
+            <a href="{% url 'logout' %}">Cerrar sesión</a>
+          </div>
+        </div>
+      {% endif %}
+
+    {% else %}
+      <!-- No autenticado -->
+      <a href="{% url 'login' %}"><button class="boton-login">Login</button></a>
+      <a href="{% url 'registro' %}" style="margin-left: 15px;"><button class="boton-registro">Sign up</button></a>
+    {% endif %}
+  </div>
+</div>
+
+          <div class="language-dropdown">
+            <div class="boton-idioma" id="language-button" aria-label="Cambiar idioma">
+              <span class="material-symbols-outlined">
+                language
+              </span>
+            </div>
+            <div class="dropdown-menu" id="language-menu">
+              <a href="#" class="dropdown-item" data-lang="es">
+                <div class="flag-icon flag-es"></div>
+                Español
+              </a>
+              <a href="#" class="dropdown-item" data-lang="en">
+                <div class="flag-icon flag-en"></div>
+                English
+              </a>
+            </div>
+          </div>
+      </div>
+    </div>
+
+    <nav class="barra-navegacion">
+    <ul>
+        <li><a href="{% url 'home' %}" data-nav-key="homeNav">Inicio</a></li>
+        <li><a href="{% url 'segpag' %}" data-nav-key="featuresNav">Funcionalidades y Beneficios</a></li>
+        <li><a href="{% url 'blog_view' %}" data-nav-key="aboutNav">Acerca de Nosotros</a></li>
+        <li><a href="{% url 'blog_view' %}" data-nav-key="blogNav">Blog</a></li>
+    </ul>
+    </nav>
+  </header>
+ 
+  <img class="img_principal" src="{%static 'images/REST_ingles.webp'%}" alt="Vital Rest Image" data-image-key="image_main_rest">
+  <div class="seccion_parrafo">
+    <h2 data-text-key="section_paragraph_h2">Do You Know How Vital Good Rest Is?</h2>
+    <ul>
+        <li data-text-key="section_paragraph_li_1">Sleeping well is essential for our health and emotional well-being.</li>
+        <li data-text-key="section_paragraph_li_2">Getting enough sleep and having good quality sleep are essential for healthy sleep.</li>
+        <li data-text-key="section_paragraph_li_3">The amount of sleep you need changes as you age.</li>
+        <li data-text-key="section_paragraph_li_4">Talk to your healthcare provider if you have trouble sleeping.</li>
+    </ul>
+  </div>
+  
+  <img src="{% static 'images/dormidaaa.webp' %}" alt="Health Benefits" class="img-principal" data-image-key="image_health_benefits">
+  <div class="benefit1">
+    <div class="benefit1-1">
+      <h2 data-text-key="benefit1_h2">Health benefits of sleep</h2>
+      <h3 data-text-key="benefit1_h3_1">Get sick less often</h3>
+      <p data-text-key="benefit1_p_1">Quality sleep strengthens your immune system, helping you fight off viruses and infections.</p>
+      <hr>
+      <h3 data-text-key="benefit1_h3_2">Maintain a healthy weight</h3>
+      <p data-text-key="benefit1_p_2">Sleep regulates the hormones that control hunger and appetite, helping prevent weight gain.</p>
+      <hr>
+      <h3 data-text-key="benefit1_h3_3">Reduce stress and improve your mood</h3>
+      <p data-text-key="benefit1_p_3">Proper rest helps manage emotions, reduces irritability, and improves emotional stability.</p>
+    </div>
+    <div class="benefit1-2">
+      <img src="{% static 'images/imagen_1.1.webp' %}" alt="" data-image-key="image_benefit1_1">
+    </div>
+  </div>
+  <div class="benefit2">
+    <div class="benefit2-1">
+      <img src="{%static 'images/abuelitavenami_(1).webp'%}" alt="Other Benefits" data-image-key="image_other_benefits">
+    </div>
+    <div class="benefit2-2">
+      <h2 data-text-key="benefit2_h2">Others Benefits</h2>
+      <h3 data-text-key="benefit2_h3_1">Improve your heart health and metabolism</h3>
+      <p data-text-key="benefit2_p_1">Deep sleep supports healthy blood pressure and blood sugar regulation.</p>
+      <hr>
+      <h3 data-text-key="benefit2_h3_2">Reduce the risk of chronic diseases such as</h3>
+      <p data-text-key="benefit2_p_2">Type 2 diabetes, Heart disease, Hypertension, Stroke</p>
+      <hr>
+      <h3 data-text-key="benefit2_h3_3">Reduce the risk of car accidents and injury-related deaths</h3>
+      <p data-text-key="benefit2_p_3">Drowsy driving slows reaction time and reduces focus, increasing accident risk.</p>
+    </div>
+  </div>
+    
+  <div class="frase">
+    <h2 data-text-key="frase_h2">Strategies to improve sleep</h2>
+    <p data-text-key="frase_p">Improving sleep habits can help you sleep well. Some habits that can improve your sleep include:</p>
+  </div>
+ 
+  <ol class="sleep-quality-list">
+      <li>
+        <div class="list-item-content">
+          <h3 data-text-key="sleep_quality_h3_1">1. Going to bed and waking up at the same time every day</h3>
+          <p data-text-key="sleep_quality_p_1">Maintaining a consistent sleep schedule helps regulate your internal clock and improves sleep quality.</p>
+        </div>
+      </li>
+      <li>
+        <div class="list-item-content">
+          <h3 data-text-key="sleep_quality_h3_2">2. Keeping your bedroom quiet, relaxing, and cool</h3>
+          <p data-text-key="sleep_quality_p_2">A calm and comfortable environment promotes deeper, uninterrupted sleep.</p>
+        </div>
+      </li>
+      <li>
+        <div class="list-item-content">
+          <h3 data-text-key="sleep_quality_h3_3">3. Turning off electronic devices at least 30 minutes before bedtime</h3>
+          <p data-text-key="sleep_quality_p_3">Blue light from screens can interfere with melatonin production, making it harder to fall asleep.</p>
+        </div>
+      </li>
+      <li>
+        <div class="list-item-content">
+          <h3 data-text-key="sleep_quality_h3_4">4. Avoiding heavy meals and alcohol before bed</h3>
+          <p data-text-key="sleep_quality_p_4">These can disrupt digestion and lead to restless or fragmented sleep.</p>
+        </div>
+      </li>
+      <li>
+        <div class="list-item-content">
+          <h3 data-text-key="sleep_quality_h3_5">5. Avoiding caffeine in the afternoon or evening</h3>
+          <p data-text-key="sleep_quality_p_5">Caffeine is a stimulant that can keep your mind alert when it should be winding down.</p>
+        </div>
+      </li>
+      <li>
+        <div class="list-item-content">
+          <h3 data-text-key="sleep_quality_h3_6">6. Exercising regularly and maintaining a healthy diet</h3>
+          <p data-text-key="sleep_quality_p_6">Physical activity and balanced nutrition contribute to more restorative and high-quality sleep.</p>
+        </div>
+      </li>
+  </ol>
+    
+  <img class="img_principal" src="{% static 'images/imagen.webp' %}" alt="Signs of Poor Sleep" data-image-key="image_poor_sleep_signs">
+  <div class="class_poor_quality">
+    <h2 data-text-key="poor_quality_h2">Signs of poor sleep quality include:</h2>
+    <ul>
+      <li><strong data-text-key="poor_quality_li_1_strong">Difficulty falling asleep:</strong> <span data-text-key="poor_quality_li_1_text">Taking more than 20–30 minutes to fall asleep may be due to stress, anxiety, screen use before bed, or an irregular bedtime routine.</span></li>
+      <li><strong data-text-key="poor_quality_li_2_strong">Waking up repeatedly during the night:</strong> <span data-text-key="poor_quality_li_2_text">Frequent awakenings disrupt the natural sleep cycle and may be linked to anxiety, sleep apnea, or an uncomfortable environment.</span></li>
+      <li><strong data-text-key="poor_quality_li_3_strong">Feeling sleepy or tired even after enough sleep:</strong> <span data-text-key="poor_quality_li_3_text">Even after 7 to 9 hours, fatigue may indicate poor sleep quality, undiagnosed disorders, or issues like depression or hormonal imbalances.</span></li>
+    </ul>
+    <br>
+    <h2 id="Sleepdesorder" data-text-key="sleep_disorders_h2">Sleep Disorders</h2>
+    <p data-text-key="sleep_disorders_p">Some people may have health problems that prevent them from sleeping well, no matter how hard they try. These problems are called sleep disorders. Some of this common sleep disorders are:</p>
+  </div>
+ 
+  <div class="contenido_div2">
+    <div class="contenido_div2_1">
+      <h3 data-text-key="insomnia_h3">Insomnia</h3>
+      <p data-text-key="insomnia_p">A sleep disorder characterized by difficulty falling asleep, staying asleep, or waking up too early, leading to daytime fatigue and concentration problems.</p>
+      <hr>
+      <h3 data-text-key="restless_leg_h3">Restless Leg Syndrome</h3>
+      <p data-text-key="restless_leg_p">A condition causing an uncontrollable urge to move the legs, usually in the evening or night, often disrupting sleep and causing discomfort.</p>
+      <hr>
+      <h3 data-text-key="narcolepsy_h3">Narcolepsy</h3>
+      <p data-text-key="narcolepsy_p">A chronic neurological disorder that affects the brain's ability to regulate sleep–wake cycles, causing sudden sleep attacks and excessive daytime sleepiness.</p>
+      <hr>
+      <h3 data-text-key="sleep_apnea_h3">Sleep Apnea</h3>
+      <p data-text-key="sleep_apnea_p">A serious condition where breathing repeatedly stops and starts during sleep, often leading to poor sleep, poor sleep quality, and increased health risks.</p>
+    </div>
+    <div class="contenido_div2_2">
+      <img src="{% static 'images/imagenseis_copia.webp' %}" alt="" data-image-key="image_sleep_disorders">
+    </div>
+  </div>
+  <img src="{% static 'images/appoitment.webp' %}" alt="" class="img_principal" data-image-key="image_assessment">
+ 
+  <div class="contenido_div3">
+    <h2 data-text-key="sleep_diary_h2">Keeping a sleep diary</h2>
+    <p data-text-key="sleep_diary_p">Your sleep diary should include the times when you:</p>
+    <hr>
+  </div>
+  
+   <!-- Sección para las 6 imágenes con texto, estructurada con un grid -->
+<div class="content-div3-images">
+  <div class="flip-card">
+    <div class="flip-card-inner">
+      <div class="flip-card-front">
+        <img src="{% static 'images/bed.webp' %}" alt="Go to bed" data-image-key="flipcard_1_img">
+      </div>
+      <div class="flip-card-back">
+        <p data-text-key="flipcard_1_p">Time you go to bed</p>
+      </div>
+    </div>
+  </div>
+ 
+  <div class="flip-card">
+    <div class="flip-card-inner">
+      <div class="flip-card-front">
+        <img src="{% static 'images/despertar.webp' %}" alt="Wake up during the night"data-image-key="flipcard_2_img">
+      </div>
+      <div class="flip-card-back">
+        <p data-text-key="flipcard_2_p">Wake up during the night</p>
+      </div>
+    </div>
+  </div>
+ 
+  <div class="flip-card">
+    <div class="flip-card-inner">
+      <div class="flip-card-front">
+        <img src="{% static 'images/medication.webp' %}" alt="Take medications"data-image-key="flipcard_3_img">
+      </div>
+      <div class="flip-card-back">
+        <p data-text-key="flipcard_3_p">Take medications</p>
+      </div>
+    </div>
+  </div>
+ 
+  <div class="flip-card">
+    <div class="flip-card-inner">
+      <div class="flip-card-front">
+        <img src="{% static 'images/ejercicio.webp' %}" alt="Exercise"data-image-key="flipcard_4_img">
+      </div>
+      <div class="flip-card-back">
+        <p data-text-key="flipcard_4_p">Exercise</p>
+      </div>
+    </div>
+  </div>
+ 
+  <div class="flip-card">
+    <div class="flip-card-inner">
+      <div class="flip-card-front">
+        <img src="{% static 'images/nap.webp' %}" alt="Take naps" data-image-key="flipcard_5_img">
+      </div>
+      <div class="flip-card-back">
+        <p data-text-key="flipcard_5_p">Take naps</p>
+      </div>
+    </div>
+  </div>
+ 
+  <div class="flip-card">
+    <div class="flip-card-inner">
+      <div class="flip-card-front">
+        <img src="{% static 'images/alcohol.webp' %}" alt="Consume alcohol or caffeinated drinks" data-image-key="flipcard_6_img">
+      </div>
+      <div class="flip-card-back">
+        <p data-text-key="flipcard_6_p">Consume alcohol or caffeinated drinks</p>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+</body>
+ 
+ <footer class="main-footer">
+    <div class="footer-column">
+        <h3>Health<br>Connectors</h3>
+        <p>New Elsiebury</p>
+        <p>634 Halvorson</p>
+        <p>Estates Suite 039</p>
+        <br>
+        <div class="social-button">
+          <a href="https://linktr.ee/Health_Connectors" target="_blank" style="
+  display: inline-block;
+  margin-top: 25px;
+  background-color: #8cb8ff;
+  border: none;
+  border-radius: 12px;
+  color: #000;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 15px 30px;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: 'Poppins', sans-serif;
+">
+  Know more
+</a>
+
+        </div>
+    </div>
+    <div class="footer-column links-column">
+        <h3>Links</h3>
+        <ul class="footer-links">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="#">Pages</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Portfolio</a></li>
+            <li><a href="{% url 'blog_view' %}">Blog</a></li>
+            <li><a href="{% url 'contacto' %}">Contact</a></li>
+        </ul>
+    </div>
+    <div class="footer-column links-column">
+        <br>
+        <ul class="footer-links">
+            <li><a href="{% url 'privacy_policies' %}">Privacy Policies</a></li>
+            <li><a href="{% url 'terms' %}">Term of use</a></li>
+            <li><a href="{% url 'registro' %}">Sign up</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
+            <li><a href="{% url 'difamation' %}">Defamation</a></li>
+        </ul>
+    </div>
+    <div class="footer-column recent-posts-column">
+        <h3>Recent posts</h3>
+        <ul class="recent-posts">
+            <li> <a href="{% url 'journal1' %}">Health Benefits of Sleep</a></li>
+            <li> <a href="{% url 'journal2' %}">Benefits of Excercise</a></li>
+            <li><a href="{% url 'journal3' %}">Stress Management</a></li>
+            <li><a href="{% url 'journal4' %}">The importance of preventive care.</a></li>
+        </ul>
+    </div>
+</footer>
+ 
+<script src="{% static 'js/journall1.js' %}"></script>
+ 
+</html>

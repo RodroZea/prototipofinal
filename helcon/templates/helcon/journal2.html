@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+  <meta charset="UTF-8">
+  <title data-text-key="pageTitle">Benefits of Physical Activity</title>
+  <link rel="stylesheet" href="{% static 'css/journal2.css' %}" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" xintegrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+  <!--Link para fuente-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=language" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!--Barra de navegacion-->
+  <header>
+  
+    <div class="barra-superior">
+    <body>
+  <button onclick="window.history.back()" style="
+  background-color: #111835;
+  color: white;
+  padding: 10px 20px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 20px;
+  transition: background-color 0.3s ease;
+"
+onmouseover="this.style.backgroundColor='#2c3e7e'"
+onmouseout="this.style.backgroundColor='#111835'"
+>
+  ← Volver
+</button>  
+      
+      
+      <div class="botones">
+          <div class="botones">
+  <div class="account-menu">
+    {% if user.is_authenticated %}
+      
+      {% if paciente %}
+        <!-- Paciente logueado -->
+        <div class="dropdown">
+          <span class="material-symbols-outlined">person</span>
+          <div class="dropdown-content">
+            <a href="{% url 'perfil_paciente' %}">Perfil</a>
+            <a href="{% url 'logout' %}">Cerrar sesión</a>
+          </div>
+        </div>
+
+      {% elif doctor %}
+        <!-- Doctor logueado -->
+        <div class="dropdown">
+          {% if doctor.foto_perfil %}
+            <img src="{{ doctor.foto_perfil.url }}" alt="Foto de perfil" style="width:50px; height:50px; border-radius:50%; object-fit:cover;" />
+          {% else %}
+            <img src="{% static 'images/fotoprede.webp' %}" alt="Foto por defecto" style="width:50px; height:50px; border-radius:50%; object-fit:cover;" />
+          {% endif %}
+          <div class="dropdown-content">
+            <a href="{% url 'perfil_doctor' %}">Perfil</a>
+            <a href="{% url 'logout' %}">Cerrar sesión</a>
+          </div>
+        </div>
+      {% endif %}
+
+    {% else %}
+      <!-- No autenticado -->
+      <a href="{% url 'login' %}"><button class="boton-login">Login</button></a>
+      <a href="{% url 'registro' %}" style="margin-left: 15px;"><button class="boton-registro">Sign up</button></a>
+    {% endif %}
+  </div>
+</div>
+
+          <div class="language-dropdown">
+            <div class="boton-idioma" id="language-button" aria-label="Cambiar idioma">
+              <span class="material-symbols-outlined">
+                language
+              </span>
+            </div>
+            <div class="dropdown-menu" id="language-menu">
+              <a href="#" class="dropdown-item" data-lang="es">
+                <div class="flag-icon flag-es"></div>
+                Español
+              </a>
+              <a href="#" class="dropdown-item" data-lang="en">
+                <div class="flag-icon flag-en"></div>
+                English
+              </a>
+            </div>
+          </div>
+      </div>
+    </div>
+
+    <nav class="barra-navegacion">
+    <ul>
+        <li><a href="{% url 'home' %}" data-nav-key="homeNav">Inicio</a></li>
+        <li><a href="{% url 'segpag' %}" data-nav-key="featuresNav">Funcionalidades y Beneficios</a></li>
+        <li><a href="{% url 'blog_view' %}" data-nav-key="aboutNav">Acerca de Nosotros</a></li>
+        <li><a href="{% url 'blog_view' %}" data-nav-key="blogNav">Blog</a></li>
+    </ul>
+    </nav>
+  </header>
+
+  <img src="{% static 'images/health_in_motion.webp' %}" alt="Health in Motion" class="health_in_motion" data-image-key="image_health_in_motion">
+  <div class="div-1">
+    <h1 data-text-key="div1_h1">Benefits of Physical Activity</h1>
+    <p data-text-key="div1_p_strong"><strong>Regular physical activity is very beneficial for both physical and mental health.</strong></p>
+    <hr>
+    <ul>
+      <li><strong data-text-key="div1_li1_strong">In adults:</strong> <span data-text-key="div1_li1_text">helps prevent and control non-communicable diseases like cardiovascular diseases, cancer, and diabetes; reduces symptoms of depression and anxiety; and promotes brain health and overall well-being.</span></li>
+      <li><strong data-text-key="div1_li2_strong">In children and adolescents:</strong> <span data-text-key="div1_li2_text">promotes bone health, stimulates healthy growth and development of muscles, and improves motor and cognitive development.</span></li>
+    </ul>
+  </div>
+    
+   
+<div class="image-container">
+  <!-- Tarjeta 1 -->
+  <div class="flip-card">
+    <div class="flip-inner">
+      <div class="front">
+
+        
+        <img src="{% static 'images/CHEETOS.webp' %}" alt="Cheetos" class="responsive-image" data-image-key=flipcard_1_p>
+      </div>
+      <div class="back">
+        <p data-text-key="flipcard_2_text">Move or Die</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tarjeta 2 -->
+  <div class="flip-card">
+    <div class="flip-inner">
+      <div class="front">
+        <img src="{% static 'images/Move_or_die.webp' %}" alt="Move or Die" class="responsive-image" data-image-key="flipcard_2_p">
+      </div>
+      <div class="back">
+        <p data-text-key="flipcard_1_text">Cheetoss</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  </section>
+
+
+  <h2 data-text-key="specific_benefits_h2">Specific benefits include</h2>
+  <ul class="contenido_viñeta">
+    <li><strong data-text-key="bullet_li1_strong">In children and adolescents:</strong> <span data-text-key="bullet_li1_text">Improves fitness, cardiometabolic and bone health, cognitive capacity, and mental health, and reduces body fat.</span></li>
+    <li><strong data-text-key="bullet_li2_strong">In adults and the elderly:</strong> <span data-text-key="bullet_li2_text">Reduces the risk of all-cause mortality and cardiovascular disease mortality, the occurrence of hypertension, specific types of cancer, and type 2 diabetes; prevents falls; and improves mental health, cognitive health, sleep, and body fat measures.</span></li>
+    <li><strong data-text-key="bullet_li3_strong">In women during pregnancy and postpartum:</strong> <span data-text-key="bullet_li3_text">Reduces the risk of preeclampsia, gestational hypertension, gestational diabetes, excessive weight gain during pregnancy, childbirth complications, postpartum depression, and postnatal complications. Additionally, physical activity has no adverse effects on birth weight nor increases the risk of prenatal death.</span></li>
+  </ul>
+  
+
+</body>
+
+ <footer class="main-footer">
+    <div class="footer-column">
+        <h3>Health<br>Connectors</h3>
+        <p>New Elsiebury</p>
+        <p>634 Halvorson</p>
+        <p>Estates Suite 039</p>
+        <br>
+        <div class="social-button">
+          <a href="https://linktr.ee/Health_Connectors" target="_blank" style="
+  display: inline-block;
+  margin-top: 25px;
+  background-color: #8cb8ff;
+  border: none;
+  border-radius: 12px;
+  color: #000;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 15px 30px;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: 'Poppins', sans-serif;
+">
+  Know more
+</a>
+
+        </div>
+    </div>
+    <div class="footer-column links-column">
+        <h3>Links</h3>
+        <ul class="footer-links">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="#">Pages</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Portfolio</a></li>
+            <li><a href="{% url 'blog_view' %}">Blog</a></li>
+            <li><a href="{% url 'contacto' %}">Contact</a></li>
+        </ul>
+    </div>
+    <div class="footer-column links-column">
+        <br>
+        <ul class="footer-links">
+            <li><a href="{% url 'privacy_policies' %}">Privacy Policies</a></li>
+            <li><a href="{% url 'terms' %}">Term of use</a></li>
+            <li><a href="{% url 'registro' %}">Sign up</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
+            <li><a href="{% url 'difamation' %}">Defamation</a></li>
+        </ul>
+    </div>
+    <div class="footer-column recent-posts-column">
+        <h3>Recent posts</h3>
+        <ul class="recent-posts">
+            <li> <a href="{% url 'journal1' %}">Health Benefits of Sleep</a></li>
+            <li> <a href="{% url 'journal2' %}">Benefits of Excercise</a></li>
+            <li><a href="{% url 'journal3' %}">Stress Management</a></li>
+            <li><a href="{% url 'journal4' %}">The importance of preventive care.</a></li>
+        </ul>
+    </div>
+</footer>
+<script src="{% static 'js/journal2.js' %}"></script>
+
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+{% load static %}
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Formulario paciente</title>
+  <link rel="stylesheet" href="{% static 'css/formPaciente.css' %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+</head>
+
+<body>
+  <button onclick="window.history.back()" style="
+  background-color: #111835;
+  color: white;
+  padding: 10px 20px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 20px;
+  transition: background-color 0.3s ease;
+"
+onmouseover="this.style.backgroundColor='#2c3e7e'"
+onmouseout="this.style.backgroundColor='#111835'"
+>
+  ← Volver
+</button>
+
+  <div class="todo">
+    <div class="div-izquierda" id="form-box">
+        <h2 id="titulo" class="titulo-animado">Your Healthcare</h2>
+        <h2 class="h22 titulo-animado"><span>Starts here</span></h2>
+        
+      <form method="post">
+        {% csrf_token %}
+        <input type="text" name="name" required placeholder="Name">
+        <input type="date" name="birthdate" required>
+        <input type="text" name="id_number" required placeholder="ID">
+        <input type="tel" name="phone" required placeholder="Phone">
+        <input type="email" name="email" required placeholder="Email">
+        <input type="password" name="password" required placeholder="Password" />
+        <label for="genero">Género:</label>
+<select name="genero" id="genero" required>
+    <option value="">Seleccione</option>
+    <option value="M">Masculino</option>
+    <option value="F">Femenino</option>
+    <option value="O">Otro</option>
+</select>
+        <input type="submit" value="Submit">
+      </form>
+    </div>
+    <div class="div-derecha">
+      <img src="{% static 'images/corazon_registro.webp' %}" alt="">
+    </div>
+  </div>
+  
+  <script src="{% static 'js/formPaciente.js' %}"></script>
+</body>
+</html>

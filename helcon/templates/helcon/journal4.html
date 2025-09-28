@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+  <meta charset="UTF-8">
+  <title data-text-key="pageTitle">Primary Health Care</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="{% static 'css/journal4.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" xintegrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+ 
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+ 
+  <!--Link para fuente-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=language" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  
+</head>
+<body>
+  <!--Barra de navegacion-->
+ <header>
+  
+    <div class="barra-superior">
+    <body>
+  <button onclick="window.history.back()" style="
+  background-color: #111835;
+  color: white;
+  padding: 10px 20px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 20px;
+  transition: background-color 0.3s ease;
+"
+onmouseover="this.style.backgroundColor='#2c3e7e'"
+onmouseout="this.style.backgroundColor='#111835'"
+>
+  ← Volver
+</button>  
+      
+      
+      <div class="botones">
+          <div class="botones">
+  <div class="account-menu">
+    {% if user.is_authenticated %}
+      
+      {% if paciente %}
+        <!-- Paciente logueado -->
+        <div class="dropdown">
+          <span class="material-symbols-outlined">person</span>
+          <div class="dropdown-content">
+            <a href="{% url 'perfil_paciente' %}">Perfil</a>
+            <a href="{% url 'logout' %}">Cerrar sesión</a>
+          </div>
+        </div>
+
+      {% elif doctor %}
+        <!-- Doctor logueado -->
+        <div class="dropdown">
+          {% if doctor.foto_perfil %}
+            <img src="{{ doctor.foto_perfil.url }}" alt="Foto de perfil" style="width:50px; height:50px; border-radius:50%; object-fit:cover;" />
+          {% else %}
+            <img src="{% static 'images/fotoprede.webp' %}" alt="Foto por defecto" style="width:50px; height:50px; border-radius:50%; object-fit:cover;" />
+          {% endif %}
+          <div class="dropdown-content">
+            <a href="{% url 'perfil_doctor' %}">Perfil</a>
+            <a href="{% url 'logout' %}">Cerrar sesión</a>
+          </div>
+        </div>
+      {% endif %}
+
+    {% else %}
+      <!-- No autenticado -->
+      <a href="{% url 'login' %}"><button class="boton-login">Login</button></a>
+      <a href="{% url 'registro' %}" style="margin-left: 15px;"><button class="boton-registro">Sign up</button></a>
+    {% endif %}
+  </div>
+</div>
+
+          <div class="language-dropdown">
+            <div class="boton-idioma" id="language-button" aria-label="Cambiar idioma">
+              <span class="material-symbols-outlined">
+                language
+              </span>
+            </div>
+            <div class="dropdown-menu" id="language-menu">
+              <a href="#" class="dropdown-item" data-lang="es">
+                <div class="flag-icon flag-es"></div>
+                Español
+              </a>
+              <a href="#" class="dropdown-item" data-lang="en">
+                <div class="flag-icon flag-en"></div>
+                English
+              </a>
+            </div>
+          </div>
+      </div>
+    </div>
+
+    <nav class="barra-navegacion">
+    <ul>
+        <li><a href="{% url 'home' %}" data-nav-key="homeNav">Inicio</a></li>
+        <li><a href="{% url 'segpag' %}" data-nav-key="featuresNav">Funcionalidades y Beneficios</a></li>
+        <li><a href="{% url 'blog_view' %}" data-nav-key="aboutNav">Acerca de Nosotros</a></li>
+        <li><a href="{% url 'blog_view' %}" data-nav-key="blogNav">Blog</a></li>
+    </ul>
+    </nav>
+  </header>
+ 
+  <img src="{% static 'images/Act_now.webp' %}" alt="Act Now" class="imagen_principal" data-image-key="image_act_now">
+ 
+  <div class="contenido1">
+    <h2 data-text-key="contenido1_h2_1">Preventive Care</h2>
+    <p data-text-key="contenido1_p_1">Primary Health Care (PHC) is a comprehensive health approach that aims to guarantee the well-being of individuals throughout their entire life, from health promotion and disease prevention to treatment, rehabilitation, and palliative care.Its purpose is to ensure an equitable distribution of health, providing care centered on the needs of individuals as close as possible to their everyday environment.</p>
+ 
+    <h2 data-text-key="contenido1_h2_2">Health Equity</h2>
+    <p data-text-key="contenido1_p_2">PHC promotes social justice, equity, and solidarity, considering that access to the highest attainable level of health is a fundamental right for all. To achieve universal health coverage (UHC), health systems must focus on individuals and work with their participation, extending health into all policies and addressing the social determinants of health. </p>
+  </div>
+ 
+  <div class="contenido2">
+    <h3 data-text-key="contenido2_h3">PHC has three interdependent and synergistic components</h3>
+    <ol>
+      <li><strong data-text-key="contenido2_li_1_strong">Integrated health services: </strong> <span data-text-key="contenido2_li_1_text">Covering primary and public health functions.</span></li>
+      <li> <strong data-text-key="contenido2_li_2_strong">policies:</strong> <span data-text-key="contenido2_li_2_text">Aimed at addressing the broader determinants of health.</span></li>
+      <li><strong data-text-key="contenido2_li_3_strong">Community empowerment: </strong> <span data-text-key="contenido2_li_3_text">people, families, and communities to foster social participation and improve self-sufficiency in health.</span></li>
+    </ol>
+  </div>
+ 
+ 
+<img src="{% static 'images/primary_health.webp' %}" alt="Doctor at computer" class="imagen_principal" data-image-key="image_primary_health">
+ 
+<div class="contenido3">
+  <h3 data-text-key="contenido3_h3">Primary Health Care (PHC) is <br> crucial for several reasons</h3>
+  <ul>
+    <li>
+       <strong data-text-key="contenido3_li_1_strong">Inclusivity and equity:</strong> <span data-text-key="contenido3_li_1_text">PHC is the most inclusive and equitable approach to improving physical, mental, and social health, ensuring access to all sectors of the population, especially the most vulnerable.</span>
+    </li>
+    <li>
+      <strong data-text-key="contenido3_li_2_strong">Improvement of health equity:</strong>  <span data-text-key="contenido3_li_2_text">Investments in PHC help improve access to health services, reducing inequalities in healthcare and improving health outcomes.</span>
+    </li>
+    <li>
+      <strong data-text-key="contenido3_li_3_strong">Cost-effectiveness and efficiency: </strong><span data-text-key="contenido3_li_3_text">Investing in PHC is cost-effective and efficiently improves health system performance, optimizing resources and reducing long-term costs.</span>
+    </li>
+    <li>
+      <strong data-text-key="contenido3_li_4_strong">Resilience in times of crisis:</strong> <span data-text-key="contenido3_li_4_text">PHC enables health systems to be more resilient during crises, such as the COVID-19 pandemic. It helps detect early signs of epidemics and allows for a quicker response to increases in service demand.</span>
+    </li>
+    <li>
+      <strong data-text-key="contenido3_li_5_strong">Social and environmental factors:</strong> <span data-text-key="contenido3_li_5_text">PHC acknowledges that health depends not only on medical services but also on factors like education, social protection, food systems, and the environment — all of which are key to overall well-being.</span>
+    </li>
+  </ul>
+</div>
+
+ 
+</body>
+ <footer class="main-footer">
+    <div class="footer-column">
+        <h3>Health<br>Connectors</h3>
+        <p>New Elsiebury</p>
+        <p>634 Halvorson</p>
+        <p>Estates Suite 039</p>
+        <br>
+        <div class="social-button">
+          <a href="https://linktr.ee/Health_Connectors" target="_blank" style="
+  display: inline-block;
+  margin-top: 25px;
+  background-color: #8cb8ff;
+  border: none;
+  border-radius: 12px;
+  color: #000;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 15px 30px;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: 'Poppins', sans-serif;
+">
+  Know more
+</a>
+
+        </div>
+    </div>
+    <div class="footer-column links-column">
+        <h3>Links</h3>
+        <ul class="footer-links">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="#">Pages</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Portfolio</a></li>
+            <li><a href="{% url 'blog_view' %}">Blog</a></li>
+            <li><a href="{% url 'contacto' %}">Contact</a></li>
+        </ul>
+    </div>
+    <div class="footer-column links-column">
+        <br>
+        <ul class="footer-links">
+            <li><a href="{% url 'privacy_policies' %}">Privacy Policies</a></li>
+            <li><a href="{% url 'terms' %}">Term of use</a></li>
+            <li><a href="{% url 'registro' %}">Sign up</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
+            <li><a href="{% url 'difamation' %}">Defamation</a></li>
+        </ul>
+    </div>
+    <div class="footer-column recent-posts-column">
+        <h3>Recent posts</h3>
+        <ul class="recent-posts">
+            <li> <a href="{% url 'journal1' %}">Health Benefits of Sleep</a></li>
+            <li> <a href="{% url 'journal2' %}">Benefits of Excercise</a></li>
+            <li><a href="{% url 'journal3' %}">Stress Management</a></li>
+            <li><a href="{% url 'journal4' %}">The importance of preventive care.</a></li>
+        </ul>
+    </div>
+</footer>
+ 
+<script src="{% static 'js/journal4.js' %}"></script>
+</html>

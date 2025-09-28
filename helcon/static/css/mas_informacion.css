@@ -1,0 +1,346 @@
+:root {
+  --seasalt: #FBFAF8;
+  --ruddy-blue: #6CA5FF;
+  --denim: #245DB5;
+  --oxford-blue: #111835;
+  --oxford-blue-2: #051024;
+  --texto-interno: #C9C9C9;
+  --rubby-blue2: #DAE8FF;
+}
+ 
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+ 
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--seasalt);
+  color: var(--oxford-blue);
+}
+ 
+/* Fondo superior */
+.top-section {
+  background-color: var(--oxford-blue);
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+ 
+/* Contenedor principal */
+.container {
+  padding: 40px 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative; /* Necesario para posicionar el dropdown de idioma */
+}
+ 
+/* Selector de idioma */
+.language-dropdown {
+  position: absolute;
+  top: 20px; /* Ajusta la posición vertical según tu diseño */
+  right: 20px; /* Ajusta la posición horizontal */
+  z-index: 100; /* Asegura que esté por encima de otros elementos */
+ 
+  .boton-idioma {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: var(--oxford-blue); /* Color de fondo del botón, ajustado para contraste */
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s ease;
+ 
+      &:hover {
+          background-color: #0d122b; /* Explicit darker shade of --oxford-blue */
+      }
+ 
+      .material-symbols-outlined {
+          font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 28;
+          color: var(--ruddy-blue); /* Color del icono */
+          font-size: 28px;
+      }
+  }
+ 
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    min-width: 150px;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+ 
+    &.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+ 
+    .dropdown-item {
+      display: flex;
+      align-items: center;
+      padding: 12px 16px;
+      color: #333;
+      text-decoration: none;
+      transition: background-color 0.2s ease;
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+ 
+      &:hover {
+        background-color: #f5f5f5;
+      }
+ 
+      &:first-child {
+        border-top-left-radius: 7px;
+        border-top-right-radius: 7px;
+      }
+ 
+      &:last-child {
+        border-bottom-left-radius: 7px;
+        border-bottom-right-radius: 7px;
+      }
+ 
+      .flag-icon {
+        width: 20px;
+        height: 15px;
+        margin-right: 10px;
+        border-radius: 2px;
+        background-size: cover;
+        background-position: center;
+ 
+        &.flag-es {
+          background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzUwIiBoZWlnaHQ9IjUwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9Ijc1MCIgaGVpZ2h0PSI1MDAiIGZpbGw9IiNBQTAwMDAiLz4KPHJlY3QyeT0iMTI1IiB3aWR0aD0iNzUwIiBoZWlnaHQ9IjI1MCIgZmlsbD0iI0ZGRkYwMCIvPgo8L3N2Zz4=');
+        }
+ 
+        &.flag-en {
+          background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI2MDAiIHZpZXdCb3g9IjAgMCAxMjAwIDYwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjEyMDAiIGhlaWdodD0iNjAwIiBmaWxsPSIjMDA5NkZGIi8+CjxwYXRoIGQ9Im0wLDAgaDEyMDBMIDAsNjAwIE0wLDYwMCBoMTIwMEwgMCwwIiBzdHJva2U9IiNGRkZGRkYiIHN0cm9rZS13aWR0aD0iMTIwIi8+CjxwYXRoIGQ9Im0wLDAgaDEyMDBMIDAsNjAwIE0wLDYwMCBoMTIwMEwgMCwwIiBzdHJva2U9IiNGRjAwMDAiIHN0cm9rZS13aWR0aD0iODAiLz4KPHBhdGggZD0iTTYwMCwwdjYwMCBNMCwzMDBoMTIwMCIgc3Ryb2tlPSIjRkZGRkZGIiBzdHJva2Utd2lkdGg9IjIwMCIvPgo8cGF0aCBkPSJNNjAwLDB2NjAwIE0wLDMwMGgxMjAwIiBzdHJva2U9IiNGRjAwMDAiIHN0cm9rZS13aWR0aD0iMTIwIi8+Cjwvc3ZnPg==');
+        }
+      }
+    }
+  }
+}
+ 
+/* Enlace de volver */
+.back-link {
+  text-decoration: none;
+  color: var(--oxford-blue); /* Ajustado para que sea visible en fondo claro */
+  font-weight: 500;
+  margin-bottom: 20px;
+  display: inline-block;
+  font-size: 16px;
+  transition: color 0.3s ease; /* Transición para hover */
+ 
+  &:hover {
+    color: var(--ruddy-blue); /* Color al pasar el cursor */
+  }
+}
+ 
+.back-link i {
+  margin-right: 6px;
+}
+ 
+/* Tarjeta del doctor */
+.card {
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  display: flex;
+  overflow: hidden;
+  padding: 30px;
+  gap: 40px;
+  align-items: center;
+  flex-wrap: wrap;
+  position: relative; /* Asegura que el dropdown de idioma se posicione correctamente */
+}
+ 
+/* Foto + nombre */
+.left {
+  flex: 1;
+  text-align: center;
+  min-width: 250px; /* Asegurar que la columna izquierda no se comprima demasiado */
+}
+ 
+.profile-img {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 5px solid var(--oxford-blue);
+  box-shadow: 0 0 12px rgba(0,0,0,0.15);
+  margin-bottom: 15px;
+}
+ 
+.left h2 {
+  font-size: 24px;
+  color: var(--oxford-blue); /* Asegurar color */
+  margin-bottom: 5px; /* Espacio debajo del nombre */
+}
+ 
+.specialty {
+  color: var(--denim); /* Ajustado a --denim para un color más específico */
+  font-weight: 500;
+  font-size: 16px;
+  margin-top: 5px;
+}
+ 
+ 
+/* Datos */
+.right {
+  flex: 2;
+  min-width: 300px; /* Asegurar que la columna de datos no se comprima demasiado */
+}
+ 
+.right p {
+  margin-bottom: 10px;
+  font-size: 15px;
+  color: var(--oxford-blue-2); /* Color más oscuro para el texto de datos */
+}
+ 
+.right p strong {
+  color: var(--denim); /* Color para las etiquetas fuertes */
+  margin-right: 5px; /* Espacio entre label y valor */
+}
+.right p span.dynamic-value {
+  color: var(--oxford-blue-2); /* Asegurar que los valores dinámicos mantengan este color */
+}
+ 
+ 
+/* Botones */
+.buttons {
+  margin-top: 20px;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: flex-start; /* Alinea los botones a la izquierda por defecto */
+}
+ 
+.btn, .btn-outline {
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+  transition: 0.3s ease;
+  cursor: pointer;
+  white-space: nowrap; /* Evitar que el texto se rompa */
+}
+ 
+.btn {
+  background-color: var(--ruddy-blue);
+  color: white;
+  border: 1px solid var(--ruddy-blue); /* Borde del mismo color */
+}
+ 
+.btn:hover {
+  background-color: var(--denim); /* Cambio de color al pasar el cursor */
+  border-color: var(--denim);
+  color: white;
+}
+ 
+.btn-outline {
+  background-color: transparent;
+  border: 2px solid var(--oxford-blue);
+  color: var(--denim);
+}
+ 
+.btn-outline:hover {
+  background-color: var(--oxford-blue);
+  color: white;
+}
+ 
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 20px 15px; /* Ajustar padding del contenedor principal */
+  }
+ 
+  .back-link {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 15px;
+  }
+ 
+  /* El language-dropdown se posiciona dentro de .card, por lo que su top/right son relativos a .card */
+  .language-dropdown {
+    top: 15px; /* Ajustar posición para pantallas pequeñas */
+    right: 15px;
+  }
+ 
+  .card {
+    flex-direction: column;
+    text-align: center;
+    padding: 25px;
+    gap: 20px; /* Reducir gap en móvil */
+  }
+ 
+  .left {
+    width: 100%; /* Ocupar todo el ancho */
+    min-width: unset; /* Restablecer min-width */
+  }
+ 
+  .profile-img {
+    width: 180px; /* Reducir tamaño de imagen */
+    height: 180px;
+  }
+ 
+  .left h2 {
+    font-size: 22px; /* Reducir tamaño de fuente */
+  }
+ 
+  .specialty {
+    font-size: 14px;
+  }
+ 
+  .right {
+    width: 100%; /* Ocupar todo el ancho */
+    text-align: center; /* Centrar texto en móvil */
+    min-width: unset; /* Restablecer min-width */
+  }
+ 
+  .right p {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+ 
+  .buttons {
+    justify-content: center; /* Centrar botones */
+    width: 100%; /* Ocupar todo el ancho */
+    gap: 10px; /* Reducir gap entre botones */
+    button, a { /* Asegurar que los botones y enlaces se expandan */
+      flex: 1;
+      min-width: 120px; /* Ancho mínimo para cada botón */
+      font-size: 14px;
+      padding: 10px 15px;
+    }
+  }
+}
+ 
+/* Media query para móviles más pequeños */
+@media screen and (max-width: 480px) {
+  .profile-img {
+    width: 150px;
+    height: 150px;
+  }
+  .left h2 {
+    font-size: 20px;
+  }
+  .right p, .buttons button, .buttons a {
+    font-size: 12px;
+  }
+}
+ 
+ 

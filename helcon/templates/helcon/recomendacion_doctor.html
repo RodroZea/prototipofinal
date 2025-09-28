@@ -1,0 +1,203 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Doctors of the Month</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet" />
+
+  <style>
+    body {
+      background-color: #0d1321;
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .card {
+      background-color: #fff;
+      border-radius: 25px;
+      padding: 40px;
+      width: 90%;
+      max-width: 550px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      position: relative;
+    }
+
+    .card h1 {
+      color: #0d1321;
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 20px;
+    }
+
+    .card p {
+      color: #1a1a1a;
+      line-height: 1.6;
+      font-size: 14px;
+      margin: 10px 0;
+    }
+
+    button {
+      margin-top: 25px;
+      background-color: #8cb8ff;
+      border: none;
+      border-radius: 12px;
+      color: #000;
+      font-size: 16px;
+      font-weight: bold;
+      padding: 15px 30px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    button:hover {
+      background-color: #76a4ef;
+    }
+
+    /* Dropdown idioma */
+    .language-dropdown {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+
+    .boton-idioma {
+      cursor: pointer;
+      font-size: 22px;
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 35px;
+      right: 0;
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      z-index: 1000;
+    }
+
+    .dropdown-item {
+      display: flex;
+      align-items: center;
+      padding: 8px 14px;
+      text-decoration: none;
+      color: #333;
+      font-size: 14px;
+    }
+
+    .dropdown-item:hover {
+      background-color: #f2f2f2;
+    }
+
+    .flag-icon {
+      width: 20px;
+      height: 14px;
+      margin-right: 10px;
+      background-size: cover;
+    }
+
+    .flag-es {
+      background-image: url('https://flagcdn.com/es.svg');
+    }
+
+    .flag-en {
+      background-image: url('https://flagcdn.com/gb.svg');
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <!-- Dropdown de idiomas -->
+      <div class="language-dropdown">
+        <div class="boton-idioma" id="language-button" aria-label="Cambiar idioma">
+          🌐
+        </div>
+        <div class="dropdown-menu" id="language-menu">
+          <a href="#" class="dropdown-item" data-lang="es">
+            <div class="flag-icon flag-es"></div>
+            Español
+          </a>
+          <a href="#" class="dropdown-item" data-lang="en">
+            <div class="flag-icon flag-en"></div>
+            English
+          </a>
+        </div>
+      </div>
+
+      <!-- Contenido traducible -->
+      <h1 data-es="¡APROVECHA LA OPORTUNIDAD AHORA!" data-en="SEIZE THE OPPORTUNITY NOW">
+        SEIZE THE OPPORTUNITY NOW
+      </h1>
+      <p data-es="<strong>Estimado Doctor,</strong>" data-en="<strong>Dear Doctor,</strong>">
+        <strong>Dear Doctor,</strong>
+      </p>
+      <p
+        data-es="Queremos invitarlo a formar parte de nuestra sección especial “Doctores recomendados”, un área destacada en nuestra app donde resaltamos a profesionales seleccionados. El costo por aparecer en esta sección es de <strong>$2.99 USD por mes</strong>, e incluye solamente su presencia visible en la sección durante todo el mes, brindándole una mayor visibilidad dentro de la plataforma."
+        data-en="We’d like to invite you to be part of our special “Suggested Doctors” section — a featured area in our app where we highlight selected professionals. The cost to appear in this section is <strong>$2.99 USD per month</strong>, and it includes only your visible presence in the featured doctors area for the entire month, giving you greater visibility within the platform.">
+        We’d like to invite you to be part of our special “Suggested Doctors” section — a featured area in our app where we highlight selected professionals. The cost to appear in this section is <strong>$2.99 USD per month</strong>, and it includes only your visible presence in the featured doctors area for the entire month, giving you greater visibility within the platform.
+      </p>
+      <p
+        data-es="Los cupos son limitados y están disponibles para un pequeño número de doctores por especialidad. Si está interesado o desea más información, no dude en contactarnos."
+        data-en="Spots are limited and available to a small number of doctors per specialty. If you’re interested or would like more information, feel free to contact us.">
+        Spots are limited and available to a small number of doctors per specialty. If you’re interested or would like more information, feel free to contact us.
+      </p>
+      <p data-es="Gracias por ser parte de nuestra comunidad." data-en="Thank you for being part of our community.">
+        Thank you for being part of our community.
+      </p>
+      <p data-es="<strong>Atentamente, Health Connectors.</strong>" data-en="<strong>Sincerely, Health Connectors.</strong>">
+        <strong>Sincerely, Health Connectors.</strong>
+      </p>
+
+      <!-- Botón de pago -->
+      <form method="POST" action="{% url 'pago_tarjeta_doctor' doctor.id %}">
+        {% csrf_token %}
+        <button type="submit">Pay now</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const langBtn = document.getElementById('language-button');
+    const langMenu = document.getElementById('language-menu');
+
+    // Toggle dropdown
+    langBtn.addEventListener('click', () => {
+      langMenu.style.display = langMenu.style.display === 'block' ? 'none' : 'block';
+    });
+
+    // Translate content
+    document.querySelectorAll('.dropdown-item').forEach(item => {
+      item.addEventListener('click', (e) => {
+        e.preventDefault();
+        const lang = item.getAttribute('data-lang');
+        document.querySelectorAll('[data-es]').forEach(el => {
+          el.innerHTML = el.getAttribute(`data-${lang}`);
+        });
+        langMenu.style.display = 'none';
+      });
+    });
+
+    // Close if clicked outside
+    document.addEventListener('click', (e) => {
+      if (!langBtn.contains(e.target) && !langMenu.contains(e.target)) {
+        langMenu.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>
